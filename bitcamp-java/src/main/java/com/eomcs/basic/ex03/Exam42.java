@@ -1,6 +1,6 @@
 package com.eomcs.basic.ex03;
 
-// 문자 리터럴(literal) 
+// 문자 리터럴(literal) - 문자코드를 이용하여 문자 출력
 
 public class Exam42 {
   public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class Exam42 {
     //    (char)0x0041
     // => ㅇ ㅑ! JVM! 이거 정수 아니다. 문자코드다.
     //    그러니 이 문자 코드에 해당하는 문자를
-    //    폰트파일에서 찾아그 코드에 해당하는 문자 그림을 출력해라!
+    //    폰트파일에서 찾아 그 코드에 해당하는 문자 그림을 출력해라!
     System.out.println((char)0x0041); //앞에 00은 생략 가능
     System.out.println((char)0xac00);
 
@@ -21,6 +21,7 @@ public class Exam42 {
       if (i % 80 == 0)
       System.out.println();
       System.out.print((char)(0xac00 + i));
+      
     }
  
   }
