@@ -26,6 +26,8 @@ public class Exam5 {
     // 다른 값과 연산을 수행하면 해당 문자코드는 그냥정수로 간주한다.
     System.out.println('가' == 44032);
     System.out.println('가' == 44033);
+    System.out.println('나' == 45208);
+    System.out.println('나' == 45210);
 
     
   }

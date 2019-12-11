@@ -23,6 +23,10 @@ public class Exam7 {
     System.out.println('"'); // '' 안에서 " 문자는 그냥 적는다.
     System.out.println("c:\\Users\\user\\git"); // \ 문자를 출력시키는 문자
 
+
+    
+    System.out.println("안녀엉\b\bworld!");
+
   }
 }
 
