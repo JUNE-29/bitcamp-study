@@ -7,38 +7,37 @@ public class App2 {
     
     Scanner keyboard = new Scanner(System.in);
     
-    System.out.print("번호? ");
-    String number = keyboard.nextLine();
+    System.out.print("카테고리? ");
+    String categories = keyboard.next();
     
-    System.out.print("이름? ");
-    String name = keyboard.nextLine();
+    System.out.print("국가별(언어)? ");
+    String language = keyboard.next();
     
-    System.out.print("이메일? ");
-    String email = keyboard.nextLine();
+    System.out.print("나이? ");
+    int age = keyboard.nextInt();
     
-    System.out.print("암호? ");
-    String password = keyboard.nextLine();
+    System.out.print("MBTI(성격)? ");
+    String personality = keyboard.next();
     
-    System.out.print("사진? ");
-    String photo = keyboard.nextLine();
-    
-    System.out.print("전화? ");
-    String tell = keyboard.nextLine();
-    
-    System.out.print("가입일? ");
-    String date = keyboard.nextLine();
-    
-    System.out.println("----------------");
-    
-    System.out.printf("번호: %s\n", number);
-    System.out.printf("이름: %s\n", name);
-    System.out.printf("이메일: %s\n", email);
-    System.out.printf("암호: %s\n", password);
-    System.out.printf("사진: %s\n", photo);
-    System.out.printf("전화: %s\n", tell);
-    System.out.printf("가입일: %s\n", date);
+    System.out.print("키워드(태그)? ");
+    String keyword = keyboard.next();
     
     keyboard.close();
+    
+    System.out.println("------결과------");
+    
+    System.out.printf("카테고리 : %s \n", categories);
+    System.out.printf("국가별(언어) : %s \n", language);
+    System.out.printf("나이 : %d \n", age);
+    System.out.printf("MBTI: %s \n", personality);
+    System.out.printf("키워드(태그) : # %s  \n", keyword);
+    
+    /*카테고리 : 인문
+          국가별(언어) : 한국
+          나이: 28
+     MBTI(성격) : INFP
+          키워드(태그) : 철학,인생*/
+    
     
   }
 

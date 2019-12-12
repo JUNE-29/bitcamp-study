@@ -10,37 +10,34 @@ public class App {
     
     Scanner keyboard = new Scanner(System.in);
     
-    System.out.print("번호? ");
-    String number = keyboard.nextLine();
+    System.out.print("도서명? ");
+    String title = keyboard.nextLine();
     
-    System.out.print("수업명? ");
-    String title =  keyboard.nextLine();
+    System.out.print("지은이? ");
+    String author = keyboard.nextLine();
     
-    System.out.print("수업내용? ");
-    String description = keyboard.nextLine();
+    System.out.print("출판사? ");
+    String publisher = keyboard.nextLine();
     
-    System.out.print("시작일? ");
-    String startDate =  keyboard.nextLine();
+    System.out.print("카테고리? ");
+    String categories = keyboard.nextLine();
     
-    System.out.print("종료일? ");
-    String endDate =  keyboard.nextLine();
+    System.out.print("출판 년도? ");
+    int publishYear = keyboard.nextInt();
     
-    System.out.print("총수업시간? ");
-    String totalHours =  keyboard.nextLine();
-    
-    System.out.print("일수업시간? ");
-    String dayHours =  keyboard.nextLine();
-    
-    System.out.println("-------------");
-    
-    System.out.printf("번호: %s\n", number);
-    System.out.printf("수업명: %s\n", title);
-    System.out.printf("수업내용: %s\n", description);
-    System.out.printf("기간: %s ~ %s\n", startDate, endDate);
-    System.out.printf("총수업시간: %s\n", totalHours);
-    System.out.printf("일수업시간: %s\n", dayHours);
+    System.out.println("--------결과--------");
     
     keyboard.close();
+    
+    System.out.printf("도서명 : %s\n", title);
+    System.out.printf("지은이 : %s\n", author);
+    System.out.printf("출판사 : %s\n", publisher);
+    System.out.printf("카테고리 : %s\n", categories);
+    System.out.printf("출판 년도: %d 년도", publishYear);
+    
+    
+    
+    
 
   }
 }
