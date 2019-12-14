@@ -15,52 +15,45 @@ import java.util.Scanner;
 
 public class Test02 {
   public static void main(String[] args) {
-
-    Scanner keyboard = new Scanner(System.in);
-
-    int comNumber = (int) (Math.random()*3)+1;
+    // 컴퓨터의 가위, 바위, 보 계산하기
+    Scanner keyScan = new Scanner(System.in);
     
-    System.out.println("1: 가위, 2: 바위, 3: 보? 번호 선택해주세요");
-    int myNumber = keyboard.nextInt();
+    System.out.print("가위,바위,보? ");
+    String user = keyScan.nextLine();
+    System.out.printf("사용자: %s\n", user);
 
-    keyboard.nextLine();
-
-    if(myNumber == 1){
-      System.out.println("나: 가위");
-    }else if(myNumber == 2){
-      System.out.println("나: 바위");
-    }else if(myNumber == 3){
-      System.out.println("나: 보");
+    int random = (int)(Math.random() * 3);
+    String computer;
+    if (random == 0) 
+      computer = "가위";
+    else if (random == 1) 
+      computer = "바위";
+    else 
+      computer = "보";
+    
+    System.out.printf("컴퓨터: %s\n", computer);
+    
+    if (user.equals("가위")) {
+      if (computer.equals("보")) {
+        System.out.println("=> 당신이 이겼습니다.");
+        return;
+      }
+    } else if (user.equals("바위")) {
+      if (computer.equals("가위")) {
+        System.out.println("=> 당신이 이겼습니다.");
+        return;
+      }
+    } else {
+      if (computer.equals("바위")) {
+        System.out.println("=> 당신이 이겼습니다.");
+        return;
+      }
     }
-
-
-
-    System.out.print("컴퓨터: ");
-    if(comNumber == 1){
-      System.out.println("가위");
-    } else if(comNumber == 2){
-      System.out.println("바위");
-    } else{
-      System.out.println("보");
-    }
-
-    if(comNumber == myNumber){
-      System.out.println(" => 비겼습니다.");
-    }else if(comNumber == 1 && myNumber == 2){
-      System.out.println(" => 이겼습니다.");
-    }else if(comNumber == 2 && myNumber == 3){
-      System.out.println(" => 이겼습니다.");
-    }else if(comNumber == 3 && myNumber == 1){
-      System.out.println(" => 이겼습니다.");
-    }else if(comNumber == 1 && myNumber == 3){
-      System.out.println(" => 졌습니다.");
-    }else if(comNumber == 2 && myNumber == 1){
-      System.out.println(" => 졌습니다.");
-    }else if(comNumber == 3 && myNumber == 2){
-      System.out.println(" => 졌습니다.");
-    }else {}
-
-    keyboard.close();
+    
+    System.out.println("=> 당신은 비기거나 졌습니다.");
+    
+    keyScan.close();
+  
 
 
   }

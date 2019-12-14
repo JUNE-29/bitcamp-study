@@ -17,6 +17,7 @@
      System.out.println(i1);
      System.out.println(i2);
      System.out.println(s);
+     
 
      // nextInt()
      // => space(공백), tab, new line을 만나면 그 앞까지 읽은 입력 값을
