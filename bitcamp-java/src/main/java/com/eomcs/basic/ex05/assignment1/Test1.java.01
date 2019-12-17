@@ -1,0 +1,27 @@
+package com.eomcs.basic.ex05.assignment1;
+
+import java.util.Scanner;
+
+public class Test01 {
+  public static void main(String[] args) {
+    
+    Scanner keyboard = new Scanner(System.in);
+     int a = 1, b = 1, i, sum = 0;
+     while(a + b != 0) {
+        System.out.print("정수 2개 입력 : ");
+        a = keyboard.nextInt();
+        b = keyboard.nextInt();
+        if(a > b) {
+          
+            i = b;
+            b = a;
+            a = i;
+        }
+        for(i = a; i <= b; i++) 
+          sum+=i;
+        System.out.println(a + "~" + b + "의 정수의 합은 " + sum + "입니다.");
+        sum = 0;
+     }
+      
+  }
+}
