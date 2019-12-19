@@ -8,116 +8,61 @@ public class App {
     
     // 키보드에서 사용자가 입력한 값을 읽어 문자열이나 정수, 부동소수점 등으로 리턴.
     Scanner keyboard = new Scanner(System.in);
-    int[] no = new int[100];
-    String[] title = new String[100];
-    String[] contents = new String[100];
-    int[] totalHours = new int[100];
-    int[] dayHours  = new int[100];
-    Date[] date = new Date[100];
-    Date[] endDate = new Date[100];
-    String response;
+
+    final int SIZE = 100;
+    int[] no = new int[SIZE];
+    String[] title = new String[SIZE];
+    String[] description = new String[SIZE];
+    Date[] startDate = new Date[SIZE];
+    Date[] endDate = new Date[SIZE];
+    int[] totalHours = new int[SIZE];
+    int[] dayHours = new int[SIZE];
+
+    int count = 0;
     
-    System.out.print("번호? ");
-    no[0] = keyboard.nextInt();
-    keyboard.nextLine(); //줄바꿈 기호 제거용
-    
-    System.out.print("수업명? ");
-    title[0] = keyboard.nextLine();
-    
-    System.out.print("수업내용? ");
-    contents[0] = keyboard.nextLine();
-    
-    System.out.print("시작일? ");
-    date[0] = Date.valueOf(keyboard.next());
-    
-    System.out.print("종료일? ");
-    endDate[0] = Date.valueOf(keyboard.next());
-    
-    System.out.print("총 수업시간? ");
-    totalHours[0] = keyboard.nextInt();
-    keyboard.nextLine(); //줄바꿈
-    
-    System.out.print("일 수업시간? ");
-    dayHours[0] = keyboard.nextInt();
-    keyboard.nextLine(); //줄바꿈
-    
-    
-    System.out.println();
-    
-    System.out.print("계속 입력하시겠습니까?(Y/n) ");
-    response = keyboard.nextLine();
-    
-    if (response.equalsIgnoreCase("y")) {
+    for(int i = 0; i< SIZE; i++) {
+      count++;
+
       System.out.print("번호? ");
-      no[1] = keyboard.nextInt();
-      keyboard.nextLine(); // 줄바꿈
+      no[i] = keyboard.nextInt();
       
+      keyboard.nextLine(); //줄바꿈 기호 제거용
+
       System.out.print("수업명? ");
-      title[1] = keyboard.nextLine();
-      
+      title[i] = keyboard.nextLine();
+
       System.out.print("수업내용? ");
-      contents[1] = keyboard.nextLine();
-      
+      description[i] = keyboard.nextLine();
+
       System.out.print("시작일? ");
-      date[1] = Date.valueOf(keyboard.next());
-      
+      startDate[i] = Date.valueOf(keyboard.next());
+
       System.out.print("종료일? ");
-      endDate[1] = Date.valueOf(keyboard.next());
-      
+      endDate[i] = Date.valueOf(keyboard.next());
+
       System.out.print("총 수업시간? ");
-      totalHours[1] = keyboard.nextInt();
-      keyboard.nextLine(); //줄바꿈
+      totalHours[i] = keyboard.nextInt();
       
+      keyboard.nextLine(); //줄바꿈
+
       System.out.print("일 수업시간? ");
-      dayHours[1] = keyboard.nextInt();
-      keyboard.nextLine(); //줄바꿈
+      dayHours[i] = keyboard.nextInt();
       
+      keyboard.nextLine(); //일수업시간 입력 값 다음에 남아 있는 줄바꿈 값 제거
       
-      System.out.println();
-      
-      System.out.print("계속 입력하시겠습니까?(Y/n) ");
-      response = keyboard.nextLine();
-      
-      System.out.println();
-      
-      if (response.equalsIgnoreCase("y")) {
-        System.out.print("번호? ");
-        no[2] = keyboard.nextInt();
-        keyboard.nextLine(); // 줄바꿈
-        
-        System.out.print("수업명? ");
-        title[2] = keyboard.nextLine();
-        
-        System.out.print("수업내용? ");
-        contents[2] = keyboard.nextLine();
-        
-        System.out.print("시작일? ");
-        date[2] = Date.valueOf(keyboard.next());
-        
-        System.out.print("종료일? ");
-        endDate[2] = Date.valueOf(keyboard.next());
-        
-        System.out.print("총 수업시간? ");
-        totalHours[2] = keyboard.nextInt();
-        keyboard.nextLine(); //줄바꿈
-        
-        System.out.print("일 수업시간? ");
-        dayHours[2] = keyboard.nextInt();
-        keyboard.nextLine(); //줄바꿈
-        
-        System.out.println();
-        
-        System.out.print("계속 입력하시겠습니까?(Y/n) ");
-        response = keyboard.nextLine();
-      }
-     }
-    keyboard.close();
-    
+      System.out.print("계속 입력하시겠습니까?(Y/n)");
+      String response = keyboard.nextLine();
+      if(!response.equalsIgnoreCase("y")) 
+        break;
+    }
+
     System.out.println();
     
-    System.out.printf(" %d, %s, %s ~ %s, %d\n", no[0], title[0], date[0], endDate[0], totalHours[0]);
-    System.out.printf(" %d, %s, %s ~ %s, %d\n", no[1], title[1], date[1], endDate[1], totalHours[1]);
-    System.out.printf(" %d, %s, %s ~ %s, %d\n", no[2], title[2], date[2], endDate[2], totalHours[2]);
-   
+    for (int i = 0; i < count; i++) {
+      System.out.printf("%d, %s, %s ~ %s, %d\n",
+          no[i], title[i], startDate[i], endDate[i], totalHours[i]);
+    }
+    keyboard.close();
+
   }
 }

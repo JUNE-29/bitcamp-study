@@ -18,7 +18,7 @@ package com.eomcs.basic.ex06.assignment;
 ``` */
 import java.util.Scanner;
 
-public class Test2 {
+public class Test02x {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
 

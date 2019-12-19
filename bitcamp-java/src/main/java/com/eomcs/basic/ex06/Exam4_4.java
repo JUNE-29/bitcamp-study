@@ -10,7 +10,7 @@ public class Exam4_4 {
     // 컬렉션은 다른 타입의 값도 보관할 수 있다.
     // 
     // 배열은 크기가 고정되지만,
-    // 컬렉션은 크기가 가변적이다.
+    // 컬렉션은 크기가 가변적이다. 배열은 int 선언하면 int만 쓸 수 있는데 이것은 그렇지 않다.
     ArrayList list = new ArrayList();
     list.add("홍길동");
     list.add(3.14f);

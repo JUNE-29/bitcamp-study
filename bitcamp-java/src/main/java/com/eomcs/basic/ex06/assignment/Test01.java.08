@@ -3,20 +3,28 @@ package com.eomcs.basic.ex06.assignment;
 import java.util.Scanner;
 
 public class Test01 {
-
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
     
     System.out.print("밑변 길이? ");
     int width = keyScan.nextInt();
     
-    int i = 0;
-    while (i < width) {
-      System.out.println("*");
-      i++;
+    int line = 0; // 1
+    while(line++ < width) { //0부터 시작하면 =< equal 붙이지 말기. 
+      drawLine(line);
+      System.out.println();
     }
     
     keyScan.close();
+    
   }
-
+ 
+  static void drawLine(int length) {
+    int x = 0;
+    while(x++ < length) {
+      System.out.print("*");
+    }
+    
+  }
+  
 }

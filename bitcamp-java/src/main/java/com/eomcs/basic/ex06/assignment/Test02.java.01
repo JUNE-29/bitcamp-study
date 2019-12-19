@@ -1,0 +1,36 @@
+package com.eomcs.basic.ex06.assignment;
+
+import java.util.Scanner;
+
+// 현재 과제와 유사한 결과를 내는 기존 소스를 가져온다.
+public class Test02 {
+
+  public static void main(String[] args) {
+    Scanner keyScan = new Scanner(System.in);
+
+    System.out.print("밑변 길이? ");
+    int width = keyScan.nextInt();
+
+    int line = 0; // 1, 2, 3, 4, 5, 6 while 문 나갈때 line 변수가 6임! 그래서 밑에 line --; 해서 빼줘야함!
+    while(line++ < width) { 
+      int x = 0;
+      while(x++ < line) {
+        System.out.print("*");
+      }
+      System.out.println();
+    }
+    line --; // 이거 없으면 별 다섯개가 한번 더 나옴!
+
+    while(--line >= 0) { 
+      int x = 0;
+      while(x++ < line) {
+        System.out.print("*");
+      }
+      System.out.println();
+
+    }
+
+    keyScan.close();
+
+  }
+}
