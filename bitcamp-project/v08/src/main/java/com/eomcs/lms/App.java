@@ -9,7 +9,6 @@ public class App {
 
     Scanner keyboard = new Scanner(System.in);
 
-
     class Lesson {
       int no;
       String title;
@@ -19,6 +18,7 @@ public class App {
       int totalHours;
       int dayHours;
     }
+    
     final int LESSON_SIZE = 100;
     Lesson[] lessons = new Lesson[LESSON_SIZE];
     int lessonCount = 0;
@@ -50,10 +50,9 @@ public class App {
     Board[] boards = new Board[BOARD_SIZE];
     int boardCount = 0;
     
-    
-    
 
     String command;
+    
     do {
       System.out.print("\n명령> ");
       command = keyboard.nextLine();
@@ -96,7 +95,8 @@ public class App {
             Lesson l = lessons[i];
             System.out.printf("%d, %s, %s ~ %s, %d\n",
                 l.no, l.title, l.startDate, 
-                l.endDate, l.totalHours);}
+                l.endDate, l.totalHours);
+            }
           break;
         case "/member/add": 
           Member member = new Member();
@@ -147,8 +147,9 @@ public class App {
           board.viewCount = 0;
           
           boards[boardCount++] = board;
-          
+          System.out.println("저장하였습니다.");
           break;
+          
         case "/board/list":
           for(int i = 0; i < boardCount; i++) {
             Board b = boards[i];
@@ -164,7 +165,6 @@ public class App {
     } while (!command.equalsIgnoreCase("quit"));
 
     System.out.print("안녕!");
-
 
     keyboard.close();
 
