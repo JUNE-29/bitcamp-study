@@ -21,8 +21,8 @@ public class Test02 {
     
     
     if (i == 0) {
-      min == no;
-      max == no;
+      min = no;
+      max = no;
     } else {
       if(no < min) {
         min = no;

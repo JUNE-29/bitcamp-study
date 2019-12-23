@@ -14,6 +14,8 @@ public class Exam0220 {
     System.out.printf("%d살 %s님 반갑습니다.\n", age, name);
 
     //System.out.println(name + "살 " + name + "님 반갑습니다.");
+    
+    // while (true); 이것을 실행할 경우 "20살 홍길동님 반갑습니다" 까지만 출력되고 무한루프.. 
   }
 
   public static void main(String[] args) {
