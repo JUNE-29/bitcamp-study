@@ -17,7 +17,7 @@ public class Exam0130 {
     public static void main(String[] args) {
         
         // 클래스 변수 사용법
-        // 클래스명.스태틱변수명 = 값;
+        //      클래스명.스태틱변수명 = 값;
         // 클래스를 사용하는 순간 클래스가 로딩되고, 스태틱 변수는 자동 생성된다.
         A.v1 = 100;
         A.v2 = true;
