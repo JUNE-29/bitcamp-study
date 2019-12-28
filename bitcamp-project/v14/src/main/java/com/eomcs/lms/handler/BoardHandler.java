@@ -16,12 +16,13 @@ public class BoardHandler {
   // 이전까지  게시물 데이터를 입력 받을 때 키보드로부터 입력 받았지만,
   // 향후 네트워크나 파일로부터도 입력 받을 수 있다.
   // 이런 경우를 대비하여 입력 데이터를 읽는 것을 keyboard로 한정하지 말자!
-  // 각 게시판마다 입력 받는 방식을 다르게 할 수 있도록 인스턴스 변수로 선언하자!
+  // 또한 각 게시판마다 입력 받는 방식을 다르게 할 수 있도록 인스턴스 변수로 선언하자!
   Scanner input;
 
   // 클래스 필드
   // => Method Area에 클래스 코드가 로딩될 때 자동 생성된다.
   // => 공통으로 사용할 값일 경우 클래스 필드로 선언한다.
+  
   static final int BOARD_SIZE = 100;
 
   // 생성자(constructor)
@@ -40,15 +41,15 @@ public class BoardHandler {
     this.boards = new Board[BOARD_SIZE];
   }
   
-  public BoardHandler(Scanner input,int capacity) {
+  public BoardHandler(Scanner input, int capacity) {
     this.input = input;
-    if(capacity< BOARD_SIZE || capacity > 10000)
+    if(capacity < BOARD_SIZE || capacity > 10000)
       this.boards = new Board[BOARD_SIZE];
     else
     this.boards = new Board[capacity];
   }
   
-  // 클래스 메서드
+  // 인스턴스 메서드
   // => 인스턴스가 있어야만 호출할 수 있는  메서드이다.
   // => 인스턴스를 사용하는 메서드인 경우 인스턴스 메서드로 선언하라.
   // => 호출할 때는 반드시 인스턴스 주소를 줘야 한다.

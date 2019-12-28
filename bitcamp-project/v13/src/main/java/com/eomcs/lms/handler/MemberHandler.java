@@ -17,7 +17,7 @@ public class MemberHandler {
    // => 공유하는 변수
    // => 클래스가 메모리에 로딩될 때 자동으로 생성된다.
    //
-  static final int MEMBER_SIZE = 100;
+  public static final int MEMBER_SIZE = 100;
   public static Scanner keyboard;
   
   public void addMember() {

@@ -10,7 +10,7 @@ public class Exam0520 {
     int b = 200;
     
     A() {
-      //b = 300;
+      b = 300;
     }
   }
   public static void main(String[] args) {
