@@ -9,7 +9,7 @@ public class Exam0140 {
 
   public static void main(String[] args) {
     A.v1 = 100;
-    
+
     // v2 는 인스턴스 변수이기 때문에 사용하기 전에  new 명령으로 먼저 생성해야 한다.
     //A.v2 = 200; // 컴파일 오류!
 

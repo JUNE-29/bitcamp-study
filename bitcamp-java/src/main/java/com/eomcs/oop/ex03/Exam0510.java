@@ -34,12 +34,13 @@ public class Exam0510 {
     // => 정수(byte,short,int,long,char) : 0
     // => 부동소수점(float, double) : 0.0
     // => 논리(boolean) : false
+    //
     System.out.printf(
         "%d,  %d, %d,  %d,  %c, %.1f, %.1f, %b, %s, %s\n",
         A.b, A.s, A.i, A.l, A.c, A.f, A.d, A.bool, A.str, A.date);
 
 
-    // 인스턴스 변수도 클랙스 변수와 마찬가지다.
+    // 인스턴스 변수도 클래스 변수와 마찬가지다.
     A obj = new A();
     System.out.printf(
         "%d, %d, %d,  %d,  %c, %.1f, %.1f, %b, %s, %s\n",

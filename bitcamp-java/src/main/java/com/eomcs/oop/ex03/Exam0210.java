@@ -10,7 +10,7 @@ public class Exam0210 {
     static void m1() {
       System.out.println("m1()");
     }
-    
+
     //2) 인스턴스 메서드 
     //   => static 이 붙지 않은 메서드이다.
     //   => 인스턴스 주소가 있어야만 호출할 수 있다.
@@ -18,7 +18,7 @@ public class Exam0210 {
       System.out.println("m2()");
     }
   }
- 
+
   public static void main(String[] args) {
     // 클래스 메서드 호출
     // 문법) 클래스명.메서드명();

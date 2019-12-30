@@ -8,19 +8,15 @@ public class Exam0520 {
     // => 생성자 보다 먼저 실행된다.
     static int a = 100;
     int b = 200;
-    
-    A() {
-      b = 300;
-    }
   }
   public static void main(String[] args) {
-    int c = 300;
 
     System.out.println(A.a);
 
     A obj = new A();
     System.out.println(obj.b);
 
+    int c = 300;
     System.out.println(c);
   } 
 }

@@ -14,12 +14,12 @@ public class Exam0120 {
         System.out.println(d1);
         
         // 년, 월, 일 값으로 날짜 인스턴스를 초기화시킨다.
-        Date d2 = new Date(118, 2, 20);
+        Date d2 = new Date(120, 2, 20);
         System.out.println(d2);
         
         // 1970년 1월 1일 0시 0분 0초부터 측정된 밀리초를 가지고 
         // 날짜 인스턴스(객체=메모리) 초기화시킨다.
-        Date d3 = new Date(1000L * 60 * 60 * 24 * 365 * 50);
+        Date d3 = new Date(1000L * 60 * 60 * 24 * 365 * 51);
         System.out.println(d3);
     }
 }
