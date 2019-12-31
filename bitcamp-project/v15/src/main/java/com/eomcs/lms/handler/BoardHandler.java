@@ -6,24 +6,30 @@ import com.eomcs.lms.domain.Board;
 
 public class BoardHandler {
 
-  BoardList boardList;
+  Board[] boards;
+  int boardCount = 0;
   
   Scanner input;
 
+  static final int BOARD_SIZE = 100;
+
   public BoardHandler(Scanner input) {
-    this.input = input;
-    boardList = new BoardList();
     
+    this.input = input;
+    this.boards = new Board[BOARD_SIZE];
   }
   
-  public BoardHandler(Scanner input, int capacity) {
+  public BoardHandler(Scanner input,int capacity) {
     this.input = input;
-    boardList = new BoardList(capacity);
+    if(capacity< BOARD_SIZE || capacity > 10000)
+      this.boards = new Board[BOARD_SIZE];
+    else
+    this.boards = new Board[capacity];
   }
   
   public void listBoard() {
-    Board[] boards = boardList.toArray();
-    for(Board b : boards) {
+    for(int i = 0; i < this.boardCount; i++) {
+      Board b = this.boards[i];
       System.out.printf("%d, %s, %s, %d\n", b.getNo(), b.getTitle(),
           b.getDate(), b.getViewCount());
     }
@@ -42,8 +48,7 @@ public class BoardHandler {
     board.setDate(new Date(System.currentTimeMillis()));
     board.setViewCount(0);
 
-    boardList.add(board);
-    
+   this.boards[this.boardCount++] = board;
     System.out.println("저장하였습니다.");
   }
 
@@ -52,7 +57,13 @@ public class BoardHandler {
     int no = input.nextInt();
     input.nextLine();//숫자 뒤의 남은 공백 제거
 
-    Board board = boardList.get(no);
+    Board board = null;
+    for (int i = 0; i < this.boardCount; i++) {
+      if (this.boards[i].getNo() == no) {
+        board = this.boards[i];
+        break;
+      }
+    }
 
     if (board == null) {
       System.out.println("게시물 번호가 유효하지 않습니다.");

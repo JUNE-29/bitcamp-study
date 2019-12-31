@@ -18,7 +18,7 @@ public class LessonHandler {
   // => 공유할 변수
   public static final int LESSON_SIZE = 100;
   
-  public LessonHandler(Scanner intput){
+  public LessonHandler(Scanner input){
     this.input = input;
     this.lessons = new Lesson[LESSON_SIZE];
   }
