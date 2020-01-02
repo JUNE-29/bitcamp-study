@@ -6,24 +6,25 @@ import com.eomcs.lms.domain.Member;
 
 public class MemberHandler {
 
-  MemberList memberList;
+  ArrayList memberList;
   
    public Scanner input;
   
   public MemberHandler(Scanner input) {
     this.input = input;
-    memberList = new MemberList();
+    this.memberList = new ArrayList();
   }
   
   public MemberHandler(Scanner input, int capacity) {
     this.input = input;
-    memberList = new MemberList(capacity);
+    memberList = new ArrayList(capacity);
   }
   
   
   public void listMember() {
-    Member[] members = memberList.toArray();
-    for(Member m : members) {
+    Object[] arr = this.memberList.toArray();
+    for(Object obj : arr) {
+      Member m = (Member) obj;
       System.out.printf("%d, %s, %s, %s, %s\n", 
           m.getNo(), m.getName(), m.getEmail(),
           m.getTel(), m.getRegisteredDate());
@@ -54,7 +55,7 @@ public class MemberHandler {
 
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    memberList.add(member);
+    this.memberList.add(member);
     
     System.out.println("저장하였습니다.");
   }

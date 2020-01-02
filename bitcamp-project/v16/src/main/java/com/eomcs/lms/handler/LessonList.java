@@ -1,5 +1,6 @@
 package com.eomcs.lms.handler;
 
+import java.util.Arrays;
 import com.eomcs.lms.domain.Lesson;
 
 public class LessonList {
@@ -22,11 +23,13 @@ public class LessonList {
   }
   
   public Lesson[] toArray() {
-    Lesson[] arr = new Lesson[this.size];
+    /*Lesson[] arr = new Lesson[this.size];
     for (int i = 0; i < this.size; i++) {
       arr[i] = this.list[i];
       }
     return arr;
+    */
+    return Arrays.copyOf(this.list, this.size);
   }
   
   public void add(Lesson lesson) {
@@ -34,11 +37,13 @@ public class LessonList {
       int oldCapacity = this.list.length;
       int newCapacity = oldCapacity + (oldCapacity >> 1);
       
-      Lesson[] arr = new Lesson[newCapacity];
+      /*Lesson[] arr = new Lesson[newCapacity];
       for (int i = 0; i < this.list.length; i++) {
         arr[i] = this.list[i];
       }
-      this.list = arr;
+      this.list = arr; 
+      */
+      this.list = Arrays.copyOf(this.list, newCapacity);
     }
     this.list[this.size++] = lesson;
   }

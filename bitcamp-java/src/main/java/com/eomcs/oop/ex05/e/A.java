@@ -6,6 +6,6 @@ public class A {
     static { 
         System.out.println("A클래스의 static{} 실행!");
     }
-}
+} 
 
 
