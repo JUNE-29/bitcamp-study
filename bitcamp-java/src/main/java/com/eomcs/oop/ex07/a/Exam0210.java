@@ -17,7 +17,7 @@ class Score2 {
   private int sum;
   private float aver;
   
-  // 단 sum과 aver의 값을 직접 변경하지는 못하더라도
+  // sum과 aver의 값을 직접 변경하지는 못하더라도
   // 외부에서 이 값들을 조회 할 수 있는 방법/수단(method)은 제공해야 한다.
   // => 보통 이렇게 필드의 값을 조회하는 용도로 사용하는 메서드의 경우
   //    메서드의 용도를 이해하기 쉽도록 getXxx() 형태로 이름을 짓는다.

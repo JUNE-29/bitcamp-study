@@ -28,25 +28,6 @@ public class Exam0114 {
     c2.cc = 890;      // Car의 인스턴스 변수
     c2.valve = 16;    // Car의 인스턴스 변수
     
-    Truck tr = new Truck();
-    tr.model = "따란";
-    tr.capacity = 5;
-    tr.ton = 0;
-    tr.cc = 500;
-    tr.valve = 16;
-    
-    Car ca = new Truck();
-    ca.model = "티코";
-    ca.capacity = 5;
-    ca.cc = 500;
-    ca.valve = 16;
-    ca.ton = 0;
-    ((Truck)ca).ton = 0;
-    ca.dump = true;
-    
-    
-    Car ca = new Vehcile();
-    ve.cc = 290;
     
   }
 

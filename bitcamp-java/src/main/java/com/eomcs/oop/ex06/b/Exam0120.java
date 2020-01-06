@@ -24,7 +24,7 @@ public class Exam0120 {
 
   public static void main(String[] args) {
 
-    // 호추라는 메서드 이름은 같지만
+    // 호출하는 메서드 이름은 같지만
     // 아규먼트의 타입이나 개수에 따라 호출되는 메서드가 결정된다.
     
     int r1 = Calculator.plus(100, 200);

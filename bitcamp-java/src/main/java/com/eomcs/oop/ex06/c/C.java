@@ -10,7 +10,7 @@ public class C {
   void m2() {} 
   
   // protected 접근 범위:
-  // => 현재 클래스+ 같은 패키지 클래스 + 서브클래스
+  // => 현재 클래스 + 같은 패키지 클래스 + 서브클래스
   protected void m3() {}
   
   //public 접근 범위:

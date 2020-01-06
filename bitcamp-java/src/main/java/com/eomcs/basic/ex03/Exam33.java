@@ -1,7 +1,5 @@
 package com.eomcs.basic.ex03;
 
-
-
 // 부동소수점 리터럴(literal) - 최소값과 최대값
 
 public class Exam33 {

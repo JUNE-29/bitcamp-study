@@ -13,6 +13,9 @@ public class X4 extends X3 {
 
     this.m2(); // X3의 m2()
     super.m2(); // X3의 m2()
+    
+    this.m3();
+    super.m3();
 
   }
 }

@@ -34,6 +34,11 @@ public class Exam0115 {
     s.sunroof = true;
     s.auto = true;
     
+    Car c1 = new Truck();
+    c1.dump = true;
+    ((Truck)c1).dump = true;
     
+    Truck t = (Truck)c1;
+    t.dump = true;
   }
 }
