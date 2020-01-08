@@ -70,19 +70,17 @@ public class LessonHandler {
   
   
   public void detailLesson() {
-    System.out.print("수업 번호? ");
-    int no = input.nextInt();
+    System.out.print("수업 인덱스? ");
+    int index = input.nextInt();
     input.nextLine(); //숫자 뒤의 남은 공백 제거
     
-    int index = indexOfBoard(no);
+    Lesson lesson = this.lessonList.get(index);
     
-    
-    if (index == -1) {
-      System.out.println("수업 번호가 유효하지 않습니다.");
+    if (lesson == null) {
+      System.out.println("수업 인덱스가 유효하지 않습니다.");
       return;
     }
     
-    Lesson lesson = this.lessonList.get(index);
     System.out.printf("번호: %d\n", lesson.getNo());
     System.out.printf("수업명: %s\n", lesson.getTitle());
     System.out.printf("수업내용: %s\n", lesson.getDescription());
@@ -93,14 +91,14 @@ public class LessonHandler {
   }
   
   public void updateLesson() {
-    System.out.print("수업 번호? ");
-    int no = input.nextInt();
+    System.out.print("수업 인덱스? ");
+    int index = input.nextInt();
     input.nextLine(); //숫자 뒤의 남은 공백 제거
     
-    int index = indexOfBoard(no);
+    Lesson oldLesson = this.lessonList.get(index);
     
-    if (index == -1) {
-      System.out.println("수업 번호가 유효하지 않습니다.");
+    if (oldLesson == null) {
+      System.out.println("수업 인덱스가 유효하지 않습니다.");
       return;
     }
     
@@ -109,8 +107,6 @@ public class LessonHandler {
     String inputStr = null;
     
     Lesson newLesson = new Lesson();
-    
-    Lesson oldLesson = this.lessonList.get(index);
     
     newLesson.setNo(oldLesson.getNo());
     
@@ -179,14 +175,14 @@ public class LessonHandler {
   }
   
   public void deleteLesson() {
-    System.out.print("수업 번호? ");
-    int no = input.nextInt();
+    System.out.print("수업 인덱스? ");
+    int index = input.nextInt();
     input.nextLine(); //숫자 뒤의 남은 공백 제거
     
-    int index = indexOfBoard(no);
+    Lesson lesson = this.lessonList.get(index);
     
-    if (index == -1) {
-      System.out.println("수업 번호가 유효하지 않습니다.");
+    if (lesson == null) {
+      System.out.println("수업 인덱스가 유효하지 않습니다.");
       return;
     }
     
@@ -196,13 +192,5 @@ public class LessonHandler {
     
   }
   
-  private int indexOfBoard(int no) {
-    for(int i = 0; i < this.lessonList.size(); i++) {
-      if(this.lessonList.get(i).getNo() == no) {
-        return i;
-      }
-    }
-    return -1;
-  }
 }
 

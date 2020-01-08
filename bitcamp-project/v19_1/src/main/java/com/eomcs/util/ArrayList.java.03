@@ -1,0 +1,12 @@
+package com.eomcs.util;
+
+public class ArrayList {
+  Object[] elementData;
+  int size;
+  
+  public ArrayList() {
+    super();
+    
+    this.elementData = new Object[100];
+  }
+}

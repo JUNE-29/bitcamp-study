@@ -54,19 +54,17 @@ public class BoardHandler {
   }
 
   public void detailBoard() {
-    System.out.print("번호? ");
-    int no = input.nextInt();
+    System.out.print("게시글 인덱스? ");
+    int index = input.nextInt();
     input.nextLine();//숫자 뒤의 남은 공백 제거
-    
-    // 게시글 번호로 객체를 찾는다.
-    int index = indexOfBoard(no);
-    
-    if (index == -1) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+
+    Board board = this.boardList.get(index);
+
+    if (board == null) {
+      System.out.println("게시글 인덱스가 유효하지 않습니다.");
       return;
     }
-    
-    Board board = this.boardList.get(index);
+
     System.out.printf("번호: %d\n", board.getNo());
     System.out.printf("제목: %s\n", board.getTitle());
     System.out.printf("등록일: %s\n", board.getDate());
@@ -75,19 +73,17 @@ public class BoardHandler {
   }
 
   public void updateBoard() {
-    System.out.print("게시글 번호? ");
-    int no = input.nextInt();
+    System.out.print("게시글 인덱스? ");
+    int index = input.nextInt();
     input.nextLine();//숫자 뒤의 남은 공백 제거
 
-    int index = indexOfBoard(no);
-    
-    
-    if (index == -1) {
-      System.out.println(" 해당 번호의 게시글이 없습니다.");
+    Board oldBoard = this.boardList.get(index);
+
+    if (oldBoard == null) {
+      System.out.println("게시글 인덱스가 유효하지 않습니다.");
       return;
     }
     
-    Board oldBoard = this.boardList.get(index);
     System.out.printf("내용(%s)? ", oldBoard.getTitle());
     String title = input.nextLine();
     
@@ -109,15 +105,14 @@ public class BoardHandler {
   }
   
   public void deleteBoard() {
-    System.out.print("게시글 번호? ");
-    int no = input.nextInt();
+    System.out.print("게시글 인덱스? ");
+    int index = input.nextInt();
     input.nextLine();//숫자 뒤의 남은 공백 제거
-    
-    int index = indexOfBoard(no);
-    
 
-    if (index == -1) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+    Board board = this.boardList.get(index);
+
+    if (board == null) {
+      System.out.println("게시글 인덱스가 유효하지 않습니다.");
       return;
     }
     
@@ -126,12 +121,5 @@ public class BoardHandler {
     System.out.println("게시글을 삭제했습니다.");
 
   }
-   private int indexOfBoard(int no) {
-     for(int i = 0; i < this.boardList.size(); i++) {
-       if(this.boardList.get(i).getNo() == no) {
-         return i;
-       }
-     }
-     return -1;
-   }
+  
 }

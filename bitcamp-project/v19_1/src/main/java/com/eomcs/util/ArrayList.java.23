@@ -98,11 +98,7 @@ public class ArrayList<E> {
   
   @SuppressWarnings("unchecked")
   public E[] toArray(E[] arr) {
-    if(arr.length < this.size) {
-      // 파라미터로 받은 배열이 작을 때는 새 배열을 만들어 리턴.
     return (E[]) Arrays.copyOf(this.elementData, this.size, arr.getClass());
-    }
-    System.arraycopy(this.elementData, 0, arr, 0, this.size);
-    return arr; // 넉넉할 때는 파라미터로 받은 배열을 그대로 리턴. 
+    // 생성할 배열의 타입을 만들고 사이즈 만큼 elementData를 복사하여 리턴한다.
   }
 }
