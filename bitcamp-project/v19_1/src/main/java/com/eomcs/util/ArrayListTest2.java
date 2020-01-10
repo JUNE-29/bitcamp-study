@@ -7,5 +7,9 @@ public class ArrayListTest2 {
     a1.add("abcd");
     
     System.out.println(a1.get(0));
+    
+    a1.set("aaa");
+    
+    System.out.println(a1.get(0));
   }
 }
