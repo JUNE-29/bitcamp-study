@@ -1,0 +1,8 @@
+package com.eomcs.util;
+
+public class Queue extends LinkedList<Object> {
+  // 오브젝트를 다룰 LinkedList를 받는다.
+  public void offer(Object value) {
+    this.add(value);
+  }
+}

@@ -1,16 +1,18 @@
-package com.eomcs.algorithm.data_structure.linkedlist;
+package com.eomcs.util;
 
-public class LinkedList {
+import java.lang.reflect.Array;
+
+public class LinkedList<E> {
   
-  Node first;
+  Node<E> first;
   
-  Node last;
+  Node<E> last;
   
   int size;
   
   
-  public void add(Object value) {
-    Node newNode = new Node();
+  public void add(E value) {
+    Node<E> newNode = new Node<>();
     newNode.value = value;
     
     if(this.first == null) {
@@ -23,11 +25,11 @@ public class LinkedList {
     this.size++;
   }
   
-  public Object get(int index) {
+  public E get(int index) {
     if(index < 0 || index >= size)
       return null;
     
-    Node cursor = first;
+    Node<E> cursor = first;
     for(int i = 0; i < index; i++) {
       cursor = cursor.next;
     }
@@ -35,14 +37,14 @@ public class LinkedList {
     return cursor.value;
   }
   
-  public void add(int index, Object value) {
+  public void add(int index, E value) {
     if(index < 0 || index >= size)
       return;
     
-    Node newNode = new Node();
+    Node<E> newNode = new Node<>();
     newNode.value = value;
     
-    Node cursor = first;
+    Node<E> cursor = first;
     for(int i = 0; i < index - 1; i++) {
       cursor = cursor.next;
     } 
@@ -59,17 +61,17 @@ public class LinkedList {
     this.size++;
   }
   
-  public Object remove (int index) {
+  public E remove (int index) {
     if(index < 0 || index >= size)
       return null;
     
-    Node cursor = first;
+    Node<E> cursor = first;
     for(int i = 0; i < index - 1; i++) {
       cursor = cursor.next;
       // 전 커서를 찾는 식
-      
     } 
-    Node deletedNode = null;
+    
+    Node<E> deletedNode = null;
     if (index == 0) {
       deletedNode = first;
       first = deletedNode.next;
@@ -78,31 +80,65 @@ public class LinkedList {
     cursor.next = deletedNode.next;
     // 삭제할 코드의 다음 주소를 현재 커서 다음주소에 넣는다.
     }
+    
     deletedNode.next = null;
     size--;
     
     return deletedNode.value;
   }
   
-  public Object set(int index, Object value) {
+  public E set(int index, E value) {
     if(index < 0 || index >= size)
       return null;
+    // 찾는 식
     
-    Node cursor = first;
+    Node<E> cursor = first;
     for(int i = 0; i < index; i++) {
       cursor = cursor.next;
     }
     
-    Object oldvalue = cursor.value;
+    E oldValue = cursor.value;
     cursor.value = value;
     
-    return oldvalue;
+    return oldValue;
   }
   
+  public Object toArray() {
+    Object[] arr = new Object[size];
+    
+    Node<E> cursor = first;
+    for(int i = 0; i < size; i++) {
+      arr[i] = cursor.value;
+      cursor = cursor.next;
+    }
+    
+    return arr;
+  }
   
+  @SuppressWarnings("unchecked")
+  public E[] toArray(E[] arr) {
+   
+    if(arr.length < size) {
+      arr = (E[])Array.newInstance(arr.getClass().getComponentType(), size);
+      // 배열의 한 항목을 달라고... size 만큼 만들거다.
+      //파라미터로 받은 배열을 쓰면 안되고 새로 배열을 만들어야할때
+    }
+    
+    Node<E> cursor = first;
+    for(int i = 0; i < size; i++) {
+      arr[i] = cursor.value;
+      cursor = cursor.next;
+    }
+    
+    return arr;
+  }
   
-  static class Node {
-    Object value;
-    Node next;
+  public int size() {
+    return this.size;
+  }
+  
+  static class Node<T> {
+    T value;
+    Node<T> next;
   }
 }

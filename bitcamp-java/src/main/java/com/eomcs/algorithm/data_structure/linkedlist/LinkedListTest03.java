@@ -13,7 +13,9 @@ public class LinkedListTest03 {
   list.add("ggg");
   
   
-   list.add(2,"xxx");
+   //list.add(2,"xxx");
+   
+  list.remove(0);
    
    print(list);
 

@@ -5,7 +5,6 @@ import com.eomcs.lms.handler.BoardHandler;
 import com.eomcs.lms.handler.LessonHandler;
 import com.eomcs.lms.handler.MemberHandler;
 import com.eomcs.util.Prompt;
-import com.eomcs.util.Queue;
 import com.eomcs.util.Stack;
 
 public class App {
@@ -13,7 +12,7 @@ public class App {
   static Scanner keyboard = new Scanner(System.in);
 
   static Stack<String> commandStack = new Stack<>();
-  static Queue<String> commandQueue = new Queue<>();
+  //이 Stack은 String을 저장하는 Stack이다. new Stack<String>(); 가능. 
 
   public static void main(String[] args) {
 
@@ -34,8 +33,6 @@ public class App {
         continue;
 
       commandStack.push(command);
-      
-      commandQueue.offer(command);
 
       switch(command) {
         case "/lesson/add":
@@ -101,10 +98,6 @@ public class App {
         case "history":
           printCommandHistory();
           break;
-          
-        case "history2":
-          printCommandHistory2();
-          break;
 
         default:
           if(!command.equalsIgnoreCase("quit")) {
@@ -117,27 +110,6 @@ public class App {
 
     keyboard.close();
 
-  }
-  
-  
-  static void printCommandHistory2() {
-    Queue<String> historyQueue = commandQueue.clone();
-    int count = 0;
-    
-    while (historyQueue.size() > 0) {
-      System.out.println(historyQueue.poll());
-      //count++;
-      
-      if ((++count % 5) == 0) {
-        // 5의 배수 -> 5번째 마다 표시를 주기 위해서
-        System.out.print(":");
-        String str = keyboard.nextLine();
-        if (str.equalsIgnoreCase("q")) {
-          // q를 입력하면 멈추고 명령창으로 
-          break;
-        }
-      }
-    }
   }
 
   private static void printCommandHistory() {
@@ -158,5 +130,4 @@ public class App {
       }
     }
   }
-  
 }

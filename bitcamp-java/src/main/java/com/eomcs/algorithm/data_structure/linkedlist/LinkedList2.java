@@ -1,25 +1,21 @@
 package com.eomcs.algorithm.data_structure.linkedlist;
 
 public class LinkedList2 {
-  
- Node first;
-  
+
+  Node first;
   Node last;
-  
   int size;
-  
   
   public void add(Object value) {
     Node newNode = new Node();
     newNode.value = value;
     
-    if(this.first == null) {
+    if(first == null) {
       last = first = newNode;
-    }else {
+    } else {
       last.next = newNode;
       last = newNode;
     }
-    
     this.size++;
   }
   
@@ -33,10 +29,10 @@ public class LinkedList2 {
     }
     
     return cursor.value;
+    
   }
   
   public void add(int index, Object value) {
-    
     if(index < 0 || index >= size)
       return;
     
@@ -46,18 +42,56 @@ public class LinkedList2 {
     Node cursor = first;
     for(int i = 0; i < index - 1; i++) {
       cursor = cursor.next;
-    } 
+    }
     
-    if (index == 0) {
+    if(index == 0) {
       newNode.next = first;
       first = newNode;
     } else {
-    newNode.next = cursor.next;
-    // 다음주소를 새커서에 그 주소를 집어 넣는다.
-    cursor.next = newNode;
-    // 그 전의 커서의 주소에 새로운 주소를 넣는다.
+      newNode.next = cursor.next;
+      cursor.next = newNode;
     }
+    
     this.size++;
+  }
+  
+  public Object remove(int index) {
+    if(index < 0 || index >= size)
+      return null;
+    
+    Node cursor = first;
+    for(int i = 0; i < index - 1; i++) {
+      cursor = cursor.next;
+    }
+    
+    Node deletedNode = null;
+    if(index == 0) {
+      deletedNode = first;
+      first = deletedNode.next;
+    } else {
+      deletedNode = cursor.next;
+      cursor.next = deletedNode.next;
+    }
+    deletedNode.next = null;
+    size--;
+    
+    return deletedNode.value;
+  }
+  
+  public Object set(int index, Object value) {
+    if(index < 0 || index >= size)
+      return null;
+    
+    Node cursor = first;
+    for(int i = 0; i < index; i++) {
+      cursor = cursor.next;
+    }
+    
+    Object oldValue = cursor.value;
+    cursor.value = value;
+    
+    return oldValue;
+    
   }
   
   static class Node {

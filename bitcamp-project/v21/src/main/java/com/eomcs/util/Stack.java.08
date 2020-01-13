@@ -1,0 +1,42 @@
+package com.eomcs.util;
+
+import java.util.Arrays;
+
+public class Stack {
+  
+  private static final int DEFAULT_CAPACITY = 10;
+
+  Object[] elementData;
+  int size;
+  
+  public Stack() {
+    this.elementData = new Object[DEFAULT_CAPACITY];
+    this.size = 0;
+  }
+  
+  public void push(Object value) {
+    if(this.size == elementData.length) {
+      grow();
+    }
+    this.elementData[size++] = value;
+    //size++;
+  }
+  
+  private void grow() {
+    // 내부에서 쓰일 메소드이기 때문에 private로!
+    this.elementData = Arrays.copyOf(elementData, newCapacity());
+  }
+  
+  private int newCapacity() {
+    int oldCapacity = elementData.length;
+    return oldCapacity + (oldCapacity >> 1);
+  }
+  
+  public Object pop() {
+    if(this.size == 0)
+      return null;
+    return this.elementData[--this.size];
+        // 전위연산자를 이용하여 size를 줄이고 찾는다.
+  }
+  
+}
