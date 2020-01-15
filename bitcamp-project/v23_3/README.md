@@ -10,6 +10,9 @@
 
 - src/main/java/com/eomcs/util/List.java 추가
 - src/main/java/com/eomcs/util/AbstractList.java 변경
+- src/main/java/com/eomcs/lms/handler/LessonHandler.java 변경
+- src/main/java/com/eomcs/lms/handler/MemberHandler.java 변경
+- src/main/java/com/eomcs/lms/handler/BoardHandler.java 변경
 
 
 ## 실습
@@ -22,3 +25,14 @@
 - AbstractList.java
     - 추상 메서드를 List 인터페이스로 옮긴다.
     - List 규칙을 따른다.
+    
+- LessonHandler.java 
+    - List 인터페이스 따른다.
+
+- MemberHandler.java
+    - List 인터페이스 따른다.
+    
+- BoardHandler.java
+    - List 인터페이스 따른다.
+    
+    

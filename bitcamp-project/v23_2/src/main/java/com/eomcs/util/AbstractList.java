@@ -1,7 +1,7 @@
 package com.eomcs.util;
 
 public abstract class AbstractList<E> {
-  
+
   // Generalization 2단계:
   // => 서브 클래스에 공통 분모(멤버)를 물려주는 용도의 클래스는 직접 인스턴스를 생성하지 못하도록
   //    추상 클래스로 선언한다.
@@ -12,13 +12,14 @@ public abstract class AbstractList<E> {
   // => 상속 받는 메서드 중에서 반드시 서브 클래스에서 오버라이딩 해야 할 메서드라면
   //    문법으로 표시를 하는 것이 좋다.
   //    이런 용도로 만든 문법이 "추상 메서드"이다.
-  // => 추상 메서드이ㅡ 오버라이딩은 선택사항이 아니라 필수 사항이다.
+  // => 추상 메서드의 오버라이딩은 선택 사항이 아니라 필수 사항이다.
   // => 따라서 서브 클래스를 만드는 개발자는 반드시 이 추상 메서드를 구현해야 한다.
   //
-  // 추상메서드
+  //추상 메서드
   // => 서브 클래스가 반드시 재정의 해야 할 메서드라면 수퍼 클래스에서 정의하지 않는다.
-  // => 또한 서브 클래스가 반드시 오버라이딩 하도록 강제하고 싶을 때 사용하는 문법이다.       
-  
+  // => 또한 서브 클래스가 반드시 해당 메서드를 오버라이딩 하도록 강제하고 싶을 때 사용하는 문법이다.
+  //    
+
   protected int size;
 
   // size() 메서드처럼 수퍼 클래스에서 구현해도 상관없는 것은 
@@ -27,22 +28,22 @@ public abstract class AbstractList<E> {
     return this.size;
   }
 
-  
+
   // 서브 클래스에서 정의할 메서드라면 수퍼 클래스에서 정의하지 않는다.
   // 대신 서브 클래스가 반드시 구현하도록 강제한다.
-  
+
   public abstract void add(E e);
-       
+
   public abstract void add(int index, E value); 
-  
+
   public abstract E get(int index);
-  
+
   public abstract E set(int index, E e);
-  
+
   public abstract E remove(int index);
-  
+
   public abstract Object[] toArray();
-  
+
   public abstract E[] toArray(E[] arr);
-  
+
 }

@@ -103,7 +103,7 @@ public class LinkedList<E> {
     return oldValue;
   }
   
-  public Object toArray() {
+  public Object[] toArray() {
     Object[] arr = new Object[size];
     
     Node<E> cursor = first;
