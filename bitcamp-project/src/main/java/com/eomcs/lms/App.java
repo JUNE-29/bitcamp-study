@@ -1,11 +1,5 @@
 package com.eomcs.lms;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.domain.Lesson;
@@ -13,17 +7,19 @@ import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.handler.BoardHandler;
 import com.eomcs.lms.handler.LessonHandler;
 import com.eomcs.lms.handler.MemberHandler;
+import com.eomcs.util.ArrayList;
+import com.eomcs.util.Iterator;
+import com.eomcs.util.LinkedList;
 import com.eomcs.util.Prompt;
+import com.eomcs.util.Queue;
+import com.eomcs.util.Stack;
 
 public class App {
   
   static Scanner keyboard = new Scanner(System.in);
 
-  // java.util.Stack에서 제공하는 Iterator 객체는 FIFO 방식으로 값을 꺼내준다.
-  // LIFP 방식으로 꺼내는 Iterator가 필요하다면
-  // java.util.Deque 구현체를 사용하라!
-  static Deque<String> commandStack = new ArrayDeque<>();
-  static Queue<String> commandQueue = new LinkedList<>();
+  static Stack<String> commandStack = new Stack<>();
+  static Queue<String> commandQueue = new Queue<>();
 
   public static void main(String[] args) {
 

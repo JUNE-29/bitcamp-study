@@ -1,4 +1,4 @@
-// static nested class == inner class
+// static nested class 
 package com.eomcs.oop.ex11.a;
 
 public class Exam0120 {
@@ -14,7 +14,7 @@ public class Exam0120 {
     // static nested class는 스태틱 멤버이기 때문에
     // 다른 스태틱 멤버가 사용할 수있다.
     A obj;
-    obj = new A();
+    obj = new A(); // OK!
     
   }
 
