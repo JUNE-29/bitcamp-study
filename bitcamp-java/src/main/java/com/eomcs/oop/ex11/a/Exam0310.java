@@ -3,9 +3,8 @@ package com.eomcs.oop.ex11.a;
 
 public class Exam0310 {
 
-
-
   void m1() {
+
     // 로컬 클래스
     class A {
       void m1() {}

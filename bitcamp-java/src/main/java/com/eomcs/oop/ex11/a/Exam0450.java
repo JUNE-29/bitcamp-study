@@ -24,6 +24,7 @@ public class Exam0450 {
     // 문법 :
     // new 수퍼클래스명(파라미터,.......){}
     // 즉 생성자에 넘겨주는 파라미터로 호출될 생성자를 지정한다.
+    //
     final A obj = new A() {
       @Override
       public void print() {

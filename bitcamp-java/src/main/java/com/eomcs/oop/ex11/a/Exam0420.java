@@ -11,6 +11,7 @@ public class Exam0420 {
     // 익명 클래스로 인터페이스 구현하기
     // 문법:
     //  => 인터페이스명 레퍼런스 = new 인터페이스명(수퍼클래스생성자호출) {}
+    //
     A obj = new A() {
       @Override
       public void print() {

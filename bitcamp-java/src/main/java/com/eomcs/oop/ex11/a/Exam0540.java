@@ -10,9 +10,11 @@ public class Exam0540 {
   void m1(A obj) {
     obj.print();
   }
+  
   public static void main(String[] args) {
     Exam0540 r = new Exam0540();
     r.m1(new A() {
+      @Override
       public void print() {
         System.out.println("안넝");
       }

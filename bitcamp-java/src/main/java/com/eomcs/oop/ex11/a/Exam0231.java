@@ -3,7 +3,6 @@ package com.eomcs.oop.ex11.a;
 
 public class Exam0231 {
   public static void main(final String[] args) {
-
     final Exam0231_X obj = new Exam0231_X();
 
     obj.new A("홍길동", 20);
@@ -12,13 +11,6 @@ public class Exam0231 {
     /*
      * new A(obj,"홍길동",20);
      */
-
-
-    // 주의!
-    // => static nested class와 달리 inner class 객체를 생성할 때
-    // 바깥 클래스명으로 생성할 수 없다.
-    //
-    // a = new Exam0230_X.A(); // 컴파일 오류!
   }
 }
 
@@ -41,7 +33,8 @@ class Exam0231_X {
      *
      * 우리가 추가한 생성자는 다음과 같이 바깥 클래스의 객체 주소를 받을 수 있도록 파라미터가 추가된다.
      *
-     * public A(Exam0231_X outer,final String name, final int age) { this.outer = outer; this. }
+     * public A(Exam0231_X outer,final String name, final int age) { this.outer = outer; this.name
+     * = name; this.age = age; }
      *
      */
 

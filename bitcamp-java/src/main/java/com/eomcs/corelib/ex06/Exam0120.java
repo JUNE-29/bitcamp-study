@@ -5,6 +5,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Exam0120 {
 
+  // Queue는 클래스가 없다. 인터페이스라서 그것을 구현한 클래스를 사용해야 한다.
+
   public static void main(String[] args) {
     String s1 = new String("aaa");
     String s2 = new String("bbb");
@@ -14,7 +16,7 @@ public class Exam0120 {
 
     ArrayBlockingQueue queue = new ArrayBlockingQueue(100);
     queue.offer(s1); // aaa,
-    print(queue); 
+    print(queue);
     queue.offer(s2); // aaa, bbb,
     print(queue);
     queue.offer(s3); // aaa, bbb, ccc,
@@ -42,26 +44,7 @@ public class Exam0120 {
       System.out.print(value + ", ");
     }
     System.out.println();
-  }    
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

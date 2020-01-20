@@ -9,7 +9,7 @@ public class Exam0541 {
 
   public static void main(final String[] args) {
     final Exam0541 r = new Exam0541();
-    r.m1(() -> System.out.println("안넝"));
+    r.m1(() -> System.out.println("안녕!"));
   }
 
   void m1(final A obj) {

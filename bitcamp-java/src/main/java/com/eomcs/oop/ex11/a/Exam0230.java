@@ -3,8 +3,8 @@ package com.eomcs.oop.ex11.a;
 
 public class Exam0230 {
   public static void main(final String[] args) {
-
     // 다른 클래스의 인스턴스 멤버는 반드시 인스턴스가 있어야만 사용할 수 있다.
+    //
     // Exam0230_X.iValue = 100; //컴파일 오류!
     // Exam0230_X.im(); //컴파일 오류!
 

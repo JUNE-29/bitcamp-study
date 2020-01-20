@@ -9,8 +9,6 @@ public class Exam0352 {
     obj.m1();
   }
 
-  int iValue;
-
   void m1() {
     int a; // 로컬 변수
     a = 100;
@@ -26,7 +24,6 @@ public class Exam0352 {
         // 결론!
         // => 로컬 클래스는 메서드의 final 변수를 사용할 수 있다.
         // => 값이 변경될 수 있는 일반 변수는 사용할 수 없다.
-
       }
     }
 

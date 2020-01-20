@@ -15,6 +15,7 @@ public class Exam0410 {
         System.out.println("Hello!");
       }
     }
+
     final A obj = new My();
     obj.print();
   }

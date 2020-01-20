@@ -7,7 +7,8 @@ public class Exam0340 {
   public static void main(final String[] args) {
     // 인스턴스 멤버는 반드시 인스턴스를 생성한 후에 사용할 수 있다.
     final Exam0340 obj = new Exam0340();
-    obj.im(); // im()을 호출할 때 Exam0340 객체를 넘겨준다.
+    obj.im(); 
+    // im()을 호출할 때 Exam0340 객체를 넘겨준다.
     // 그러면 im() 에서는 this라는 내장 변수에 보관할 것이다.
   }
 
@@ -47,7 +48,8 @@ public class Exam0340 {
 
     final A obj = new A();
     // 위 코드는 바깥 클래스의 인스턴스 주소를 받는 생성자 호출 코드로 바꾼다.
-    // => final A obj = ????????????????????????
+    // => final A obj = new A(this);
+    //
     obj.m1();
 
   }

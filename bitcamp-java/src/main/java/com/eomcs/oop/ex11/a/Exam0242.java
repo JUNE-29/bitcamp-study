@@ -1,4 +1,4 @@
-// non-static nested class == inner class 응용
+// non-static nested class == inner class 응용III
 package com.eomcs.oop.ex11.a;
 
 import java.util.ArrayList;

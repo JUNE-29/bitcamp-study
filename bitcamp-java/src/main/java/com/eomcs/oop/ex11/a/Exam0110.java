@@ -18,7 +18,7 @@ public class Exam0110 {
       sValue = 100; //OK!
       //iValue = 100; // 컴파일 오류!
      
-      sm();
+      sm(); //OK!
       //im(); //컴파일 오류!
     }
   }

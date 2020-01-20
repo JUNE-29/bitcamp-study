@@ -28,11 +28,11 @@ public class Exam0360 {
       // 컴파일러는 바깥 클래스의 객체 주소를 받을 필드를 추가한다.
       // 또한 바깥 클래스의 객체 주소를 받는 생성자를 추가한다.
       /*
-       * Exam0360 outer; // qkRkx zmffotmdm.................
+       * Exam0360 outer; // 바깥 클래스의 주소를 받을 필드
        *
-       * String paramName; //run()....................
+       * String paramName; // run() 메서드에서 사용할 로컬 변수 값을 받을 필드
        *
-       * public A(Exam0365 obj) { outer = obj;} //sdfksdmfklsdmflk
+       * public A(Exam0365 obj, String str) { outer = obj; paramName = str;}
        *
        */
       @Override
@@ -47,7 +47,8 @@ public class Exam0360 {
         // A 로컬 객체에 name 변수의 값이 들어 있기 때문에
         // 그대로 사용할 수 있는 것이다.
         // => 다음 코드의 name은 createRunner() 메서드의 파라미터가 아니다.
-        // => A 인스턴스가......................................................
+        // => A 인스턴스가 생성될 때 값을 따로 복제한 필드를 가리키는 것이다.
+        //
         System.out.printf("%s님이 달립니다!", name);
 
         // 위 문장은 다음과 같이
@@ -71,7 +72,5 @@ public class Exam0360 {
 
 
 interface Runner {
-
-
   void run();
 }

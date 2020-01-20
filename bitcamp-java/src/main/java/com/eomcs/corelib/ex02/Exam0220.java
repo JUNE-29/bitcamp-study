@@ -1,4 +1,4 @@
-// Wrapper 클래스 - auto-boxing/auto-unboxing 
+// Wrapper 클래스 - auto-boxing/auto-unboxing
 package com.eomcs.corelib.ex02;
 
 public class Exam0220 {
@@ -13,9 +13,5 @@ public class Exam0220 {
 
   }
 }
-
-
-
-
 
 

@@ -10,12 +10,14 @@ public class Exam0530 {
   void m1() {
   // 로컬 변수의 값을 준비할 때 익명 클래스를 사용할 수 있다.
    A obj = new A() {
+     @Override
     public void print() {
       System.out.println("HELLLLLLO");
     }
   };
   obj.print();
   }
+  
   public static void main(String[] args) {
     Exam0530 r = new Exam0530();
     r.m1();

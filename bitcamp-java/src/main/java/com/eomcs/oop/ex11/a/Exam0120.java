@@ -6,7 +6,6 @@ public class Exam0120 {
 
   static class A {
     void m1() {
-      
     }
   }
 

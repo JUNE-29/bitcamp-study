@@ -9,6 +9,7 @@ public class Exam0520 {
    
   // 인스턴스 필드의 값을 준비할 때 익명 클래스를 사용할 수 있다.
    A obj = new A() {
+     @Override
     public void print() {
       System.out.println("HELLLLLLO");
     }

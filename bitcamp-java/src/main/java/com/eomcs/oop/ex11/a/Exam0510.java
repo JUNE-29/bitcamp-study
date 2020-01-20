@@ -9,8 +9,9 @@ public class Exam0510 {
    
   // 스태틱 필드의 값을 준비할 때 익명 클래스를 사용할 수 있다.
   static A obj = new A() {
+    @Override
     public void print() {
       System.out.println("HELLLLLLO");
     }
-  };
+  } ;
 }

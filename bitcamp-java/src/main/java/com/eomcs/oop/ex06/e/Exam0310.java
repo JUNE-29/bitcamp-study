@@ -7,6 +7,7 @@ public final class Exam0310 {
   public void m1() {
     // 로컬 변수에 final 을 붙이면 값을 변경할 수 없는 상수로 사용된다.
     final int a = 100;
+    
     // final 로컬 변수는 값을 변경할 수 없다.
     // a = 200; // 컴파일 오류!
 

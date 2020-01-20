@@ -12,11 +12,10 @@ public class Exam0220 {
      * public A(Exam0220 obj) { outer = obj; }
      *
      */
-    void m1() {
-
-    }
+    void m1() {}
   }
 
+  // 스태틱 멤버
   static int sValue;
 
   static void m1() {
@@ -30,8 +29,8 @@ public class Exam0220 {
 
   static void sm() {}
 
+  // 인스턴스 멤버
   int iValue;
-
 
   void im() {}
 
@@ -44,18 +43,19 @@ public class Exam0220 {
     // 인스턴스 멤버는 this라는 내장변수가 있기 때문에 인스턴스 멤버를 사용할 수 있다.
     iValue = 100; // OK!
     im(); // OK!
-    iValue = 100; // OK! OK! this 생략 가능!
+    iValue = 100; // OK! this 생략 가능!
     im();// OK! this 생략 가능!
 
     this.new A();
-    // 컴파일러는 inner clas를 생성하는 위 코드를 다음과 같이 바꾼다.
-
+    // 컴파일러는 inner class를 생성하는 위 코드를 다음과 같이 바꾼다.
     // => A 클래스의 기본 생성자가 호출 되는 것이 아니다.
     // => 컴파일러가 바깥 클래스의 객체 주소를 받으려고
     // 추가한 생성자를 호출하는 코드로 바뀐다.
     // new A(this);
 
-    new A(); // 이렇게 this를 ................................ㅋ
+    new A(); // 이렇게 this를 생략할 수 있다.
+    // 컴파일러는 위 코드를 다음과 같이 바꾼다.
+    // new A(this);
 
   }
 

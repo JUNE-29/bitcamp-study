@@ -29,15 +29,13 @@ public class Exam0110 {
     System.out.println(map.get("s03"));
     System.out.println(map.get("s04"));
 
-    // 존재하지 않는 key를 지정하면 null을 리턴한다. 
+    // 존재하지 않는 key를 지정하면 null을 리턴한다.
     System.out.println(map.get("s05"));
   }
 
 }
 
-
-
-
-
+// hashSet은 값을 그냥 저장하고 그냥 꺼낸다.
+// hashMap은 값의 라벨을 붙여놓고 저장하고 그 라벨을 찾아 값을 꺼낸다.
 
 

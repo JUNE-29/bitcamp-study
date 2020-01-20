@@ -41,26 +41,7 @@ public class Exam0120 {
       System.out.print(list.get(i) + ", ");
     }
     System.out.println();
-  }    
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
