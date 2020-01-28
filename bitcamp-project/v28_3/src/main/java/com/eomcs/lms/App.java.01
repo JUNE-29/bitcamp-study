@@ -289,22 +289,27 @@ public class App {
   }
 
   private static void saveBoardData() {
-
+    // 데이터가 보관된 파일의 정보를 준비한다.
     File file = new File("./board.json");
+
     FileWriter out = null;
 
     try {
+      // 파일의 데이터를 저장할 때 사용할 도구를 준비한다.
       out = new FileWriter(file);
-      out.write(new Gson().toJson(boardList));
+
+      Gson json = new Gson();
+      out.write(json.toJson(boardList));
+
       System.out.printf("총 %d 개의 게시판 데이터를 저장했습니다.\n", boardList.size());
 
     } catch (IOException e) {
-      System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
-
+      System.out.println("파일 쓰기 중 오류 발생! -" + e.getMessage());
     } finally {
       try {
         out.close();
-      } catch (IOException e) {
+      } catch (Exception e) {
+
       }
     }
   }
