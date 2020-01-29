@@ -6,15 +6,18 @@ import java.io.FileInputStream;
 public class Exam0110 {
 
   public static void main(String[] args) throws Exception {
-    FileInputStream in = new FileInputStream("temp/jls8.pdf");
+    FileInputStream in = new FileInputStream("temp/jls11.pdf");
 
     int b;
 
     long startTime = System.currentTimeMillis(); // 밀리초
 
     int callCount = 0;
-    while ((b = in.read()) != -1) callCount++; // 파일을 끝까지 읽는다.
-
+    while ((b = in.read()) != -1) {
+      // 1바이트씩 읽는다.
+      // b에 담긴 후 b와 -1을 비교한다.
+      callCount++; // 파일을 끝까지 읽는다.
+    }
     long endTime = System.currentTimeMillis();
 
     System.out.println(endTime - startTime);

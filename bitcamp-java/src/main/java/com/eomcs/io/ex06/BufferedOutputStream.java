@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class BufferedOutputStream extends FileOutputStream {
-  byte[] buf = new byte[8196];
+  byte[] buf = new byte[8192];
   int cursor;
 
   public BufferedOutputStream(String filename) throws Exception {
@@ -19,7 +19,7 @@ public class BufferedOutputStream extends FileOutputStream {
     }
 
     // 1바이트 출력하라고 하면 일단 버퍼에 저장할 것이다.
-    buf[cursor++] = (byte)b;
+    buf[cursor++] = (byte) b;
   }
 
   @Override
@@ -37,10 +37,5 @@ public class BufferedOutputStream extends FileOutputStream {
   }
 
 }
-
-
-
-
-
 
 
