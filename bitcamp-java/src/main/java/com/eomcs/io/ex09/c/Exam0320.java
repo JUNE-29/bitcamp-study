@@ -10,7 +10,7 @@ public class Exam0320 {
   public static void main(String[] args) throws Exception {
     FileInputStream fileIn = new FileInputStream("temp/test10.data"); // 실제 출력
     BufferedInputStream bufIn = new BufferedInputStream(fileIn); // 임시 배열 저장
-    ObjectInputStream in = new ObjectInputStream(bufIn); //
+    ObjectInputStream in = new ObjectInputStream(bufIn);
 
     // Serialize로 출력된 데이터를 읽어 다시 원래의 객체로 만들기
     Member member = (Member) in.readObject();
@@ -37,7 +37,8 @@ public class Exam0320 {
     // 즉 readObject()를 통해 바이트 배열을 읽어 객체를 생성할 때
     // 같은 클래스인지 검사한다.
     // 만약 다른 클래스라면 InvalidClassException오류가 발생한다.
-    // serialize 할 떄 사용할 클래스와 deserialize 할때 사용할 클래스가
+    //
+    // serialize 할 때 사용할 클래스와 deserialize 할 때 사용할 클래스가
     // 같은지 검사 하는 방법?
     // (serialize 할 때 사용한 Member 클래스와
     // deserialize 할 때 사용할 Member 클래스가 동일한 클래스인지 검사하는 방법)
@@ -51,11 +52,11 @@ public class Exam0320 {
     //
     // 결론!
     // - 처음에 Member클래스를 작성하였다.
-    // - 컴파일러는 이 클래스의 serialVersionUID 변수에 대해 임의의 값을 부여하였다.
+    // - 컴파일러는 이 클래스의 serialVersionUID 변수에 대해 임의의 값을 부여한다.
     // - Exam0310에서 Member 객체를 출력할 때 이 변수의 값도 출력하였다.
     // - Member 클래스를 변경하였다.
-    // - 컴파일러는 이 클래스의 serialVersionUID 변수의 값을 변경하였따.
-    // - Exam0320에서 바이트 배열을 읽어서 멤버 객체를 생성하려 했다.
+    // - 컴파일러는 이 클래스의 serialVersionUID 변수의 값을 변경하였다.
+    // - Exam0320에서 바이트 배열을 읽어서 Member 객체를 생성하려 했다.
     // - 그러나 파일에 저장된 Member 클래스의 serialVersionUID의 값과
     // 실제 객체를 생성하기 위해 사용할 Member 클래스의 serialVersionUID의 값이 달랐다.
     // - JVM은 저장할 때 형식과 읽을 때 메모리 형식이 다르다고 판단하여

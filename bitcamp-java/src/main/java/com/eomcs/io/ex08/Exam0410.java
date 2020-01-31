@@ -1,4 +1,4 @@
-// 부품 연결 예시 II : FileOutputStream에 ---> BufferdOutputStream 을 연결.
+// 부품 연결 예시 II : FileOutputStream에 --> BufferedOutputStream 연결 --> DataOutputStream 연결
 package com.eomcs.io.ex08;
 
 import java.io.FileOutputStream;
