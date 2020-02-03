@@ -19,9 +19,10 @@
   - 스태틱 필드와 스태틱 메서드를 인스턴스 필드와 인스턴스 메서드로 전환한다.
   - 보통 실무에서는 클래스의 일반적인 구조로 인스턴스 필드와 메서드를 사용한다.
   
+  
 ### 훈련 2: 애플리케이션을 시작하거나 종료할 때 호출 될 옵저버의 규칙을 정의한다.
 
-- ApplicationContextListener.java (ApplicationContextListener.java.01)
+- ApplicationContextListener.java
     - Observer가 갖춰야 할 규칙을 정의한다.
     - 애플리케이션이 시작할 때 자동으로 호출할 메서드의 규칙을 정의한다.
     - 애플리케이션을 종료하기 전에 자동으로 호출할 메서드의 규칙을 정의한다.
