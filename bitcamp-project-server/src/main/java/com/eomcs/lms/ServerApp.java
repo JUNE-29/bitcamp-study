@@ -270,7 +270,7 @@ public class ServerApp {
 
         } else if (request.equals("/lesson/detail")) {
           try {
-            int no = in.readInt(); // 객체를 한번 더 읽는다.
+            int no = in.readInt();
 
             Lesson lesson = null;
             for (Lesson l : lessons) {
@@ -283,6 +283,59 @@ public class ServerApp {
             if (lesson != null) {
               out.writeUTF("OK");
               out.writeObject(lesson);
+            } else {
+              out.writeUTF("FAIL");
+              out.writeUTF("해당 번호의 게시물이 없습니다.");
+            }
+          } catch (Exception e) {
+            out.writeUTF("FAIL");
+            out.writeUTF(e.getMessage());
+          }
+
+        } else if (request.equals("/lesson/update")) {
+          try {
+            Lesson lesson = (Lesson) in.readObject();
+
+            int index = -1;
+            for (int i = 0; i < lessons.size(); i++) {
+              if (lessons.get(i).getNo() == lesson.getNo()) {
+                // 게시물 번호 찾기.
+                index = i;
+                break;
+              }
+            }
+
+            if (index != -1) {
+              lessons.set(index, lesson);
+              out.writeUTF("OK");
+            } else {
+              out.writeUTF("FAIL");
+              out.writeUTF("해당 번호의 게시물이 없습니다.");
+            }
+
+          } catch (Exception e) {
+            out.writeUTF("FAIL");
+            out.writeUTF(e.getMessage()); // 왜 오류가 났는지 메세지를 보낸다.
+          }
+
+        } else if (request.equals("/lesson/delete")) {
+          try {
+
+            int no = in.readInt();
+
+            int index = -1;
+            for (int i = 0; i < lessons.size(); i++) {
+              if (lessons.get(i).getNo() == no) {
+                // 게시물 번호가 사용자가 보낸 번호와 같다면
+                index = i;
+                break;
+              }
+            }
+
+            if (index != -1) { // 삭제하려는 번호의 게시물을 찾았다면
+              lessons.remove(index); // 삭제
+              out.writeUTF("OK");
+
             } else {
               out.writeUTF("FAIL");
               out.writeUTF("해당 번호의 게시물이 없습니다.");

@@ -18,8 +18,10 @@ import com.eomcs.lms.handler.BoardListCommand;
 import com.eomcs.lms.handler.BoardUpdateCommand;
 import com.eomcs.lms.handler.Command;
 import com.eomcs.lms.handler.LessonAddCommand;
+import com.eomcs.lms.handler.LessonDeleteCommand;
 import com.eomcs.lms.handler.LessonDetailCommand;
 import com.eomcs.lms.handler.LessonListCommand;
+import com.eomcs.lms.handler.LessonUpdateCommand;
 import com.eomcs.util.Prompt;
 
 public class ClientApp {
@@ -85,6 +87,8 @@ public class ClientApp {
     commandMap.put("/lesson/list", new LessonListCommand(out, in));
     commandMap.put("/lesson/add", new LessonAddCommand(out, in, prompt));
     commandMap.put("/lesson/detail", new LessonDetailCommand(out, in, prompt));
+    commandMap.put("/lesson/update", new LessonUpdateCommand(out, in, prompt));
+    commandMap.put("/lesson/delete", new LessonDeleteCommand(out, in, prompt));
     // 바로 출력할 수 없으니 서버에게 데이터를 요청해야한다.
 
     try {
