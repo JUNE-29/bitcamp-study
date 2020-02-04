@@ -13,6 +13,7 @@ import java.util.Set;
 import com.eomcs.lms.context.ApplicationContextListener;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.domain.Lesson;
+import com.eomcs.lms.domain.Member;
 
 public class ServerApp {
 
@@ -114,7 +115,7 @@ public class ServerApp {
 
         List<Board> boards = (List<Board>) context.get("boardList");
         List<Lesson> lessons = (List<Lesson>) context.get("lessonList");
-        // List<Member> members = (List<Member>) context.get("memberList");
+        List<Member> members = (List<Member>) context.get("memberList");
 
         // 클라이언트의 명령에 응답을 한다.
         if (request.equals("/board/list")) {
@@ -247,7 +248,7 @@ public class ServerApp {
 
             int i = 0;
             for (; i < lessons.size(); i++) {
-              if (boards.get(i).getNo() == lesson.getNo()) {
+              if (lessons.get(i).getNo() == lesson.getNo()) {
                 break;
               }
             }
@@ -261,7 +262,6 @@ public class ServerApp {
               out.writeUTF("같은 번호의 게시물이 있습니다.");
 
             }
-
 
           } catch (Exception e) {
             out.writeUTF("FAIL");
@@ -344,6 +344,118 @@ public class ServerApp {
             out.writeUTF("FAIL");
             out.writeUTF(e.getMessage());
           }
+
+        } else if (request.equals("/member/list")) {
+
+          out.writeUTF("OK");
+
+          out.reset();
+          // => 기존의 출력했던 List<Board> 객체의 직렬화 데이터를 무시하고
+          // 새로 직렬화를 수행한다.
+
+          out.writeObject(members); // 꺼낸 데이터를 보내준다
+
+        } else if (request.equals("/member/add")) {
+
+          try {
+            Member member = (Member) in.readObject();
+
+            int i = 0;
+            for (; i < members.size(); i++) {
+              if (members.get(i).getNo() == member.getNo()) {
+                break;
+              }
+            }
+
+            if (i == members.size()) { // 같은 번호의 게시물이 없다면
+              members.add(member); // 새 게시물을 등록한다.
+              out.writeUTF("OK"); // 잘 저장했다고 응답
+
+            } else {
+              out.writeUTF("FAIL");
+              out.writeUTF("같은 번호의 게시물이 있습니다.");
+            }
+          } catch (Exception e) {
+            out.writeUTF("FAIL");
+            out.writeUTF(e.getMessage()); // 왜 오류가 났는지 메세지를 보낸다.
+          }
+
+        } else if (request.equals("/member/detail")) {
+          try {
+            int no = in.readInt();
+
+            Member member = null;
+            for (Member m : members) {
+              if (m.getNo() == no) {
+                member = m;
+                break;
+              }
+            }
+
+            if (member != null) {
+              out.writeUTF("OK");
+              out.writeObject(member);
+            } else {
+              out.writeUTF("FAIL");
+              out.writeUTF("해당 번호의 게시물이 없습니다.");
+            }
+          } catch (Exception e) {
+            out.writeUTF("FAIL");
+            out.writeUTF(e.getMessage());
+          }
+
+        } else if (request.equals("/member/update")) {
+          try {
+            Member member = (Member) in.readObject();
+
+            int index = -1;
+            for (int i = 0; i < members.size(); i++) {
+              if (members.get(i).getNo() == member.getNo()) {
+                // 게시물 번호 찾기.
+                index = i;
+                break;
+              }
+            }
+
+            if (index != -1) {
+              members.set(index, member);
+              out.writeUTF("OK");
+            } else {
+              out.writeUTF("FAIL");
+              out.writeUTF("해당 번호의 게시물이 없습니다.");
+            }
+
+          } catch (Exception e) {
+            out.writeUTF("FAIL");
+            out.writeUTF(e.getMessage()); // 왜 오류가 났는지 메세지를 보낸다.
+          }
+
+        } else if (request.equals("/member/delete")) {
+          try {
+            int no = in.readInt();
+
+            int index = -1;
+            for (int i = 0; i < members.size(); i++) {
+              if (members.get(i).getNo() == no) {
+                // 게시물 번호 찾기.
+                index = i;
+                break;
+              }
+            }
+
+            if (index != -1) { // 삭제하려는 번호의 게시물을 찾았다면
+              members.remove(index); // 삭제
+              out.writeUTF("OK");
+
+            } else {
+              out.writeUTF("FAIL");
+              out.writeUTF("해당 번호의 게시물이 없습니다.");
+            }
+          } catch (Exception e) {
+            out.writeUTF("FAIL");
+            out.writeUTF(e.getMessage());
+          }
+
 
         } else {
           out.writeUTF("FAIL");
