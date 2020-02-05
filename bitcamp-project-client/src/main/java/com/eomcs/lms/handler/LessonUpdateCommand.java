@@ -70,7 +70,7 @@ public class LessonUpdateCommand implements Command {
         return;
       }
 
-      System.out.println("게시글을 변경했습니다.");
+      System.out.println("수업을 변경했습니다.");
 
     } catch (Exception e) {
       System.out.println("명령 실행 중 오류 발생!");

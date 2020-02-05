@@ -12,9 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import com.eomcs.lms.context.ApplicationContextListener;
-import com.eomcs.lms.dao.BoardFileDao;
-import com.eomcs.lms.dao.LessonFileDao;
-import com.eomcs.lms.dao.MemberFileDao;
+import com.eomcs.lms.domain.Board;
+import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.servlet.BoardAddServlet;
 import com.eomcs.lms.servlet.BoardDeleteServlet;
@@ -46,7 +45,9 @@ public class ServerApp {
   Map<String, Servlet> servletMap = new HashMap<>();
 
 
+  List<Board> boards;
   List<Member> members;
+  List<Lesson> lessons;
 
   // 옵저버를 등록하는 메서드이다.
   public void addApplicationContextListener(ApplicationContextListener listener) {
@@ -74,35 +75,36 @@ public class ServerApp {
   // 옵저버 관련코드 끝
 
 
+  @SuppressWarnings("unchecked")
   public void service() {
 
     // 애플리케이션이 시작되면 등록된 옵저버를 실행한다.
     // 즉 DataLoaderListener를 실행한다!
     notifyApplicationInitialized();
 
-    // DataLoaderListener가 준비한 DAO객체를 꺼내 변수에 저장한다.
-    BoardFileDao boardDao = (BoardFileDao) context.get("boardDao");
-    LessonFileDao lessonDao = (LessonFileDao) context.get("lessonDao");
-    MemberFileDao memberDao = (MemberFileDao) context.get("memberDao");
+    // DataLoaderListener가 준비한 데이터(인스턴스주소)를 꺼내 인스턴스 필드에 저장한다.
+    boards = (List<Board>) context.get("boardList");
+    members = (List<Member>) context.get("memberList");
+    lessons = (List<Lesson>) context.get("lessonList");
 
     // 커멘드 객체 역할을 수행하는 서블릿 객체를 맵에 보관한다.
-    servletMap.put("/board/list", new BoardListServlet(boardDao));
-    servletMap.put("/board/add", new BoardAddServlet(boardDao));
-    servletMap.put("/board/detail", new BoardDetailServlet(boardDao));
-    servletMap.put("/board/update", new BoardUpdateServlet(boardDao));
-    servletMap.put("/board/delete", new BoardDeleteServlet(boardDao));
+    servletMap.put("/board/list", new BoardListServlet(boards));
+    servletMap.put("/board/add", new BoardAddServlet(boards));
+    servletMap.put("/board/detail", new BoardDetailServlet(boards));
+    servletMap.put("/board/update", new BoardUpdateServlet(boards));
+    servletMap.put("/board/delete", new BoardDeleteServlet(boards));
 
-    servletMap.put("/lesson/list", new LessonListServlet(lessonDao));
-    servletMap.put("/lesson/add", new LessonAddServlet(lessonDao));
-    servletMap.put("/lesson/detail", new LessonDetailServlet(lessonDao));
-    servletMap.put("/lesson/update", new LessonUpdateServlet(lessonDao));
-    servletMap.put("/lesson/delete", new LessonDeleteServlet(lessonDao));
+    servletMap.put("/lesson/list", new LessonListServlet(lessons));
+    servletMap.put("/lesson/add", new LessonAddServlet(lessons));
+    servletMap.put("/lesson/detail", new LessonDetailServlet(lessons));
+    servletMap.put("/lesson/update", new LessonUpdateServlet(lessons));
+    servletMap.put("/lesson/delete", new LessonDeleteServlet(lessons));
 
-    servletMap.put("/member/list", new MemberListServlet(memberDao));
-    servletMap.put("/member/add", new MemberAddServlet(memberDao));
-    servletMap.put("/member/detail", new MemberDetailServlet(memberDao));
-    servletMap.put("/member/update", new MemberUpdateServlet(memberDao));
-    servletMap.put("/member/delete", new MemberDeleteServlet(memberDao));
+    servletMap.put("/member/list", new MemberListServlet(members));
+    servletMap.put("/member/add", new MemberAddServlet(members));
+    servletMap.put("/member/detail", new MemberDetailServlet(members));
+    servletMap.put("/member/update", new MemberUpdateServlet(members));
+    servletMap.put("/member/delete", new MemberDeleteServlet(members));
 
 
 

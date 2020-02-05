@@ -45,12 +45,12 @@ public class MemberUpdateCommand implements Command {
           prompt.inputString(String.format("이름(%s)? ", oldMember.getName()), oldMember.getName()));
       newMember.setEmail(prompt.inputString(String.format("이메일(%s)? ", oldMember.getEmail()),
           oldMember.getEmail()));
-      newMember.setPassword(prompt.inputString(String.format("이메일(%s)? ", oldMember.getPassword()),
+      newMember.setPassword(prompt.inputString(String.format("비밀번호(%s)? ", oldMember.getPassword()),
           oldMember.getPassword()));
       newMember.setPhoto(prompt.inputString(String.format("사진(%s)? ", oldMember.getPhoto()),
           oldMember.getPhoto()));
       newMember.setTel(
-          prompt.inputString(String.format("사진(%s)? ", oldMember.getTel()), oldMember.getTel()));
+          prompt.inputString(String.format("전화(%s)? ", oldMember.getTel()), oldMember.getTel()));
       newMember.setRegisteredDate(new Date(System.currentTimeMillis()));
 
       if (oldMember.equals(newMember)) {
