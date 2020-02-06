@@ -10,14 +10,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import com.eomcs.lms.domain.Board;
+import com.eomcs.lms.domain.Lesson;
 
-public class BoardFileDao {
+public class LessonFileDao {
 
   String filename;
-  List<Board> list;
+  List<Lesson> list;
 
-  public BoardFileDao(String filename) {
+  public LessonFileDao(String filename) {
     this.filename = filename;
     list = new ArrayList<>();
     loadData(); // 객체가 생성될 때 데이터 로딩
@@ -30,8 +30,8 @@ public class BoardFileDao {
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
 
-      list = (List<Board>) in.readObject();
-      System.out.printf("총 %d 개의 게시판 데이터를 로딩했습니다.\n", list.size());
+      list = (List<Lesson>) in.readObject();
+      System.out.printf("총 %d 개의 수업 데이터를 로딩했습니다.\n", list.size());
 
     } catch (Exception e) {
       // 모든 예외를 다 받는다
@@ -50,7 +50,7 @@ public class BoardFileDao {
       out.reset(); // 기존의 직렬화(Serialize)수행 중에 캐시된(임시보관된) 데이터를 초기화 시킨다.
       out.writeObject(list);
 
-      System.out.printf("총 %d 개의 게시판 데이터를 저장했습니다.\n", list.size());
+      System.out.printf("총 %d 개의 수업 데이터를 저장했습니다.\n", list.size());
 
     } catch (IOException e) {
       System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
@@ -59,22 +59,23 @@ public class BoardFileDao {
   }
 
   // 서블릿 객체들이 데이터를 다룰 때 사용할 메서드를 정의한다.
-  public int insert(Board board) throws Exception {
+  public int insert(Lesson lesson) throws Exception {
 
-    if (indexOf(board.getNo()) > -1) { // 클라이언트가 보낸 번호가 같은 번호의 게시물이 있다면
+    if (indexOf(lesson.getNo()) > -1) { // 클라이언트가 보낸 번호가 같은 번호의 게시물이 있다면
       return 0; // 0개 저장
     }
 
-    list.add(board); // 파라미터로 넘어온 번호를 새 게시물로 등록(저장)한다.
+    list.add(lesson); // 파라미터로 넘어온 번호를 새 게시물로 등록(저장)한다.
     saveData();
     return 1;
   }
 
-  public List<Board> findAll() throws Exception {
+  public List<Lesson> findAll() throws Exception {
     return list;
   }
 
-  public Board findByNo(int no) throws Exception {
+  public Lesson findByNo(int no) throws Exception {
+
     int index = indexOf(no);
     if (index == -1) {
       return null;
@@ -82,34 +83,33 @@ public class BoardFileDao {
     return list.get(index); // 인덱스의 게시물을 꺼내서 리턴.
   }
 
-  public int update(Board board) throws Exception {
-    int index = indexOf(board.getNo());
+  public int update(Lesson lesson) throws Exception {
+    int index = indexOf(lesson.getNo());
 
     if (index == -1) {
       return 0; // 못찾으면
     }
-    list.set(index, board); // 기존 객체를 파라미터로 받은 객체로 바꾼다.
+
+    list.set(index, lesson);
     saveData();
     return 1;
   }
 
   public int delete(int no) throws Exception {
-
     int index = indexOf(no);
     if (index == -1) {
       return 0;
     }
 
     list.remove(index);
-    saveData(); // 기존 파일에 덮어씌어서 저장
+    saveData();
     return 1;
   }
 
   private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getNo() == no) {
-        // 같은 번호가 있는지 없는지 확인
-        return i; // 같은 번호라면 그 번호를 리턴.
+        return i;
       }
     }
     return -1;

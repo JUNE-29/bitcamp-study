@@ -7,6 +7,23 @@
 
 ## 실습 소스 및 결과
 
+- src/main/java/com/eomcs/lms/servlet 패키지 생성
+- src/main/java/com/eomcs/lms/servlet/Servlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/BoardListServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/BoardAddServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/BoardDetailServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/BoardUpdateServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/BoardDeleteServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/LessonListServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/LessonAddServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/LessonDetailServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/LessonUpdateServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/LessonDeleteServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/MemberListServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/MemberAddServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/MemberDetailServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/MemberUpdateServlet.java 추가
+- src/main/java/com/eomcs/lms/servlet/MemberDeleteServlet.java 추가
 - src/main/java/com/eomcs/lms/ServerApp.java 변경
 
 ## 실습  
