@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import com.eomcs.lms.dao.proxy.BoardDaoProxy;
+import com.eomcs.lms.dao.proxy.LessonDaoProxy;
+import com.eomcs.lms.dao.proxy.MemberDaoProxy;
 import com.eomcs.lms.handler.BoardAddCommand;
 import com.eomcs.lms.handler.BoardDeleteCommand;
 import com.eomcs.lms.handler.BoardDetailCommand;
@@ -82,24 +85,30 @@ public class ClientApp {
     Deque<String> commandStack = new ArrayDeque<>();
     Queue<String> commandQueue = new LinkedList<>();
 
+    // Dao 프록시 객체 준비
+    BoardDaoProxy boardDao = new BoardDaoProxy(in, out);
+    LessonDaoProxy lessonDao = new LessonDaoProxy(in, out);
+    MemberDaoProxy memberDao = new MemberDaoProxy(in, out);
+
     HashMap<String, Command> commandMap = new HashMap<>();
-    commandMap.put("/board/list", new BoardListCommand(out, in));
-    commandMap.put("/board/add", new BoardAddCommand(out, in, prompt));
-    commandMap.put("/board/detail", new BoardDetailCommand(out, in, prompt));
-    commandMap.put("/board/update", new BoardUpdateCommand(out, in, prompt));
-    commandMap.put("/board/delete", new BoardDeleteCommand(out, in, prompt));
 
-    commandMap.put("/lesson/list", new LessonListCommand(out, in));
-    commandMap.put("/lesson/add", new LessonAddCommand(out, in, prompt));
-    commandMap.put("/lesson/detail", new LessonDetailCommand(out, in, prompt));
-    commandMap.put("/lesson/update", new LessonUpdateCommand(out, in, prompt));
-    commandMap.put("/lesson/delete", new LessonDeleteCommand(out, in, prompt));
+    commandMap.put("/board/list", new BoardListCommand(boardDao));
+    commandMap.put("/board/add", new BoardAddCommand(boardDao, prompt));
+    commandMap.put("/board/detail", new BoardDetailCommand(boardDao, prompt));
+    commandMap.put("/board/update", new BoardUpdateCommand(boardDao, prompt));
+    commandMap.put("/board/delete", new BoardDeleteCommand(boardDao, prompt));
 
-    commandMap.put("/member/list", new MemberListCommand(out, in));
-    commandMap.put("/member/add", new MemberAddCommand(out, in, prompt));
-    commandMap.put("/member/detail", new MemberDetailCommand(out, in, prompt));
-    commandMap.put("/member/update", new MemberUpdateCommand(out, in, prompt));
-    commandMap.put("/member/delete", new MemberDeleteCommand(out, in, prompt));
+    commandMap.put("/lesson/list", new LessonListCommand(lessonDao));
+    commandMap.put("/lesson/add", new LessonAddCommand(lessonDao, prompt));
+    commandMap.put("/lesson/detail", new LessonDetailCommand(lessonDao, prompt));
+    commandMap.put("/lesson/update", new LessonUpdateCommand(lessonDao, prompt));
+    commandMap.put("/lesson/delete", new LessonDeleteCommand(lessonDao, prompt));
+
+    commandMap.put("/member/list", new MemberListCommand(memberDao));
+    commandMap.put("/member/add", new MemberAddCommand(memberDao, prompt));
+    commandMap.put("/member/detail", new MemberDetailCommand(memberDao, prompt));
+    commandMap.put("/member/update", new MemberUpdateCommand(memberDao, prompt));
+    commandMap.put("/member/delete", new MemberDeleteCommand(memberDao, prompt));
     // 바로 출력할 수 없으니 서버에게 데이터를 요청해야한다.
 
     try {

@@ -1,23 +1,20 @@
 
 package com.eomcs.lms.handler;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Date;
+import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.util.Prompt;
 
 // "/board/add" 명령어 처리
 public class BoardAddCommand implements Command {
 
-  ObjectOutputStream out;
-  ObjectInputStream in;
-
   Prompt prompt;
+  BoardDao boardDao;
 
-  public BoardAddCommand(ObjectOutputStream out, ObjectInputStream in, Prompt prompt) {
-    this.out = out;
-    this.in = in;
+  public BoardAddCommand(BoardDao boardDao, Prompt prompt) {
+    // 프록시 객체가 넘어올 것이다.
+    this.boardDao = boardDao;
     this.prompt = prompt;
   }
 
@@ -32,20 +29,11 @@ public class BoardAddCommand implements Command {
     board.setViewCount(0);
 
     try {
-      out.writeUTF("/board/add");
-      out.writeObject(board);
-      out.flush();
-
-      String response = in.readUTF();
-      if (response.equals("FAIL")) {
-        System.out.println(in.readUTF()); // 서버의 메시지(왜 실패했는지)를 읽는다.
-        return;
-      }
-
+      boardDao.insert(board);
       System.out.println("저장하였습니다.");
 
     } catch (Exception e) {
-      System.out.println("통신 오류 발생!");
+      System.out.println("저장 실패!");
     }
   }
 }

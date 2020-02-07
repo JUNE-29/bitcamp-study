@@ -3,21 +3,17 @@
 package com.eomcs.lms.handler;
 
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.util.Prompt;
 
 public class LessonDetailCommand implements Command {
 
-  ObjectOutputStream out;
-  ObjectInputStream in;
-
+  LessonDao lessonDao;
   public Prompt prompt;
 
-  public LessonDetailCommand(ObjectOutputStream out, ObjectInputStream in, Prompt prompt) {
-    this.out = out;
-    this.in = in;
+  public LessonDetailCommand(LessonDao lessonDao, Prompt prompt) {
+    this.lessonDao = lessonDao;
     this.prompt = prompt;
   }
 
@@ -27,20 +23,9 @@ public class LessonDetailCommand implements Command {
   public void execute() {
 
     try {
+
       int no = prompt.inputInt("번호? ");
-
-      out.writeUTF("/lesson/detail");
-      out.writeInt(no);
-      out.flush();
-
-      String response = in.readUTF();
-      if (response.equals("FAIL")) {
-        System.out.println(in.readUTF());
-        return;
-      }
-
-
-      Lesson lesson = (Lesson) in.readObject();
+      Lesson lesson = lessonDao.findByNo(no);
       System.out.printf("번호: %d\n", lesson.getNo());
       System.out.printf("수업명: %s\n", lesson.getTitle());
       System.out.printf("수업내용: %s\n", lesson.getDescription());
@@ -49,7 +34,7 @@ public class LessonDetailCommand implements Command {
       System.out.printf("일수업시간: %s\n", lesson.getDayHours());
 
     } catch (Exception e) {
-      System.out.println("명령 실행 중 오류 발생!");
+      System.out.println("조회 실패!");
     }
 
   }
