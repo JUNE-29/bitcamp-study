@@ -74,6 +74,14 @@ public abstract class AbstractJsonFileDao<T> {
         list.add(b);
       }
 
+      // @SuppressWarnings("serial")
+      // TypeToken<ArrayList<T>> typeToken = new TypeToken<ArrayList<T>>() {
+      // // TypeToken 이라는 추상 클래스를 상속 받은 서브 클래스를 정의한다.
+      // // => 이 타입의 객체를 한 번만 사용할 것이기 때문에 익명 클래스로 정의한다.
+      // // => 따로 상속받은 메서드를 오버라이딩 할 필요가 없다.
+      // };
+      //
+      // Type type = typeToken.getType();
       System.out.printf("총 %d 개의 객체를 로딩했습니다.\n", list.size());
 
     } catch (Exception e) {
