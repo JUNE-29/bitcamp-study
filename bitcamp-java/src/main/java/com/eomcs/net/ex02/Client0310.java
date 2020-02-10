@@ -1,4 +1,4 @@
-// 타입아웃 시간 설정하기
+// 타임아웃 시간 설정하기
 package com.eomcs.net.ex02;
 
 import java.net.InetSocketAddress;
@@ -24,6 +24,10 @@ public class Client0310 {
     //
     System.out.println("서버와 연결 중...");
     socket.connect(socketAddress, 5000); // timeout : milliseconds
+    // 문자열로 주소를 적을 수 없다.
+    // SocketAddress 를 넣을수 없으니 추상클래스 객체여서
+    // 그래서 SoketAddress를 상속받은 일반 클래스의 객체를 넣어줘야 한다.
+    //
     System.out.println("서버와 연결되었음!");
 
     keyScan.nextLine(); // 사용자가 엔터를 칠 때까지 다음 코드로 이동하지 않는다.
