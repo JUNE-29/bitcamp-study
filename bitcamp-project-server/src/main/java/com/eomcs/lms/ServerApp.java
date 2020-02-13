@@ -8,14 +8,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import com.eomcs.lms.context.ApplicationContextListener;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.dao.MemberDao;
-import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.servlet.BoardAddServlet;
 import com.eomcs.lms.servlet.BoardDeleteServlet;
 import com.eomcs.lms.servlet.BoardDetailServlet;
@@ -35,6 +33,12 @@ import com.eomcs.lms.servlet.Servlet;
 
 public class ServerApp {
 
+
+
+  // v33까지 연스브으으으으으읍!!!
+
+
+
   // 옵저버 관련 코드
   // 옵저버 목록을 관리할 객체 준비
   Set<ApplicationContextListener> listeners = new HashSet<>();
@@ -45,8 +49,6 @@ public class ServerApp {
   // 커맨드(예: Servlet 구현체) 디자인 패턴과 관련된 코드
   Map<String, Servlet> servletMap = new HashMap<>();
 
-
-  List<Member> members;
 
   // 옵저버를 등록하는 메서드이다.
   public void addApplicationContextListener(ApplicationContextListener listener) {
@@ -146,47 +148,42 @@ public class ServerApp {
 
       System.out.println("통신을 위한 입출력 스트림을 준비하였음!");
 
-      while (true) {
-        String request = in.readUTF(); // 요청 메시지를 읽는다.
-        System.out.println("클라이언트가 보낸 메시지를 수신하였음!");
+      String request = in.readUTF(); // 요청 메시지를 읽는다.
+      System.out.println("클라이언트가 보낸 메시지를 수신하였음!");
 
-        // 클라이언트의 명령에 응답을 한다.
-        switch (request) {
-          case "quit":
-            quit(out);
-            return 0; // 클라이언트와 연결을 끊는다.
-          case "/server/stop":
-            quit(out);
-            return 9; // 서버를 종료한다.
-        }
-
-        // 클라이언트의 요청을 처리할 객체를 찾는다.
-        Servlet servlet = servletMap.get(request);
-
-        if (servlet != null) { // 없다면 간단한 안내 메시지로 응답한다.
-          // 클라이언트 요청을 처리할 객체를 찾았으면 작업을 실행시킨다.
-          try {
-
-            servlet.service(in, out);
-
-          } catch (Exception e) {
-            // 요청한 작업을 수행하다가 오류 발생할 경우 그 이유를 응답한다.
-            out.writeUTF("FAIL");
-            out.writeUTF(e.getMessage());
-
-            // 서버쪽 화면에는 더 자세하게 오류 내용을 출력한다.
-            System.out.println("클라이언트 요청 처리 중 오류 발생:");
-            e.printStackTrace();
-          }
-        } else {// 없다면? 간단한 안내 메시지로 응답한다.
-          notFound(out);
-
-        }
-
-        out.flush();
-        System.out.println("클라이언트에게 응답하였음!");
-        System.out.println("--------------------------------------------------");
+      // 클라이언트의 명령에 응답을 한다.
+      if (request.equalsIgnoreCase("/server/stop")) {
+        quit(out);
+        return 9; // 서버를 종료한다.
       }
+
+      // 클라이언트의 요청을 처리할 객체를 찾는다.
+      Servlet servlet = servletMap.get(request);
+
+      if (servlet != null) { // 없다면 간단한 안내 메시지로 응답한다.
+        // 클라이언트 요청을 처리할 객체를 찾았으면 작업을 실행시킨다.
+        try {
+
+          servlet.service(in, out);
+
+        } catch (Exception e) {
+          // 요청한 작업을 수행하다가 오류 발생할 경우 그 이유를 응답한다.
+          out.writeUTF("FAIL");
+          out.writeUTF(e.getMessage());
+
+          // 서버쪽 화면에는 더 자세하게 오류 내용을 출력한다.
+          System.out.println("클라이언트 요청 처리 중 오류 발생:");
+          e.printStackTrace();
+        }
+      } else {// 없다면? 간단한 안내 메시지로 응답한다.
+        notFound(out);
+
+      }
+
+      out.flush();
+      System.out.println("클라이언트에게 응답하였음!");
+
+      return 0;
 
     } catch (Exception e) {
       System.out.println("예외 발생: ");
