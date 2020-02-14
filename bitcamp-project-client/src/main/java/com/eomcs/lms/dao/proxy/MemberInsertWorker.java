@@ -23,7 +23,6 @@ public class MemberInsertWorker implements Worker {
     String response = in.readUTF();
     if (response.equals("FAIL")) {
       throw new Exception(in.readUTF());
-      // 이유를 읽고 Exception으로 해서 던진다. 누구에게..?
     }
     return 1;
 

@@ -46,7 +46,6 @@ public class ServerApp {
   Map<String, Servlet> servletMap = new HashMap<>();
 
 
-  List<Member> members;
 
   // 옵저버를 등록하는 메서드이다.
   public void addApplicationContextListener(ApplicationContextListener listener) {
