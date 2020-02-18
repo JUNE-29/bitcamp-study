@@ -26,7 +26,6 @@ public class MemberDeleteCommand implements Command {
       } else {
         System.out.println("해당 번호의 게시글이 없습니다.");
       }
-
     } catch (Exception e) {
       System.out.println("삭제 실패!");
     }

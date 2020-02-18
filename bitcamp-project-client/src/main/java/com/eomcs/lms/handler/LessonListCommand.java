@@ -27,6 +27,7 @@ public class LessonListCommand implements Command {
       }
     } catch (Exception e) {
       System.out.println("목록 조회 실패!");
+      e.printStackTrace();
     }
   }
 }

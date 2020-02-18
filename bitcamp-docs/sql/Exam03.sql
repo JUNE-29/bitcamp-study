@@ -62,6 +62,8 @@ from test1;
 - where 절과 연산자를 이용하여 조회 조건을 지정할 수 있다.
 - 이렇게 조건을 지정하여 결과를 선택하는 것을 "셀렉션(selection)" 이라 한다.
 
+/* 프로젝션과 셀렉션의 차이 꼭 기억해두기!!!*/
+
 ```
 select ... from ... where 조건...
 select * 
@@ -87,6 +89,19 @@ where working='Y' or class='java100';
 select no, name, class, working
 from test1
 where working='Y' and class='java100';
+
+
+/* 주의!
+* test1 데이터를 먼저 선택한 후 where절 실행 다음에 select 한다!!!!!!
+* where 절을 통해 결과 데이터를 먼저 선택(selection)한 다음
+* 결과 데이터에서 가져올 컬럼을 선택(projection)한다.
+* 따라서 실행 순서는:
+* from ==> where ==> select
+*/
+select no, name
+from test1
+where working='Y' and class='java100';
+
 
 /* 재직자가 아닌 사람만 조회하라!*/
 select no, name, class, working

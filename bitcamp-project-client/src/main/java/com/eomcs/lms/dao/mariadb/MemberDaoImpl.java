@@ -16,35 +16,35 @@ public class MemberDaoImpl implements MemberDao {
     this.con = con;
   }
 
-
   @Override
   public int insert(Member member) throws Exception {
 
-    try (Statement stmt = con.createStatement()
-
-    ) {
-      int result =
-          stmt.executeUpdate("insert into lms_member(name, email, pwd, tel, photo ) values('"//
-              + member.getName() + "', '" + member.getEmail() + "', '" + member.getPassword() + "',"
-              + " '" + member.getTel() + "','" + member.getPhoto() + "')");
+    try (Statement stmt = con.createStatement()) {
+      // SQL 문법:
+      // stmt.executeUpdate("insert into 테이블명(컬럼명1, 컬럼명2,...) value(값1, 값2, ..)");
+      int result = stmt.executeUpdate("insert into lms_member(name, email, pwd, tel, photo ) "
+          + "value('" + member.getName() + "', '" + member.getEmail() + "', '"
+          + member.getPassword() + "','" + member.getTel() + "','" + member.getPhoto() + "')");
 
       return result;
     }
   }
 
+
   @Override
   public List<Member> findAll() throws Exception {
 
+
     try (Statement stmt = con.createStatement();
-
-        ResultSet rs = stmt.executeQuery(//
-            "select member_id, name, email, pwd, cdt, tel, photo from lms_member")) {
-
+        // MariaDB의 lms_member 테이블에 있는 데이터를 가져올 도구를 준비한다.
+        ResultSet rs = stmt
+            .executeQuery("select member_id, name, email, pwd, cdt, tel, photo from lms_member")) {
 
       ArrayList<Member> list = new ArrayList<>();
 
-      while (rs.next()) { // 데이터를 가져왔으면 true를 리턴한다.
-        Member member = new Member(); // 새로운 Board 메모리 준비
+      // ResultSet 도구를 사용하여 데이터를 하나씩 가져온다.
+      while (rs.next()) {
+        Member member = new Member();
 
         member.setNo(rs.getInt("member_id"));
         member.setName(rs.getString("name"));
@@ -60,6 +60,7 @@ public class MemberDaoImpl implements MemberDao {
     }
   }
 
+
   @Override
   public Member findByNo(int no) throws Exception {
 
@@ -70,7 +71,6 @@ public class MemberDaoImpl implements MemberDao {
                 + no)) {
 
       if (rs.next()) {
-
         Member member = new Member();
         member.setNo(rs.getInt("member_id"));
         member.setName(rs.getString("name"));
@@ -79,7 +79,6 @@ public class MemberDaoImpl implements MemberDao {
         member.setRegisteredDate(rs.getDate("cdt"));
         member.setTel(rs.getString("tel"));
         member.setPhoto(rs.getString("photo"));
-
         return member;
 
       } else {
@@ -109,15 +108,14 @@ public class MemberDaoImpl implements MemberDao {
 
   @Override
   public int delete(int no) throws Exception {
-    Class.forName("org.mariadb.jdbc.Driver");
 
-    try (Statement stmt = con.createStatement()
+    try (Statement stmt = con.createStatement();
 
     ) {
-      // DBMS에게 데이터를 삭제하라는 명령을 보낸다.
+      // DBMS에게 데이터 변경 하라는 명령을 보낸다.
       // SQL 문법:
-      // => stmt.executeUpdate("delete from 테이블명 where 조건");
-      // => executeUpdate()의 리턴 값은 SQL 명령에 따라 삭제된 데이터의 개수이다.
+      // stmt.executeUpdate("delete from 테이블명 where 조건");
+      // => executeUpdate()의 리턴 SQL 명령에 따라 삭제된 데이터의 개수이다.
       int result = stmt.executeUpdate("delete from lms_member where member_id=" + no);
 
       return result;

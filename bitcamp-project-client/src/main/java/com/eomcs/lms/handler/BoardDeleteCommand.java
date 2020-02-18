@@ -23,14 +23,11 @@ public class BoardDeleteCommand implements Command {
     try {
       int no = prompt.inputInt("번호? ");
 
-      // 리턴값이 있을지 없을지는 호출한 쪽에서 알아서 처리하도록
       if (boardDao.delete(no) > 0) {
         System.out.println("게시글을 삭제했습니다.");
-
       } else {
         System.out.println("해당 번호의 게시글이 없습니다.");
       }
-
     } catch (Exception e) {
       System.out.println("삭제 실패!");
     }

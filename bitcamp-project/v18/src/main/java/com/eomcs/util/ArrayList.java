@@ -29,8 +29,10 @@ public class ArrayList<E> {
     // 마지막으로 새로 만든 배열의 주소를 리턴하라!
     if(arr.length < this.size) {
       return (E[]) Arrays.copyOf(this.list, this.size, arr.getClass());
+      //this.size 만큼 만들어서 this.list를 복사해서 새로 배열을 만들어라! 
       }
     System.arraycopy(this.list, 0, arr, 0, this.size);
+    // this.list에 있는 것을 this.size 만큼 0번부터 꺼내 arr에 복사한다.
     
     /*
      // 위의 arraycopy()는 다음 코드와 같다.

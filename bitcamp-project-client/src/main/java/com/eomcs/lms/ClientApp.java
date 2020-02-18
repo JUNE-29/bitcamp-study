@@ -42,7 +42,6 @@ public class ClientApp {
   Deque<String> commandStack;
   Queue<String> commandQueue;
 
-  Connection con;
 
   // 필드에서 준비하자
   HashMap<String, Command> commandMap = new HashMap<>();
@@ -57,12 +56,13 @@ public class ClientApp {
 
     // DB 연결 객체 준비
     Class.forName("org.mariadb.jdbc.Driver");
-    con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
+    Connection con =
+        DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
 
     // MariaDB와 연동하여 데이터를 처리하는 DAO 객체 준비
     BoardDao boardDao = new BoardDaoImpl(con);
-    MemberDao memberDao = new MemberDaoImpl(con);
     LessonDao lessonDao = new LessonDaoImpl(con);
+    MemberDao memberDao = new MemberDaoImpl(con);
 
     // 사용자 명령을 처리할 Command 객체 준비
     commandMap.put("/board/list", new BoardListCommand(boardDao));
@@ -115,11 +115,6 @@ public class ClientApp {
 
     }
     keyboard.close();
-
-    try {
-      con.close();
-    } catch (Exception e) {
-    }
   }
 
   private void processCommand(String command) {
