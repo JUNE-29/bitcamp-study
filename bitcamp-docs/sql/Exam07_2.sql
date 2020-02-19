@@ -23,6 +23,7 @@ order by name desc;
 select rno, loc, name 
 from room
 order by name asc, loc asc;
+---> 이름부터 먼저 정렬하고 그 다음에 이름에 맞게 지점 정렬
 
 /* 이름은 오름차순, 지점명은 내림차순으로 정렬하기*/
 select rno, loc, name 
@@ -33,6 +34,7 @@ order by name asc, loc desc;
 select rno, loc, name 
 from room
 order by loc asc, name asc;
+---> 지점부터 먼저 정렬하고 그 다음에 지점에 맞게 이름 정렬
 
 
 

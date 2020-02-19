@@ -316,7 +316,7 @@ ALTER TABLE lect
 ALTER TABLE mgr
     ADD CONSTRAINT FK_memb_TO_mgr -- 멤버 -> 매니저
         FOREIGN KEY (
-            mno -- 매니저번호
+            mno --  매니저번호
         )
         REFERENCES memb ( -- 멤버
             mno -- 멤버번호

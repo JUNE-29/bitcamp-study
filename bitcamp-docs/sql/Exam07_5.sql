@@ -1,3 +1,6 @@
+
+-- 면접에서 물어볼 수 있음! 조인!
+
 /* 조인
 => 서로 관련된 테이블의 데이터를 연결하여 추출하는 방법
 => 기법
@@ -103,8 +106,17 @@ from lect l inner join room r on l.rno=r.rno;
    강의실이 아직 지정되지 않은 강의의 경우 강의실 테이블의 데이터와 연결하지 못해 
    결과로 출력되지 않는 문제가 있다. */
 
-
-
+/* inner join의 문제점 예2:
+ * 모든 강의장 이름을 출력하라.
+* 단 강의장에 강의가 배정된 경우 그 강의 이름도 출력하라.
+*/ 
+select 
+r.rno,
+r.name,
+r.loc,
+l.titl
+from room r inner join lect l on r.rno = l.rno;
+  
 /* => 만약 기준 컬럼의 값과 일치하는 데이터가 없어서 
       다른 테이블의 데이터와 연결되지 않았다 하더라도 
       결과로 뽑아내고 싶다면 outer join을 사용하라!*/
@@ -117,7 +129,7 @@ select
     r.rno, 
     r.loc, 
     r.name
-from lect l right outer join room r on l.rno=r.rno;
+from lect l left outer join room r on l.rno=r.rno;
 /* 왼쪽 테이블인 lect를 기준으로 room 데이터를 연결한다. 
  * 만약 lect와 일치하는 데이터가 room에 없더라도 
  * lect 데이터를 출력한다!
@@ -139,6 +151,7 @@ from memb natural join stnt;
 select mno, name, work
 from memb join stnt using(mno);
 
+-- 옛날 방식
 select memb.mno, name, work
 from memb, stnt
 where memb.mno=stnt.mno;
@@ -206,8 +219,15 @@ from lect_appl la
  * => 매니저 번호는 lect 테이블에 있다.
  * => 매니저 이름은 memb 테이블에 있다. 
  */
-select la.lano, l.titl, m.name, s.work, la.rdt, r.name, m2.name
-from lect_appl la 
+select 
+  la.lano,
+  l.titl,
+  m.name member_name,
+  s.work,
+  la.rdt,
+  r.name room_name,
+  m2.name manager_name
+  from lect_appl la 
         join memb m on la.mno=m.mno
         join stnt s on la.mno=s.mno 
         join lect l on la.lno=l.lno
@@ -218,7 +238,15 @@ from lect_appl la
  * => 매니저 번호는 lect 테이블 있다.
  * => 매니저 직위는 mgr 테이블에 있다.  
  */
-select la.lano, l.titl, m.name, s.work, la.rdt, r.name, m2.name, mr.posi
+select 
+  la.lano,
+  l.titl,
+  m.name,
+  s.work,
+  la.rdt,
+  r.name,
+  m2.name,
+  mr.posi
 from lect_appl la 
         join memb m on la.mno=m.mno
         join stnt s on la.mno=s.mno 

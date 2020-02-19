@@ -4,7 +4,15 @@
 */
 
 /* join이용하여 데이터를 추출한 방법 */
-select la.lano, l.titl, m.name, s.work, la.rdt, r.name, m2.name, mr.posi
+select
+  la.lano, 
+  l.titl, 
+  m.name, 
+  s.work, 
+  la.rdt, 
+  r.name, 
+  m2.name, 
+  mr.posi
 from lect_appl la 
         inner join memb m on la.mno=m.mno
         inner join stnt s on la.mno=s.mno 
@@ -16,7 +24,11 @@ from lect_appl la
 /* select 절에 서브쿼리 사용하기 */
 
 /* => 1단계: 수강신청 데이터를 출력 */
-select la.lano, la.lno, la.mno, la.rdt
+select 
+  la.lano, 
+  la.lno, 
+  la.mno, 
+  date_format(la.rdt, '%Y-%m-%d') reg_dt
 from lect_appl la; 
 
 /* => 2단계 : 서브 쿼리를 이용하여 강의명을 가져오기 */
@@ -51,14 +63,14 @@ select
     l.titl, 
     (select name from room where rno=l.rno) as room_name, 
     (select name from memb where mno=l.mno) as manager_name,
-    (select posi from mgr where mno=l.mno) as manager_posi
-from lect l
+    (select posi from mgr where mno=l.mno) as manager_posi 
+from lect l;
 
 /* 2단계: 위에서 준비한 select 결과를 가상 테이블로 사용하여 
              기존의 lect_appl 테이블과 조인한다.*/
 select 
     la.lano, 
-    (select titl from lect where lno=la.lno) as lect_title, 
+    /*(select titl from lect where lno=la.lno) as lect_title, */
     (select name from memb where mno=la.mno) as stud_name,
     lec.titl,
     lec.room_name,
@@ -104,25 +116,20 @@ from lect_appl la
 /* 과장 또는 대리 매니저가 담당하고 있는 수강 신청만 추출하기 */
 select 
     la.lano, 
-    -- (select titl from lect where lno=la.lno) as lect_title, 
+    /* (select titl from lect where lno=la.lno) as lect_title, */
     (select name from memb where mno=la.mno) as stud_name,
     lec.titl,
     lec.room_name,
-    -- lec.manager_no,
+    /* lec.manager_no,*/
     lec.manager_name,
     lec.manager_posi
 from lect_appl la 
     join lect2 as lec on la.lno=lec.lno 
 where
-    lec.manager_no in (select 
-                           mno 
-                       from
-                           mgr 
-                       where 
-                           posi in ('과장', '대리'));
+    lec.manager_no in (select mno from mgr where  posi in ('과장', '대리'));
 
 
-
+-- 서브쿼리는 직관적이지만 시간이 오래걸린다. 그래서 join을 쓰는걸 권고한다.
 
 
 
