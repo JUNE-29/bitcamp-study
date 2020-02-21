@@ -1,4 +1,4 @@
-// 트랜잭션 다루기 - autocommit
+// 트랜잭션 다루기 - autocommit = true 일 경우의 문제
 package com.eomcs.jdbc.ex2;
 
 import java.sql.Connection;
@@ -62,7 +62,7 @@ public class Exam0510 {
           "insert into x_board_file(file_path,board_id) values(?,?)")) {
         stmt2.setString(1, filename);
         stmt2.setInt(2, no);
-        stmt2.execute();
+        stmt2.executeUpdate();
         System.out.println("첨부파일 등록 완료!");
 
       } catch (Exception e) {
