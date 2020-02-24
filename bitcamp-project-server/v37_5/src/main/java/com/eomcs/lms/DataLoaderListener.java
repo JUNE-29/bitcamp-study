@@ -7,7 +7,6 @@ import com.eomcs.lms.context.ApplicationContextListener;
 import com.eomcs.lms.dao.mariadb.BoardDaoImpl;
 import com.eomcs.lms.dao.mariadb.LessonDaoImpl;
 import com.eomcs.lms.dao.mariadb.MemberDaoImpl;
-import com.eomcs.lms.dao.mariadb.PhotoBoardDaoImpl;
 
 // 애플리케이션이 시작되건 종료될 때
 // 데이터를 로딩하고 저장하는 일을 한다.
@@ -31,7 +30,6 @@ public class DataLoaderListener implements ApplicationContextListener {
       context.put("boardDao", new BoardDaoImpl(con));
       context.put("lessonDao", new LessonDaoImpl(con));
       context.put("memberDao", new MemberDaoImpl(con));
-      context.put("photoBoardDao", new PhotoBoardDaoImpl(con));
 
     } catch (Exception e) {
       e.printStackTrace();
