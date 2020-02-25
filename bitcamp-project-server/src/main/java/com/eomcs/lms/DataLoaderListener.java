@@ -8,13 +8,16 @@ import com.eomcs.lms.dao.mariadb.BoardDaoImpl;
 import com.eomcs.lms.dao.mariadb.LessonDaoImpl;
 import com.eomcs.lms.dao.mariadb.MemberDaoImpl;
 import com.eomcs.lms.dao.mariadb.PhotoBoardDaoImpl;
+import com.eomcs.lms.dao.mariadb.PhotoFileDaoImpl;
 
 // 애플리케이션이 시작되건 종료될 때
 // 데이터를 로딩하고 저장하는 일을 한다.
 //
 public class DataLoaderListener implements ApplicationContextListener {
 
-  Connection con;
+  // 다른 클래스에서 커넥션 객체를 사용할 수 있도록 공개한다.
+  // => Servlet 클래스에서 트랜잭션을 다루기 위해 이 커넥션 객체를 사용한다.
+  public static Connection con;
 
   @Override
   public void contextInitialized(Map<String, Object> context) {
@@ -25,13 +28,13 @@ public class DataLoaderListener implements ApplicationContextListener {
       Class.forName("org.mariadb.jdbc.Driver");
       con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
 
-
       // 이 메서드를 호출한 쪽(App)에서 DAO 객체를 사용할 수 있도록 Map 객체에 담아둔다.
       // 객체 주소를 공유하는 것이다.
       context.put("boardDao", new BoardDaoImpl(con));
       context.put("lessonDao", new LessonDaoImpl(con));
       context.put("memberDao", new MemberDaoImpl(con));
       context.put("photoBoardDao", new PhotoBoardDaoImpl(con));
+      context.put("photoFileDao", new PhotoFileDaoImpl(con));
 
     } catch (Exception e) {
       e.printStackTrace();
