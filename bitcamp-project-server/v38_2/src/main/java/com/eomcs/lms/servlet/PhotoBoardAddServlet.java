@@ -77,6 +77,7 @@ public class PhotoBoardAddServlet implements Servlet {
         // PhotoFile photoFile = new PhotoFile();
         // photoFile.setFilepath(filepath);
         // photoFile.setBoardNo(photoBoard.getNo());
+        // photoFiles.add(photoFile);
 
         // 2) 초기 값을 설정하는 생성자를 사용할 때
         // PhotoFile photoFile = new PhotoFile(filepath, photoBoard.getNo());
