@@ -1,7 +1,6 @@
 package com.eomcs.lms.servlet;
 
 import java.io.PrintStream;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,19 +10,27 @@ import com.eomcs.lms.dao.PhotoFileDao;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
-import com.eomcs.util.ConnectionFactory;
+import com.eomcs.sql.PlatformTransactionManager;
+import com.eomcs.sql.TransactionCallback;
+import com.eomcs.sql.TransactionTemplate;
 import com.eomcs.util.Prompt;
 
 public class PhotoBoardAddServlet implements Servlet {
 
-  ConnectionFactory conFactory;
   PhotoBoardDao photoBoardDao;
   LessonDao lessonDao;
   PhotoFileDao photoFileDao;
+  TransactionTemplate transactionTemplate;
 
-  public PhotoBoardAddServlet(ConnectionFactory conFactory, PhotoBoardDao photoBoardDao,
+  public PhotoBoardAddServlet(PlatformTransactionManager txManager, PhotoBoardDao photoBoardDao,
       LessonDao lessonDao, PhotoFileDao photoFileDao) {
-    this.conFactory = conFactory;
+
+    // 우리를 대신해서 트랜잭션 관리자를 사용하여
+    // 트랜잭션을 처리할 도우미 객체를 준비한다.
+    // 따라서 트랜잭션 관리자는 TransactionTemplate이 사용할 것이기 때문에
+    // 생성자에 넘겨준다.
+    this.transactionTemplate = new TransactionTemplate(txManager);
+
     this.photoBoardDao = photoBoardDao;
     this.lessonDao = lessonDao;
     this.photoFileDao = photoFileDao;
@@ -45,38 +52,36 @@ public class PhotoBoardAddServlet implements Servlet {
 
     photoBoard.setLesson(lesson);
 
-    // 트랜잭션 시작
-    Connection con = conFactory.getConnection();
-    // => ConnectionFactory는 스레드에 보관된 Connection객체를 찾을 것이다.
-    // => 있으면 스레드에 보관된 Connection 객체를 리턴해 줄 것이고
-    // => 없으면 새로 만들어 리턴해 줄 것이다.
-    // => 물론 새로 만든 Connection 객체는 스레드에도 보관될 것이다.
+    // 사용자로부터 사진 게시글에 첨부할 파일을 입력 받는다.
+    List<PhotoFile> photoFiles = inputPhotoFiles(in, out);
 
-    con.setAutoCommit(false);
 
-    try {
+    // 도우미 객체를 이용하여 트랜잭션 작업을 처리해보자.
+    // => 트랜잭션으로 묶어서 처리할 작업은 TransactionCallback 규칙에 따라
+    // 객체를 만들어 파라미터로 넘겨주면 된다.
+    transactionTemplate.execute(new TransactionCallback() {
 
-      if (photoBoardDao.insert(photoBoard) == 0) {
-        throw new Exception("사진 게시글 등록에 실패했습니다.");
+      @Override
+      public Object doInTransaction() throws Exception {
+        // 이 메서드는 TransactionTemplate의 execute()에서
+        // 트랜잭션 시작을 준비한 후에 호출할 것이다.
+        // 따라서 이 메서드 안에서는 트랜잭션으로 한 단위 묶어
+        // 실행할 코드를 두면 된다.
+
+        if (photoBoardDao.insert(photoBoard) == 0) {
+          throw new Exception("사진 게시글 등록에 실패했습니다.");
+        }
+
+        for (PhotoFile photoFile : photoFiles) {
+          photoFile.setBoardNo(photoBoard.getNo());
+          photoFileDao.insert(photoFile); // 첨부파일 저장
+        }
+        out.println("새 사진 게시글을 등록했습니다.");
+        return null;
       }
-
-      List<PhotoFile> photoFiles = inputPhotoFiles(in, out);
-      for (PhotoFile photoFile : photoFiles) {
-        photoFile.setBoardNo(photoBoard.getNo());
-        photoFileDao.insert(photoFile); // 첨부파일 저장
-      }
-      con.commit();
-      out.println("새 사진 게시글을 등록했습니다.");
-
-
-    } catch (Exception e) {
-      con.rollback();
-      out.println(e.getMessage());
-
-    } finally {
-      con.setAutoCommit(true);
-    }
+    });
   }
+
 
   private List<PhotoFile> inputPhotoFiles(Scanner in, PrintStream out) {
     // 첨부 파일을 입력 받는다.

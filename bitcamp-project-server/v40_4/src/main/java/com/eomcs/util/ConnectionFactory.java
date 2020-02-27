@@ -28,8 +28,11 @@ public class ConnectionFactory {
     }
 
     // 없다면, 새로 Connection을 만들어 리턴한다.
-    con = new ConnectionProxy(DriverManager.getConnection(jdbcUrl, username, password));
-    System.out.println("새 Connection 객체를 생성하여 리턴!");
+    con = new ConnectionProxy(DriverManager.getConnection( //
+        jdbcUrl, //
+        username, //
+        password));
+    System.out.println("새 ConnectionProxy 객체를 생성하여 리턴!");
 
     // 물론 리턴하기 전에 스레드에 생성된 Connection 객체의 주소를 기록한다.
     connectionLocal.set(con);

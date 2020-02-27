@@ -1,34 +1,38 @@
 package com.eomcs.lms.dao.mariadb;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
-import com.eomcs.util.ConnectionFactory;
+import com.eomcs.sql.DataSource;
 
 public class MemberDaoImpl implements MemberDao {
 
-  ConnectionFactory conFactory;
+  DataSource dataSource;
 
-  public MemberDaoImpl(ConnectionFactory conFactory) {
-    this.conFactory = conFactory;
+  public MemberDaoImpl(DataSource dataSource) {
+    this.dataSource = dataSource;
   }
 
 
   @Override
   public int insert(Member member) throws Exception {
 
-    try (Connection con = conFactory.getConnection(); Statement stmt = con.createStatement()) {
-      // SQL 문법:
-      // stmt.executeUpdate("insert into 테이블명(컬럼명1, 컬럼명2,...) value(값1, 값2, ..)");
-      int result = stmt.executeUpdate("insert into lms_member(name, email, pwd, tel, photo ) "
-          + "value('" + member.getName() + "', '" + member.getEmail() + "', '"
-          + member.getPassword() + "','" + member.getTel() + "','" + member.getPhoto() + "')");
+    try (Connection con = dataSource.getConnection(); //
+        PreparedStatement stmt =
+            con.prepareStatement("insert into lms_member(name, email, pwd, tel, photo) "
+                + "value(?,?,pwd=password(?),?,?)")) {
 
-      return result;
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getTel());
+      stmt.setString(5, member.getPhoto());
+
+      return stmt.executeUpdate();
     }
   }
 
@@ -37,11 +41,11 @@ public class MemberDaoImpl implements MemberDao {
   public List<Member> findAll() throws Exception {
 
 
-    try (Connection con = conFactory.getConnection();
-        Statement stmt = con.createStatement();
-        // MariaDB의 lms_member 테이블에 있는 데이터를 가져올 도구를 준비한다.
-        ResultSet rs = stmt
-            .executeQuery("select member_id, name, email, pwd, cdt, tel, photo from lms_member")) {
+    try (Connection con = dataSource.getConnection();
+        PreparedStatement stmt = con.prepareStatement(//
+            "select member_id, name, email, pwd, cdt, tel, photo" //
+                + " from lms_member");
+        ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<Member> list = new ArrayList<>();
 
@@ -67,85 +71,125 @@ public class MemberDaoImpl implements MemberDao {
   @Override
   public Member findByNo(int no) throws Exception {
 
-    try (Connection con = conFactory.getConnection();
-        Statement stmt = con.createStatement();
+    try (Connection con = dataSource.getConnection(); //
+        PreparedStatement stmt = con.prepareStatement( //
+            "select member_id, name, email, pwd, cdt, tel, photo" //
+                + " from lms_member" //
+                + " where member_id=?")) {
 
-        ResultSet rs = stmt.executeQuery(//
-            "select member_id, name, email, pwd, cdt, tel, photo from lms_member where member_id="
-                + no)) {
+      stmt.setInt(1, no);
 
-      if (rs.next()) {
-        Member member = new Member();
-        member.setNo(rs.getInt("member_id"));
-        member.setName(rs.getString("name"));
-        member.setEmail(rs.getString("email"));
-        member.setPassword(rs.getString("pwd"));
-        member.setRegisteredDate(rs.getDate("cdt"));
-        member.setTel(rs.getString("tel"));
-        member.setPhoto(rs.getString("photo"));
-        return member;
+      try (ResultSet rs = stmt.executeQuery()) {
 
-      } else {
-        return null;
+        if (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("member_id"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setPassword(rs.getString("pwd"));
+          member.setRegisteredDate(rs.getDate("cdt"));
+          member.setTel(rs.getString("tel"));
+          member.setPhoto(rs.getString("photo"));
+          return member;
+
+        } else {
+          return null;
+        }
       }
     }
   }
 
+
+
   @Override
   public int update(Member member) throws Exception {
 
-    try (Connection con = conFactory.getConnection(); Statement stmt = con.createStatement()
+    try (Connection con = dataSource.getConnection(); //
+        PreparedStatement stmt = con.prepareStatement( //
+            "update lms_member set name = ? , email = ?, "//
+                + "pwd=password(?), tel = ?, photo = ?"//
+                + " where member_id=?")) {
 
-    ) {
-      int result = stmt.executeUpdate("update lms_member set name = '" + //
-          member.getName() + "' , email = '" + member.getEmail() + "', pwd = '"
-          + member.getPassword() + "', tel = '" + member.getTel() + "', photo = '"
-          + member.getPhoto() + "' where member_id=" + member.getNo());
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getTel());
+      stmt.setString(5, member.getPhoto());
+      stmt.setInt(6, member.getNo());
 
-      return result;
+      return stmt.executeUpdate();
     }
   }
+
 
   @Override
   public int delete(int no) throws Exception {
 
-    try (Connection con = conFactory.getConnection(); Statement stmt = con.createStatement();
+    try (Connection con = dataSource.getConnection();
+        PreparedStatement stmt = con.prepareStatement(//
+            "delete from lms_member where member_id=?")) {
 
-    ) {
-      int result = stmt.executeUpdate("delete from lms_member where member_id=" + no);
+      stmt.setInt(1, no);
+      return stmt.executeUpdate();
 
-      return result;
     }
   }
 
   @Override
   public List<Member> findByKeyword(String keyword) throws Exception {
 
-    try (Connection con = conFactory.getConnection();
-        Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery(//
-            "select member_id, name, email, cdt, tel" //
-                + " from lms_member"//
-                + " where name like '%" + keyword //
-                + "%' or email like '%" + keyword //
-                + "%' or tel like '%" + keyword + "%'")) {
+    try (Connection con = dataSource.getConnection(); //
+        PreparedStatement stmt = con.prepareStatement(//
+            "select member_id, name, email, tel, cdt" //
+                + " from lms_member" //
+                + " where name like ?"//
+                + " or email like ?"//
+                + " or tel like ?")) {
+      String value = "%" + keyword + "%";
+      stmt.setString(1, value);
+      stmt.setString(2, value);
+      stmt.setString(3, value);
 
-      ArrayList<Member> list = new ArrayList<>();
-
-      // ResultSet 도구를 사용하여 데이터를 하나씩 가져온다.
-      while (rs.next()) {
-        Member member = new Member();
-
-        member.setNo(rs.getInt("member_id"));
-        member.setName(rs.getString("name"));
-        member.setEmail(rs.getString("email"));
-        member.setRegisteredDate(rs.getDate("cdt"));
-        member.setTel(rs.getString("tel"));
-
-        list.add(member);
+      try (ResultSet rs = stmt.executeQuery()) {
+        ArrayList<Member> list = new ArrayList<>();
+        while (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("member_id"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setTel(rs.getString("tel"));
+          member.setRegisteredDate(rs.getDate("cdt"));
+          list.add(member);
+        }
+        return list;
       }
-      return list;
     }
   }
 
+  @Override
+  public Member findByEmailAndPassword(String email, String password) throws Exception {
+
+    try (Connection con = dataSource.getConnection(); //
+        PreparedStatement stmt = con.prepareStatement(//
+            "select member_id, name, email, pwd, tel, photo" //
+                + " from lms_member" //
+                + " where email=? and pwd=password(?)")) {
+      stmt.setString(1, email);
+      stmt.setString(2, password);
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          Member member = new Member();
+          member.setNo(rs.getInt("member_id"));
+          member.setName(rs.getString("name"));
+          member.setEmail(rs.getString("email"));
+          member.setPassword(rs.getString("pwd"));
+          member.setTel(rs.getString("tel"));
+          member.setPhoto(rs.getString("photo"));
+          return member;
+        } else {
+          return null;
+        }
+      }
+    }
+  }
 }
