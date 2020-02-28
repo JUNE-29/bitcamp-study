@@ -16,23 +16,19 @@ public class MemberDetailServlet implements Servlet {
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
-
     int no = Prompt.getInt(in, out, "번호? ");
 
     Member member = memberDao.findByNo(no);
 
     if (member != null) {
-
-      out.printf("번호: %d \n", member.getNo());
+      out.printf("번호: %d\n", member.getNo());
       out.printf("이름: %s\n", member.getName());
       out.printf("이메일: %s\n", member.getEmail());
       out.printf("암호: %s\n", member.getPassword());
       out.printf("사진: %s\n", member.getPhoto());
       out.printf("전화: %s\n", member.getTel());
-      out.printf("가입일: %s \n", member.getRegisteredDate());
-
     } else {
-      out.println("해당 번호의 회원정보가 없습니다.");
+      out.println("해당 번호의 회원이 없습니다.");
     }
   }
 }

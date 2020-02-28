@@ -12,10 +12,8 @@ public class DataSource {
   // 스레드에 값을 보관하는 일을 할 도구 준비
   ThreadLocal<Connection> connectionLocal = new ThreadLocal<>();
 
-  // 반납 받을 ...
+  // 반납 받은 커넥션을 보관할 저장소를 준비한다.
   ArrayList<Connection> conList = new ArrayList<>();
-
-
 
   public DataSource(String jdbcUrl, String username, String password) {
     this.jdbcUrl = jdbcUrl;
@@ -32,22 +30,24 @@ public class DataSource {
       return con; // 보관된 Connection 객체를 리턴한다.
     }
 
-    // 만약 스레드에 보관된 Connection 객체가 없다면,
+    // 스레드에 보관된 Connection 객체가 없다면,
     // 기존에 반납한 Connection 객체가 있는지 검사한다.
     if (conList.size() > 0) {
 
-      // 1) 있다면 반납 받은 객체를 리턴한다.
+      // 1) 있다면, 반납 받은 객체를 리턴한다.
       con = conList.remove(0);
-      System.out.println("기존의 반납 받은 객체 재사용!");
+      System.out.println("기존에 반납 받은 Connection 객체 재사용!");
 
     } else {
-
-      // 2) 없다면 새로 Connection 객체를 만들어 리턴한다.
-      con = new ConnectionProxy(DriverManager.getConnection(jdbcUrl, username, password));
-      System.out.println("새 Connection 객체를 생성하여 리턴!");
+      // 2) 없다면, 새로 Connection 객체를 만들어 리턴한다.
+      con = new ConnectionProxy(DriverManager.getConnection( //
+          jdbcUrl, //
+          username, //
+          password));
+      System.out.println("새 Connection 객체 생성!");
     }
 
-    // 물론 리턴하기 전에 스레드에 생성된 Connection 객체를 보관한다.
+    // 물론 리턴하기 전에 스레드에 Connection 객체를 보관한다.
     connectionLocal.set(con);
 
     System.out.printf("DataSource: 현재 보관중인 객체 %d개\n", conList.size());
@@ -73,8 +73,6 @@ public class DataSource {
     // 보관소에 저장된 모든 커넥션을 닫는다.
     while (conList.size() > 0) {
       try {
-        // 커넥션리스트의 0번째부터 꺼내서 닫고(반복) 꺼낸
-        // 커넥션에 대해서 형변환된 커넥션프록시에서 realClose() 호출.
         ((ConnectionProxy) conList.remove(0)).realClose();
       } catch (Exception e) {
         // 커넥션을 닫다가 발생한 오류는 무시한다!

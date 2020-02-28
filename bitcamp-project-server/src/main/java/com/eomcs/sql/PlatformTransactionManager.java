@@ -22,7 +22,6 @@ public class PlatformTransactionManager {
     Connection con = dataSource.getConnection();
     con.commit();
     con.setAutoCommit(true);
-
   }
 
   public void rollback() throws Exception {

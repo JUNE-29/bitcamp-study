@@ -19,8 +19,8 @@
 
 ## 실습 소스 및 결과
 
-- src/main/java/com/eomcs/sql/ConnectionFactory.java 삭제
-- src/main/java/com/eomcs/sql/DataSource.java 추가
+- src/main/java/com/eomcs/sql/ConnectionFactory.java 삭제(DataSource로 변경)
+- src/main/java/com/eomcs/sql/DataSource.java 추가(변경)
 - src/main/java/com/eomcs/sql/PlatformTransactionManager.java 변경
 - src/main/java/com/eomcs/lms/dao/mariadb/XxxDaoImpl.java 변경
 - src/main/java/com/eomcs/lms/DataLoaderListener.java 변경

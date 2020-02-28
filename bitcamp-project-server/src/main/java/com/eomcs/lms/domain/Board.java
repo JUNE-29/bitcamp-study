@@ -3,13 +3,9 @@ package com.eomcs.lms.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-
-
 public class Board implements Serializable {
 
-
   private static final long serialVersionUID = 20200131L;
-  // serialize 버전 번호 명시
 
   private int no;
   private String title;
@@ -23,6 +19,9 @@ public class Board implements Serializable {
         + ", writer=" + writer + "]";
   }
 
+  // CSV 포맷:
+  // - 번호,제목,등록일,조회수,작성자
+  //
   public static Board valueOf(String csv) {
     String[] data = csv.split(",");
 
@@ -32,16 +31,13 @@ public class Board implements Serializable {
     board.setDate(Date.valueOf(data[2]));
     board.setViewCount(Integer.parseInt(data[3]));
     board.setWriter(data[4]);
-
     return board;
   }
 
-  public String toCSVString() {
+  public String toCsvString() {
     return String.format("%d,%s,%s,%d,%s", this.getNo(), this.getTitle(), this.getDate(),
         this.getViewCount(), this.getWriter());
-    // 이 인스턴스에 저장된것들
   }
-
 
   @Override
   public int hashCode() {
@@ -119,7 +115,5 @@ public class Board implements Serializable {
   public void setWriter(String writer) {
     this.writer = writer;
   }
-
-
 
 }

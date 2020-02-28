@@ -13,7 +13,6 @@ public class PhotoBoard implements Serializable {
   int viewCount;
   Lesson lesson;
 
-
   @Override
   public String toString() {
     return "PhotoBoard [no=" + no + ", title=" + title + ", createdDate=" + createdDate
@@ -59,7 +58,6 @@ public class PhotoBoard implements Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-
 
 
 }

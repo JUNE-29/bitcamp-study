@@ -10,17 +10,18 @@ import com.eomcs.util.Prompt;
 
 public class PhotoBoardDeleteServlet implements Servlet {
 
+  TransactionTemplate transactionTemplate;
   PhotoBoardDao photoBoardDao;
   PhotoFileDao photoFileDao;
-  TransactionTemplate transactionTemplate;
 
-  public PhotoBoardDeleteServlet(PlatformTransactionManager txManager, PhotoBoardDao photoBoardDao,
+  public PhotoBoardDeleteServlet( //
+      PlatformTransactionManager txManager, //
+      PhotoBoardDao photoBoardDao, //
       PhotoFileDao photoFileDao) {
     this.transactionTemplate = new TransactionTemplate(txManager);
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
-
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {

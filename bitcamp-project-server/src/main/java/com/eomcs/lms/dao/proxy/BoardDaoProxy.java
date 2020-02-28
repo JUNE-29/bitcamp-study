@@ -28,7 +28,6 @@ public class BoardDaoProxy implements BoardDao {
     String response = in.readUTF();
     if (response.equals("FAIL")) {
       throw new Exception(in.readUTF());
-      // 이유를 읽고 Exception으로 해서 던진다. 누구에게..?
     }
 
     return 1;
@@ -37,11 +36,8 @@ public class BoardDaoProxy implements BoardDao {
   @SuppressWarnings("unchecked")
   @Override
   public List<Board> findAll() throws Exception {
-
-    out.writeUTF("/board/list"); // 서버에 요청!
-
+    out.writeUTF("/board/list");
     out.flush();
-
     String response = in.readUTF();
     if (response.equals("FAIL")) {
       throw new Exception(in.readUTF());
@@ -72,7 +68,7 @@ public class BoardDaoProxy implements BoardDao {
     if (response.equals("FAIL")) {
       throw new Exception(in.readUTF());
     }
-    return 1; // 한 개 업데이트 했다.
+    return 1;
   }
 
   @Override
@@ -87,4 +83,5 @@ public class BoardDaoProxy implements BoardDao {
     }
     return 1;
   }
+
 }

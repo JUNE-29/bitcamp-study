@@ -11,21 +11,19 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
-// 서브 클래스에게 공통 필드나 메서드를 상속해주는 역학을 하기 때문에
+// 서브 클래스에게 공통 필드나 메서드를 상속해주는 역할을 하기 때문에
 // => abstract
-// 서브 클래스에게 상속 해주는 메서드 중에서 indexOf()처럼 구현되지 않은 메서드가 있기 때문에
+// 서브 클래스에게 상속 해주는 메서드 중에서 indexOf() 처럼 구현되지 않은 메서드가 있기 때문에
 // => abstract
 //
 public abstract class AbstractObjectFileDao<T> {
-  // T는 파라미터 타입
   protected String filename;
   protected List<T> list;
 
   public AbstractObjectFileDao(String filename) {
     this.filename = filename;
     list = new ArrayList<>();
-    loadData(); // 객체가 생성될 때 데이터 로딩
+    loadData();
   }
 
   @SuppressWarnings("unchecked")
@@ -34,27 +32,21 @@ public abstract class AbstractObjectFileDao<T> {
 
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-
       list = (List<T>) in.readObject();
       System.out.printf("총 %d 개의 객체를 로딩했습니다.\n", list.size());
 
     } catch (Exception e) {
-      // 모든 예외를 다 받는다
       System.out.println("파일 읽기 중 오류 발생! - " + e.getMessage());
-
     }
   }
-
 
   protected void saveData() {
     File file = new File(filename);
 
     try (ObjectOutputStream out =
         new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-
-      out.reset(); // 기존의 직렬화(Serialize)수행 중에 캐시된(임시보관된) 데이터를 초기화 시킨다.
+      out.reset(); // 기존에 직렬화 수행 중에 캐시된(임시보관된) 데이터를 초기화시킨다.
       out.writeObject(list);
-
       System.out.printf("총 %d 개의 객체를 저장했습니다.\n", list.size());
 
     } catch (IOException e) {
@@ -66,15 +58,14 @@ public abstract class AbstractObjectFileDao<T> {
   // 서브 클래스들의 공통 메서드이기 때문에
   // => 수퍼 클래스에 정의한다.
   // 서브 클래스에서 접근할 수 있어야 하기 때문에
-  // => protected로 선언한다.
-  //
-  // 서브 클래스마다 구현방법이 다르기 때문에
+  // => protected
+  // 서브 클래스마다 구현 방법이 다르기 때문에
   // => abstract
-  // => 수퍼 클래스에서 구현할 수도 없고 구현해 봐야 소용없다
-  // 서브 클래스에서 반드시 구현해야 할 메서드이기 떄문에
+  // => 수퍼 클래스에서 구현할 수도 없고, 구현해 봐야 소용없다.
+  // 서브 클래스에서 반드시 구현해야 할 메서드이기 때문에
   // => abstract
   //
   protected abstract <K> int indexOf(K key);
-  // K는 파라미터 타입이다. 인트가 오든 스트링이오든...?
-
 }
+
+

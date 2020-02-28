@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.sql.Date;
 
 // 객체를 serialize 하려면 이 기능을 활성화시켜야 한다.
-// - java.io.Serializeble을 구현하라!
+// - java.io.Serializable을 구현하라!
 // - serialize 데이터를 구분하기 위해 버전 번호를 명시하라.
-
+//
 public class Member implements Serializable {
 
   private static final long serialVersionUID = 20200131L;
-  // serialize 버전 번호 명시
 
   private int no;
   private String name;
@@ -19,7 +18,6 @@ public class Member implements Serializable {
   private String photo;
   private String tel;
   private Date registeredDate;
-
 
   @Override
   public String toString() {
@@ -30,7 +28,6 @@ public class Member implements Serializable {
   public static Member valueOf(String csv) {
     String[] data = csv.split(",");
 
-    // 번호, 이름, 이메일, 비밀번호, 사진, 전화, 가입날짜
     Member member = new Member();
     member.setNo(Integer.parseInt(data[0]));
     member.setName(data[1]);
@@ -43,8 +40,7 @@ public class Member implements Serializable {
     return member;
   }
 
-  public String toCSVString() {
-
+  public String toCsvString() {
     return String.format("%d,%s,%s,%s,%s,%s,%s", this.getNo(), this.getName(), this.getEmail(),
         this.getPassword(), this.getPhoto(), this.getTel(), this.getRegisteredDate());
   }
@@ -59,6 +55,7 @@ public class Member implements Serializable {
     result = prime * result + no;
     result = prime * result + ((password == null) ? 0 : password.hashCode());
     result = prime * result + ((photo == null) ? 0 : photo.hashCode());
+    result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
     result = prime * result + ((tel == null) ? 0 : tel.hashCode());
     return result;
   }
@@ -93,6 +90,11 @@ public class Member implements Serializable {
       if (other.photo != null)
         return false;
     } else if (!photo.equals(other.photo))
+      return false;
+    if (registeredDate == null) {
+      if (other.registeredDate != null)
+        return false;
+    } else if (!registeredDate.equals(other.registeredDate))
       return false;
     if (tel == null) {
       if (other.tel != null)
@@ -157,5 +159,4 @@ public class Member implements Serializable {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
 }

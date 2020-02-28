@@ -33,7 +33,6 @@ public class Prompt {
     }
   }
 
-
   public static Date getDate(Scanner in, PrintStream out, String title) {
     return Date.valueOf(getString(in, out, title));
   }
@@ -41,5 +40,4 @@ public class Prompt {
   public static Date getDate(Scanner in, PrintStream out, String title, String defaultValue) {
     return Date.valueOf(getString(in, out, title, defaultValue));
   }
-
 }

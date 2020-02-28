@@ -16,7 +16,6 @@ public class LessonListServlet implements Servlet {
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
-
     List<Lesson> lessons = lessonDao.findAll();
     for (Lesson l : lessons) {
       out.printf("%d, %s, %s ~ %s, %d\n", l.getNo(), l.getTitle(), l.getStartDate(), l.getEndDate(),

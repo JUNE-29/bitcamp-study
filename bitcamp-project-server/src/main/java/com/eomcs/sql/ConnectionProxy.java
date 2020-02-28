@@ -38,9 +38,8 @@ public class ConnectionProxy implements Connection {
     // 커넥션을 닫으라고 해도 닫지 않는다.
     // 별도로 추가한 realClose()호출할 때 진짜로 닫는다.
     System.out.println("내가 닫을 것 같으냐!");
-    System.out.println("진짜 닫고 싶다면 realClose()를 호출하거라~_~");
+    System.out.println("진짜 닫고 싶다면 realClose()를 호출하거라!");
   }
-
 
   @Override
   public <T> T unwrap(Class<T> iface) throws SQLException {
@@ -344,5 +343,7 @@ public class ConnectionProxy implements Connection {
   public void setShardingKey(ShardingKey shardingKey) throws SQLException {
     origin.setShardingKey(shardingKey);
   }
+
+
 
 }

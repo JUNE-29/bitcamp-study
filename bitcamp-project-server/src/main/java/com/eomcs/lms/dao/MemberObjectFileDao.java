@@ -5,7 +5,6 @@ import com.eomcs.lms.domain.Member;
 
 public class MemberObjectFileDao extends AbstractObjectFileDao<Member> implements MemberDao {
 
-
   public MemberObjectFileDao(String filename) {
     super(filename);
   }
@@ -14,11 +13,11 @@ public class MemberObjectFileDao extends AbstractObjectFileDao<Member> implement
   @Override
   public int insert(Member member) throws Exception {
 
-    if (indexOf(member.getNo()) > -1) { // 클라이언트가 보낸 번호가 같은 번호의 게시물이 있다면
-      return 0; // 0개 저장
+    if (indexOf(member.getNo()) > -1) { // 같은 번호의 회원이 있다면,
+      return 0;
     }
 
-    list.add(member); // 파라미터로 넘어온 번호를 새 게시물로 등록(저장)한다.
+    list.add(member); // 새 회원을 등록한다.
     saveData();
     return 1;
   }
@@ -39,12 +38,12 @@ public class MemberObjectFileDao extends AbstractObjectFileDao<Member> implement
 
   @Override
   public int update(Member member) throws Exception {
-
     int index = indexOf(member.getNo());
 
     if (index == -1) {
       return 0;
     }
+
     list.set(index, member); // 기존 객체를 파라미터로 받은 객체로 바꾼다.
     saveData();
     return 1;
@@ -52,14 +51,13 @@ public class MemberObjectFileDao extends AbstractObjectFileDao<Member> implement
 
   @Override
   public int delete(int no) throws Exception {
-
     int index = indexOf(no);
-
     if (index == -1) {
       return 0;
     }
+
     list.remove(index);
-    saveData(); // 기존 파일에 덮어씌어서 저장
+    saveData();
     return 1;
   }
 
@@ -72,5 +70,6 @@ public class MemberObjectFileDao extends AbstractObjectFileDao<Member> implement
     }
     return -1;
   }
-
 }
+
+
