@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import com.eomcs.lms.dao.PhotoFileDao;
+import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 
 public class PhotoFileDaoImpl implements PhotoFileDao {
@@ -15,10 +16,9 @@ public class PhotoFileDaoImpl implements PhotoFileDao {
   }
 
   @Override
-  public int insert(PhotoFile photoFile) throws Exception {
+  public int insert(PhotoBoard photoBoard) throws Exception {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      int count = sqlSession.insert("PhotoFileMapper.insertPhotoFile", photoFile);
-      sqlSession.commit();
+      int count = sqlSession.insert("PhotoFileMapper.insertPhotoFile", photoBoard);
       return count;
     }
   }
@@ -34,7 +34,6 @@ public class PhotoFileDaoImpl implements PhotoFileDao {
   public int deleteAll(int boardNo) throws Exception {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       int count = sqlSession.delete("PhotoFileMapper.deletePhotoFile", boardNo);
-      sqlSession.commit();
       return count;
     }
   }

@@ -16,12 +16,16 @@
     <result column="photo" property="photo"/>
   </resultMap>
   
-  <select id="selectMember" resultMap="MemberMap" >
-     select 
+  <sql id="select1">
      member_id, 
      name, 
      email, 
      tel, 
+  </sql>
+  
+  <select id="selectMember" resultMap="MemberMap" >
+     select 
+    <include refid="select1"/>
      cdt
      from lms_member
   </select>
@@ -33,11 +37,8 @@
   
   <select id="selectDetail" resultMap ="MemberMap" parameterType="int">
    select
-    member_id, 
-    name, 
-    email, 
+    <include refid="select1"/>
     pwd, 
-    tel, 
     photo
   from lms_member
   where member_id=#{no}
@@ -45,12 +46,13 @@
   
   <update id="updateMember" parameterType="Member">
   update lms_member
-  set
-    name=#{name},
-    email=#{email},
-    pwd=password(#{password}), 
-    tel=#{tel},
-    photo=#{photo} 
+  <set>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="email != null and email != ''">email=#{email},</if>
+    <if test="password != null and password != ''">pwd=password(#{password}),</if> 
+    <if test="tel != null and tel != ''">tel=#{tel},</if>
+    <if test="photo != null and photo != ''">photo=#{photo}</if>
+    </set>
    where member_id=#{no}
   </update>
   
@@ -61,10 +63,8 @@
   
   <select id="selectByKeyword" resultMap="MemberMap" parameterType="string">
   <bind name="keywordPattern" value="'%' + _parameter + '%'"/>
-      select member_id,
-       name,
-       email,
-       tel,
+      select 
+      <include refid="select1"/>
        cdt
        from
        lms_member
@@ -76,11 +76,8 @@
   
    <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
      select
-      member_id,
-       name,
-       email,
+     <include refid="select1"/>
        pwd,
-       tel,
        photo
      from lms_member
      where
