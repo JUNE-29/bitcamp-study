@@ -35,8 +35,7 @@ public class PhotoBoardDetailServlet implements Servlet {
       out.printf("수업: %s\n", photoBoard.getLesson().getTitle());
       out.println("사진 파일:");
 
-      List<PhotoFile> photoFiles = photoFileDao.findAll(photoBoard.getNo());
-      for (PhotoFile photoFile : photoFiles) {
+      for (PhotoFile photoFile : photoBoard.getFiles()) {
         out.printf("> %s\n", photoFile.getFilepath());
       }
 
