@@ -8,7 +8,9 @@ import com.eomcs.lms.service.PhotoBoardService;
 import com.eomcs.sql.PlatformTransactionManager;
 import com.eomcs.sql.TransactionCallback;
 import com.eomcs.sql.TransactionTemplate;
+import com.eomcs.util.Component;
 
+@Component
 public class PhotoBoardServiceImpl implements PhotoBoardService {
 
   TransactionTemplate transactionTemplate;

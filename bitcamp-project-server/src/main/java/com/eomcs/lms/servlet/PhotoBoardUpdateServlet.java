@@ -7,8 +7,10 @@ import java.util.Scanner;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 import com.eomcs.lms.service.PhotoBoardService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/photoboard/update")
 public class PhotoBoardUpdateServlet implements Servlet {
 
   // 트랜잭션 관리자를 이용하여 작업을 실행시켜줄 도우미 객체
