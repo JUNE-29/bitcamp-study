@@ -14,9 +14,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.apache.ibatis.session.SqlSessionFactory;
 import com.eomcs.lms.context.ApplicationContextListener;
-import com.eomcs.lms.servlet.Servlet;
 import com.eomcs.sql.SqlSessionFactoryProxy;
 import com.eomcs.util.ApplicationContext;
+import com.eomcs.util.RequestHandler;
+import com.eomcs.util.RequestMappingHandlerMapping;
 
 public class ServerApp {
 
@@ -32,6 +33,9 @@ public class ServerApp {
 
   // IoC 컨테이너 준비
   ApplicationContext iocContainer;
+
+  // Request handler 매퍼 준비
+  RequestMappingHandlerMapping handlerMapper;
 
   public void addApplicationContextListener(ApplicationContextListener listener) {
     listeners.add(listener);
@@ -57,6 +61,10 @@ public class ServerApp {
   public void service() {
 
     notifyApplicationInitialized();
+
+    // requestHandler mapper를 꺼낸다.
+    handlerMapper = (RequestMappingHandlerMapping) context.get("handlerMapper");
+
 
     // ApplicationContext (IoC컨테이너)를 꺼낸다.
     iocContainer = (ApplicationContext) context.get("IocContatiner");
@@ -139,11 +147,11 @@ public class ServerApp {
         return;
       }
 
-      Servlet servlet = (Servlet) iocContainer.getBean(request);
+      RequestHandler requestHandler = handlerMapper.getHandler(request);
 
-      if (servlet != null) {
+      if (requestHandler != null) {
         try {
-          servlet.service(in, out);
+          requestHandler.getMethod().invoke(requestHandler.getBean(), in, out);
 
         } catch (Exception e) {
           out.println("요청 처리 중 오류 발생!");

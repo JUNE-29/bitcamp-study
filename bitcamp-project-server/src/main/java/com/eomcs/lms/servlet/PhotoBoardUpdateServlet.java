@@ -9,9 +9,10 @@ import com.eomcs.lms.domain.PhotoFile;
 import com.eomcs.lms.service.PhotoBoardService;
 import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
+import com.eomcs.util.RequestMapping;
 
-@Component("/photoboard/update")
-public class PhotoBoardUpdateServlet implements Servlet {
+@Component
+public class PhotoBoardUpdateServlet {
 
   // 트랜잭션 관리자를 이용하여 작업을 실행시켜줄 도우미 객체
   PhotoBoardService photoBoardService;
@@ -22,7 +23,7 @@ public class PhotoBoardUpdateServlet implements Servlet {
 
   }
 
-  @Override
+  @RequestMapping("/photoboard/update")
   public void service(Scanner in, PrintStream out) throws Exception {
 
     int no = Prompt.getInt(in, out, "번호? ");
