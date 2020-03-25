@@ -20,7 +20,7 @@ public class BoardAddFormServlet {
     out.println("<title>게시글 입력</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>게시물 입력</h1>");
+    out.println("<h1>게시글 입력</h1>");
     out.println("<form action='/board/add'>");
     out.println("내용:<br>");
     out.println("<textarea name='title' rows='5' cols='60'></textarea><br>");

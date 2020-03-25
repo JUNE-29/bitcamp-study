@@ -31,7 +31,7 @@ public class BoardAddServlet {
     out.println("<title>게시글 입력</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>게시물 입력 결과</h1>");
+    out.println("<h1>게시글 입력 결과</h1>");
     out.println("<P>새 게시글을 등록했습니다.</p>");
     out.println("</body>");
     out.println("</html>");

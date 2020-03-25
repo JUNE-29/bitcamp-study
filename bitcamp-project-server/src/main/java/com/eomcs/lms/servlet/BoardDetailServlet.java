@@ -27,7 +27,7 @@ public class BoardDetailServlet {
     out.println("<html>");
     out.println("<head>");
     out.println("<meta charset='UTF-8'>");
-    out.println("<title>게시글 입력</title>");
+    out.println("<title>게시글 상세정보</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>게시물 상세정보</h1>");
