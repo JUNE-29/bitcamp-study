@@ -1,64 +1,80 @@
-# 53_1 - Log4j 1.2.x 를 사용하여 애플리케이션 로그 처리하기
-
-애플리케이션의 실행 상태를 확인하고 싶을 때 보통 
-`System.out.println()`을 사용하여 변수의 값이나 
-메서드의 리턴 값, 객체의 필드 값을 출력한다. 
-이 방식의 문제는 
-개발을 완료한 후 이런 코드를 찾아 제거하기가 매우 번거롭다는 것이다. 
-또한 콘솔 출력이 아닌 파일이나 네트웍으로 출력하려면 
-별개의 코드를 작성해야 한다.
-이런 문제점을 해결하기 위해 나온 것이 `Log4j`라는 라이브러리이다.
-개발 중에는 로그를 자세하게 출력하고 
-개발이 완료된 후에는 중요 로그만 출력하도록 조정하는 기능을 제공한다.
-로그의 출력 형식을 지정할 수 있다. 
-출력 대상도 콘솔, 파일, 네트워크, DB 등 다양하게 지정할 수 있다.
+# 54_2 - 출력 콘텐트에 HTML 형식 적용하기
 
 ## 학습목표
 
-- Log4j 1.2.x 를 설정하고 이용하는 방법
+- HTML 태그를 사용할 수 있다.
 
 ## 실습 소스 및 결과
 
-- build.gradle 변경
-- src/main/resources/log4j.properties 추가
-- src/main/java/com/eomcs/lms/AppConfig.java 변경
-- src/main/java/com/eomcs/lms/DatabaseConfig.java 변경
-- src/main/java/com/eomcs/lms/MybatisConfig.java 변경
-- src/main/java/com/eomcs/lms/ContextLoaderListener.java 변경
+- src/main/java/com/eomcs/lms/servlet/BoardXxxServlet.java 변경
+- src/main/java/com/eomcs/lms/servlet/MemberXxxServlet.java 변경
+- src/main/java/com/eomcs/lms/servlet/LessonXxxServlet.java 변경
+- src/main/java/com/eomcs/lms/servlet/PhotoBoardXxxServlet.java 변경
 - src/main/java/com/eomcs/lms/ServerApp.java 변경
 
 ## 실습  
 
-### 훈련1: Log4j 1.2.x 라이브러리를 추가한다.
+### 훈련1: 게시글 목록을 출력할 때 HTML 형식으로 콘텐트를 출력한다.
 
-- 라이브러리 정보 알아내기
-    - `mvnrepository.com`에서 `log4j`를 검색한다.
-- build.gradle
-    - `log4j` 라이브러리 정보를 추가한다.
-    - `$ gradle eclipse`를 실행하여 이클립스 설정 파일을 갱신한다.
-    - 이클립스 워크스페이스에 로딩되어 있는 클래스를 갱신한다.
+- com.eomcs.lms.servlet.BoardListServlet 변경
 
+### 훈련2: 웹브라우저에게 게시글 데이터 입력을 요구한다.
 
-### 훈련2: Log4j 설정 파일을 추가한다.
-
-- src/main/resources/log4j.properties 추가
-  - 자바 classpath 루트에 log4j 설정 파일을 둔다.
-  - log4j의 출력 범위와 출력 대상, 출력 형식을 설정하는 파일이다.
+- com.eomcs.lms.servlet.BoardAddFormServlet 추가
+  - 웹브라우저에게 게시글 데이터 입력을 요구하는 HTML을 보낸다.
+- com.eomcs.lms.servlet.BoardListServlet 변경
+  - /board/addForm 을 요청하는 링크를 추가한다.
 
 
-### 훈련3: 각 클래스의 로그 출력을 Log4j로 전환한다.
+### 훈련3: 웹브라우저가 보낸 데이터 받기
 
 - com.eomcs.lms.ServerApp 변경
-- com.eomcs.lms.ContextLoaderListener 변경
-- com.eomcs.lms.AppConfig 변경
-- com.eomcs.lms.DatabaseConfig 변경
-- com.eomcs.lms.MybatisConfig 변경
+  - request-uri에서 자원의 경로와 데이터를 분리한다.
+  - 예) /board/add?title=aaaa
+  - 자원의 경로: /board/add
+  - 데이터: title=aaaa
 
-### 훈련4: Mybatis에 log4j를 설정한다.
+### 훈련4: 웹브라우저가 보낸 게시글 데이터 저장하기
 
-- com.eomcs.lms.MybatisConfig 변경
-  - org.apache.ibatis.logging.LogFactory.useLog4JLogging() 호출
-  - 즉 log4j 기능을 활성화시킨다.
+- com.eomcs.lms.servlet.BoardAddServlet 변경
+  - 웹브라우저가 보낸 게시글을 입력한다.
+  - 웹브라우저에게 게시글 입력 결과를 보낸다.
 
+### 훈련5: 게시글 상세 정보를 출력하기
 
+- com.eomcs.lms.servlet.BoardDetailServlet 변경
+  - 웹브라우저가 보낸 번호의 게시글을 가져온다.
+  - 웹브라우저에게 게시글 상세 정보를 HTML 형식으로 만들어 보낸다.
+- com.eomcs.lms.servlet.BoardListServlet 변경
+  - /board/detail 을 요청하는 링크를 추가한다.  
+  
+### 훈련6: 게시글 삭제하기
 
+- com.eomcs.lms.servlet.BoardDeleteServlet 변경
+  - 웹브라우저가 보낸 번호의 게시글을 삭제한다.
+  - 웹브라우저에게 게시글 삭제 결과를 HTML 형식으로 만들어 보낸다.
+- com.eomcs.lms.servlet.BoardDetailServlet 변경
+  - /board/delete 을 요청하는 링크를 추가한다.
+  
+### 훈련7: 게시글 변경폼 만들기
+
+- com.eomcs.lms.servlet.BoardDetailServlet 변경
+  - /board/updateForm 을 요청하는 링크를 추가한다.
+- com.eomcs.lms.servlet.BoardUpdateFormServlet 추가
+  - 웹브라우저에게 게시글 데이터 변경을 요구하는 HTML을 보낸다.
+
+### 훈련8: 게시글 변경하기
+
+- com.eomcs.lms.servlet.BoardUpdateServlet 변경
+  - 웹브라우저가 보낸 게시글을 변경한다.
+  - 웹브라우저에게 게시글 변경 결과를 보낸다.
+  
+### 훈련9: 회원 관리 서블릿을 모두 변경하기
+
+### 훈련10: 수업 관리 서블릿을 모두 변경하기
+
+### 훈련11: 사진게시글 관리 서블릿을 모두 변경하기
+
+### 훈련12: 로그인 서블릿을 모두 변경하기
+  
+  
