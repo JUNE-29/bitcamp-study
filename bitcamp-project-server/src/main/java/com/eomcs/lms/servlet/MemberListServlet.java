@@ -53,6 +53,13 @@ public class MemberListServlet {
           m.getEmail(), m.getTel(), //
           m.getRegisteredDate()); //
     }
+    out.println("</table>");
+
+    out.println("<hr>");
+
+    out.println("<form action='/member/search'>");
+    out.println("검색어: <input name='keyword' type='text'>");
+    out.println("<button>검색</button>");
     out.println("</body>");
     out.println("</html>");
   }
