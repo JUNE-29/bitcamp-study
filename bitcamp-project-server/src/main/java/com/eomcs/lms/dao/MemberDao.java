@@ -24,9 +24,7 @@ public interface MemberDao {
     return null;
   }
 
-  default Member findByEmailAndPassword(Map<String, Object> params) throws Exception {
-    return null;
-  }
+  Member findByEmailAndPassword(Map<String, Object> params) throws Exception;
 }
 
 

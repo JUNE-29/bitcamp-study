@@ -48,7 +48,7 @@ public class LessonServiceImpl implements LessonService {
   }
 
   @Override
-  public List<Lesson> findByKeyword(HashMap<String, Object> params) throws Exception {
+  public List<Lesson> search(HashMap<String, Object> params) throws Exception {
     return lessonDao.findByKeyword(params);
   }
 

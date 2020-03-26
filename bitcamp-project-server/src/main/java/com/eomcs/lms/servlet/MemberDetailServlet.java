@@ -32,14 +32,22 @@ public class MemberDetailServlet {
     out.println("<h1>회원 상세정보</h1>");
 
     if (member != null) {
-      out.printf("번호: %d<br>\n", member.getNo());
-      out.printf("이름: %s<br>\n", member.getName());
-      out.printf("이메일: %s<br>\n", member.getEmail());
-      out.printf("암호: %s<br>\n", member.getPassword());
-      out.printf("사진: %s<br>\n", member.getPhoto());
-      out.printf("전화: %s<br>\n", member.getTel());
-      out.printf("<p><a href='/member/delete?no=%d'>삭제</a>\n", member.getNo());
-      out.printf("<a href='/member/updateForm?no=%d'>변경</a></p>\n", member.getNo());
+      out.println("<form action='/member/update'>");
+      out.printf("번호: <input name='no' type='text' readonly value='%d'><br>\n", //
+          member.getNo());
+      out.printf("이름: <input name='name' type='text' value='%s'><br>\n", //
+          member.getName());
+      out.printf("이메일: <input name='email' type='text' value='%s'><br>\n", //
+          member.getEmail());
+      out.println("암호: <input name='password' type='password'><br>");
+      out.printf("사진: <input name='photo' type='text' value='%s'><br>\n", //
+          member.getPhoto());
+      out.printf("전화: <input name='tel' type='text' value='%s'><br>\n", //
+          member.getTel());
+      out.println("<p><button>변경</button>");
+      out.printf("<a href='/member/delete?no=%d'>삭제</a></p>\n", //
+          member.getNo());
+      out.println("</form>");
     } else {
       out.println("<p>해당 번호의 회원이 없습니다.</p>");
     }

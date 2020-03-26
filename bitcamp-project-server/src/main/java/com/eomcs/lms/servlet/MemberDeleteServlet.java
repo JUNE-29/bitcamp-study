@@ -24,13 +24,13 @@ public class MemberDeleteServlet {
     out.println("<head>");
     out.println("<meta charset='UTF-8'>");
     out.println("<meta http-equiv='refresh' content='2;url=/member/list'>");
-    out.println("<title>회원 정보 삭제</title>");
+    out.println("<title>회원 삭제</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원 정보 삭제 결과</h1>");
+    out.println("<h1>회원 삭제 결과</h1>");
 
     if (memberService.delete(no) > 0) { // 삭제했다면,
-      out.println("<p> 회원 정보를 삭제했습니다.</p>");
+      out.println("<p> 회원을 삭제했습니다.</p>");
 
     } else {
       out.println("<p> 해당 번호의 회원이 없습니다.</p> ");

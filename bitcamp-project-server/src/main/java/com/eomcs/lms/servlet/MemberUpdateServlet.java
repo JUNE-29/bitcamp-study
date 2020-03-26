@@ -32,17 +32,18 @@ public class MemberUpdateServlet {
     out.println("<head>");
     out.println("<meta charset='UTF-8'>");
     out.println("<meta http-equiv='refresh' content='2;url=/member/list'>");
-    out.println("<title>회원 정보 변경</title>");
+    out.println("<title>회원 변경</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원 정보 변경 결과</h1>");
+    out.println("<h1>회원 변경 결과</h1>");
 
     if (memberService.update(member) > 0) {
-      out.println("<p> 회원을 변경했습니다.</p>");
+      out.println("<p>회원을 변경했습니다.</p>");
 
     } else {
       out.println("<p>변경에 실패했습니다.</p>");
     }
+
     out.println("</body>");
     out.println("</html>");
   }

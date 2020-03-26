@@ -27,7 +27,7 @@ public class LessonDeleteServlet {
     out.println("<title>수업 삭제</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>수업 삭제 결과</h1>");
+    out.println("<h1>강의 삭제 결과</h1>");
 
     if (lessonService.delete(no) > 0) { // 삭제했다면,
       out.println("<p>강의를 삭제했습니다.</p>");

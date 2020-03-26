@@ -22,7 +22,7 @@ public class LoginServlet {
     String email = Prompt.getString(in, out, "이메일? ");
     String password = Prompt.getString(in, out, "암호? ");
 
-    Member member = memberService.findByEmailAndPassword(email, password);
+    Member member = memberService.get(email, password);
 
     if (member != null) {
       out.printf("'%s'님 환영합니다.\n", member.getName());

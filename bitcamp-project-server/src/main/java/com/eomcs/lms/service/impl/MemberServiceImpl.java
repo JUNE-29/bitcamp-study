@@ -43,12 +43,12 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public List<Member> getKeyword(String keyword) throws Exception {
+  public List<Member> search(String keyword) throws Exception {
     return memberDao.findByKeyword(keyword);
   }
 
   @Override
-  public Member findByEmailAndPassword(String email, String password) throws Exception {
+  public Member get(String email, String password) throws Exception {
     HashMap<String, Object> params = new HashMap<>();
     params.put("email", email);
     params.put("password", password);

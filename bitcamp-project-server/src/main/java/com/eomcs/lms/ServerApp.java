@@ -40,7 +40,7 @@ public class ServerApp {
   // IoC 컨테이너 준비
   ApplicationContext iocContainer;
 
-  // Request handler 매퍼 준비
+  // request handler 맵퍼 준비
   RequestMappingHandlerMapping handlerMapper;
 
   public void addApplicationContextListener(ApplicationContextListener listener) {
@@ -68,12 +68,12 @@ public class ServerApp {
 
     notifyApplicationInitialized();
 
-    // requestHandler mapper를 꺼낸다.
-    handlerMapper = (RequestMappingHandlerMapping) context.get("handlerMapper");
+    // ApplicationContext (IoC 컨테이너)를 꺼낸다.
+    iocContainer = (ApplicationContext) context.get("iocContainer");
 
-
-    // ApplicationContext (IoC컨테이너)를 꺼낸다.
-    iocContainer = (ApplicationContext) context.get("IocContatiner");
+    // request handler mapper를 꺼낸다.
+    handlerMapper = //
+        (RequestMappingHandlerMapping) context.get("handlerMapper");
 
     try (ServerSocket serverSocket = new ServerSocket(9999)) {
 
@@ -85,7 +85,6 @@ public class ServerApp {
 
         executorService.submit(() -> {
           processRequest(socket);
-
           logger.info("--------------------------------------");
         });
 
@@ -98,7 +97,8 @@ public class ServerApp {
       }
 
     } catch (Exception e) {
-      logger.error(String.format("서버 준비 중 오류 발생!: %s", e.getMessage()));
+      logger.error(String.format("서버 준비 중 오류 발생!: %s", //
+          e.getMessage()));
     }
 
 
@@ -140,10 +140,8 @@ public class ServerApp {
         PrintStream out = new PrintStream(socket.getOutputStream())) {
 
       String[] requestLine = in.nextLine().split(" ");
-
-      // 기타 나머지 요청 데이터는 버린다.
+      // 기타 나머지 요청 데이터를 버린다.
       while (true) {
-        // 읽다가 빈 문자를 발견하면 멈추겠다.
         String line = in.nextLine();
         if (line.length() == 0) {
           break;
@@ -156,7 +154,7 @@ public class ServerApp {
       logger.info(String.format("request-uri => %s", requestUri));
 
       String servletPath = getServletPath(requestUri);
-      logger.debug(String.format("servlet uri => %s", requestUri));
+      logger.debug(String.format("servlet path => %s", servletPath));
 
       Map<String, String> params = getParameters(requestUri);
 
@@ -169,18 +167,19 @@ public class ServerApp {
       }
 
       RequestHandler requestHandler = handlerMapper.getHandler(servletPath);
-      // Uri가 맞으면 Handler를 찾아서 리턴하겠다.
 
       if (requestHandler != null) {
         try {
           // Request Handler의 메서드 호출
-          requestHandler.getMethod().invoke(requestHandler.getBean(), params, out);
+          requestHandler.getMethod().invoke( //
+              requestHandler.getBean(), //
+              params, out);
 
         } catch (Exception e) {
           out.println("요청 처리 중 오류 발생!");
           out.println(e.getMessage());
 
-          logger.info("클라이언트 요청 처리 중 오류 발생:");
+          logger.info("클라이언트 요청 처리 중 오류 발생");
           logger.info(e.getMessage());
           StringWriter strWriter = new StringWriter();
           e.printStackTrace(new PrintWriter(strWriter));
@@ -206,7 +205,7 @@ public class ServerApp {
     out.println("<html>");
     out.println("<head>");
     out.println("<meta charset='UTF-8'>");
-    out.println("<title>실행 오류</title>");
+    out.println("<title>실행 오류!</title>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>실행 오류!</h1>");
@@ -229,13 +228,13 @@ public class ServerApp {
   }
 
   private String getServletPath(String requestUri) {
-    // 예) requestUri => /member/add?email=aaa@test.com&name=aaa&password=1111
-    return requestUri.split("\\?")[0]; // 예) member/add
+    // requestUri => /member/add?email=aaa@test.com&name=aaa&password=1111
+    return requestUri.split("\\?")[0]; // 예) /member/add
   }
 
   private Map<String, String> getParameters(String requestUri) throws Exception {
-    // 데이터(Query String) 따로 저장
-    // =>/member/list?email=aaa@test.com&name=aaa&password=1111
+    // 데이터(Query String)는 따로 저장
+    // => /member/list?email=aaa@test.com&name=aaa&password=1111
     Map<String, String> params = new HashMap<>();
     String[] items = requestUri.split("\\?");
     if (items.length > 1) {
@@ -245,15 +244,19 @@ public class ServerApp {
         logger.debug(String.format("parameter => %s", entry));
         String[] kv = entry.split("=");
 
-        // 웹브라우저가 URL 인코딩하여 보낸 데이터를
-        // 디코딩하여 String 객체로 만든다.
-        String value = URLDecoder.decode(kv[1], "UTF-8");
-        params.put(kv[0], value);
+        if (kv.length > 1) {
+          // 웹브라우저가 URL 인코딩하여 보낸 데이터를
+          // 디코딩하여 String 객체로 만든다.
+          String value = URLDecoder.decode(kv[1], "UTF-8");
+
+          params.put(kv[0], value);
+        } else {
+          params.put(kv[0], "");
+        }
       }
     }
     return params;
   }
-
 
   public static void main(String[] args) {
     logger.info("서버 수업 관리 시스템입니다.");

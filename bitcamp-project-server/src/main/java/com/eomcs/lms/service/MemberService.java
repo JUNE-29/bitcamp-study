@@ -15,8 +15,8 @@ public interface MemberService {
 
   int delete(int no) throws Exception;
 
-  List<Member> getKeyword(String keyword) throws Exception;
+  List<Member> search(String keyword) throws Exception;
 
-  Member findByEmailAndPassword(String email, String password) throws Exception;
+  Member get(String email, String password) throws Exception;
 
 }

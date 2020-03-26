@@ -14,7 +14,7 @@ public interface LessonService {
 
   List<Lesson> list() throws Exception;
 
-  List<Lesson> findByKeyword(HashMap<String, Object> params) throws Exception;
+  List<Lesson> search(HashMap<String, Object> params) throws Exception;
 
   int update(Lesson lesson) throws Exception;
 
