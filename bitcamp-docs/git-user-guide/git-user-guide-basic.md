@@ -41,7 +41,7 @@
 Git은 다음 세가지 상태로 파일을 관리한다.
 
 - Committed
-  - 로컬 데이터베이스에 안전하게 저장되었다는 뜻이다.
+  - 로컬 데이터베이스(저장소; Repository)에 안전하게 저장되었다는 뜻이다.
 - Modified
   - 파일이 변경되었지만 아직 로컬 데이터베이스에 저장되지 않았다는 뜻이다.
 - Staged
@@ -117,6 +117,7 @@ $ git config --global core.editor emacs
 
 ```
 예3) 설정 확인하기
+$ git config -l
 $ git config --list
 ```
 
@@ -163,10 +164,12 @@ $ git config --help
 예2) bin/ 디렉토리를 통째로 무시하기
 bin/
 
-예3) 현재 디렉토리의 *.log 파일만 무시하기. src/*.log처럼 기타 하위 디렉토리에 있는 *.log 파일은 포함하기
+예3) 현재 디렉토리의 *.log 파일만 무시하기. 
+- src/*.log처럼 기타 하위 디렉토리에 있는 *.log 파일은 포함하기
 /*.log
 
-예4) src/*.class 파일은 무시하고, src/main/*.class 파일은 포함하기
+예4) src/*.class 파일은 무시하고, 
+- src/main/*.class 파일은 포함하기
 src/*.class
 
 예5) src 디렉토리 및 그 하위 디렉토리에 있는 *.class 파일 무시하기
@@ -177,12 +180,16 @@ src/**/*.class
 
 예7) 확장자가 '.o' 또는 '.a'인 파일 무시하기
 *.[oa]
+- 위의 방식 대신에 아래처럼 낱개를 일일이 지정해도 된다.
+*.o
+*.a
 
 예8) *~
 파일명이 ~로 끝나는 파일
 
-예9) 만약 *.log 파일을 무시한다면, cotext.log 파일은 무시하지 않고 포함하기
-!context.log
+예9) *.log 파일 중에서 cotext.log 파일은 무시하지 않고 포함하기
+- 문법) !(무시하지말아야할파일)
+- 예) !context.log
 ```
 
 ### git clone [url] [폴더]
@@ -223,7 +230,7 @@ $ git add LICENSE
 $ git add .
 ```
 
-### git commit -m '이번 스냅샷을 저장하는 이유'
+### git commit -m "이번 스냅샷을 저장하는 이유"
 
 - Staging Area에 기록된 파일들(스냅샷)을 로컬 저장소에 보관한다.
 - 파일을 새로 추가하거나 변경하였다면 반드시 `git add`를 실행하여 Staging Area에 기록해야 한다.
@@ -257,21 +264,21 @@ Your branch is up to date with 'origin/master'.
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
-	modified:   src/main/webapp/test02.html
-	modified:   src/main/webapp/test03.html
-	new file:   src/main/webapp/test05.html
+  modified:   src/main/webapp/test02.html
+  modified:   src/main/webapp/test03.html
+  new file:   src/main/webapp/test05.html
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-	modified:   src/main/webapp/index.html
-	modified:   src/main/webapp/test01.html
+  modified:   src/main/webapp/index.html
+  modified:   src/main/webapp/test01.html
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-	src/main/webapp/test05.html
+  src/main/webapp/test05.html
 ```
 
 ```
@@ -308,7 +315,7 @@ AM src/main/webapp/test06.html
 
 ```
 예1) 작업 디렉토리에서 변경한 파일과 Staging Area에 등록된 파일과 비교하여
-     변경경 전/후를 출력하기
+     변경 전/후를 출력하기
 
 $ git diff
 diff --git a/src/main/webapp/test01.html b/src/main/webapp/test01.html
@@ -361,8 +368,11 @@ index 0000000..3081b8d
 ### git checkout [파일]
 
 - 작업 디렉토리의 파일을 변경한 후 변경 전으로 되돌릴 때 사용한다.
-- Staging Area에 마지막으로 기록된 버전으로 되돌린다.
-- `git add`를 수행한 적이 없다면 Staging Area에는 마지막으로 커밋한 파일을 가리킨다. 따라서 마지막으로 커밋된 파일로 되돌릴 것이다.
+- Staging Area에 등록된 것이 없다면, 최종 커밋한 버전으로 되돌린다.
+- Staging Area에 등록된 것이 있다면, 현재 Staging Area에 기록된 버전으로 되돌린다.
+- `git add`를 수행한 적이 없다면 
+   Staging Area에는 마지막으로 커밋한 파일을 가리킨다. 
+   따라서 마지막으로 커밋된 파일로 되돌릴 것이다.
 
 ```
 예) src/main/webapp/index.html 파일을 편집 전으로 되돌리기
@@ -374,6 +384,7 @@ $ git checkout src/main/webapp/index.html
 - Staging Area의 기록에서 지정된 파일을 뺀다.
 - 작업 디렉토리에 해당 파일이 있다면 그 파일도 자동 삭제된다.
 - 이전 스냅샷에는 해당 파일이 계속 남아 있다.
+- 파일 삭제 + git add = git rm
 
 ```
 예1) 작업 디렉토리에 있는 파일을 삭제한 후 Git에서도 제거하기
@@ -491,6 +502,28 @@ index 0afb588..c0e04ec 100644
  </html>
 ```
 
+```
+예5) 커밋 정보를 한 줄로 출력해서 보기
+$ git log --oneline    
+f559e21 (HEAD -> master, b1) v0.3
+5896279 v0.2
+8dd76bf v0.1
+5d8d97b (origin/master, origin/HEAD) Initial commit 
+```
+
+```
+예6) 커밋 정보와 브랜치 정보를 함께 보기
+$ git log --oneline --graph --all
+* 6f4725e (HEAD -> master) v0.6
+| * 34fda9c (b1) v0.5
+| * 9cf510e v0.4
+|/  
+* f559e21 v0.3
+* 5896279 v0.2
+* 8dd76bf v0.1
+* 5d8d97b (origin/master, origin/HEAD) Initial commit
+```
+
 ### git commit --amend
 
 - 마지막 커밋을 다시 현재의 Staging Area의 내용으로 덮어쓴다.
@@ -536,18 +569,18 @@ origin
 ```
 예2) 원격 저장소의 이름 뿐만아니라 URL도 알아내기
 $ git remote -v
-origin	https://github.com/eomjinyoung/test.git (fetch)
-origin	https://github.com/eomjinyoung/test.git (push)
+origin  https://github.com/eomjinyoung/test.git (fetch)
+origin  https://github.com/eomjinyoung/test.git (push)
 ```
 
 ```
 예3) 원격 저장소 추가하기
 $ git remote add [단축이름] [URL]
 $ git remote add cs https://github.com/eomcs/test.git
-origin	https://github.com/eomjinyoung/test.git (fetch)
-origin	https://github.com/eomjinyoung/test.git (push)
-cs	https://github.com/eomcs/test.git (fetch)
-cs	https://github.com/eomcs/test.git (push)
+origin  https://github.com/eomjinyoung/test.git (fetch)
+origin  https://github.com/eomjinyoung/test.git (push)
+cs  https://github.com/eomcs/test.git (fetch)
+cs  https://github.com/eomcs/test.git (push)
 ```
 
 ```
@@ -683,7 +716,7 @@ v0.2
 
 ```
 예6) 로컬 저장소에 있는 태그를 서버에 공유하기
-$ git push [원격저장소 단출이름] [태그 이름]
+$ git push [원격저장소 이름] [태그 이름]
 $ git push origin v0.1
 Counting objects: 1, done.
 Writing objects: 100% (1/1), 166 bytes | 166.00 KiB/s, done.
