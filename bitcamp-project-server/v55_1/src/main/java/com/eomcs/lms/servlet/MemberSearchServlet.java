@@ -2,6 +2,7 @@ package com.eomcs.lms.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,8 +13,8 @@ import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
-@WebServlet("/auth/login")
-public class LoginServlet extends GenericServlet {
+@WebServlet("/member/search")
+public class MemberSearchServlet extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -29,34 +30,44 @@ public class LoginServlet extends GenericServlet {
           (ApplicationContext) servletContext.getAttribute("iocContainer");
       MemberService memberService = iocContainer.getBean(MemberService.class);
 
-      String email = req.getParameter("email");
-      String password = req.getParameter("password");
-
-      Member member = memberService.get(email, password);
-
       out.println("<!DOCTYPE html>");
       out.println("<html>");
       out.println("<head>");
-      out.println("<meta charset='UTF-8'>");
-      if (member != null) {
-        out.println("<meta http-equiv='refresh' content='2;url=../index.html'>");
-      } else {
-        out.println("<meta http-equiv='refresh' content='2;url=loginForm'>");
-      }
-      out.println("<title>로그인</title>");
+      out.println("  <meta charset='UTF-8'>");
+      out.println("  <title>회원 검색</title>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>로그인 결과</h1>");
+      out.println("  <h1>회원 검색 결과</h1>");
+      out.println("  <table border='1'>");
+      out.println("  <tr>");
+      out.println("    <th>번호</th>");
+      out.println("    <th>이름</th>");
+      out.println("    <th>이메일</th>");
+      out.println("    <th>전화</th>");
+      out.println("    <th>등록일</th>");
+      out.println("  </tr>");
 
-      if (member != null) {
-        out.printf("<p>'%s'님 환영합니다.</p>\n", member.getName());
-      } else {
-        out.println("<p>사용자 정보가 유효하지 않습니다.</p>");
+      String keyword = req.getParameter("keyword");
+      List<Member> members = memberService.search(keyword);
+      for (Member m : members) {
+        out.printf("  <tr>"//
+            + "<td>%d</td> "//
+            + "<td><a href='detail?no=%d'>%s</a></td> "//
+            + "<td>%s</td> "//
+            + "<td>%s</td>"//
+            + "<td>%s</td>"//
+            + "</tr>\n", //
+            m.getNo(), //
+            m.getNo(), //
+            m.getName(), //
+            m.getEmail(), //
+            m.getTel(), //
+            m.getRegisteredDate() //
+        );
       }
-
+      out.println("</table>");
       out.println("</body>");
       out.println("</html>");
-
     } catch (Exception e) {
       throw new ServletException(e);
     }

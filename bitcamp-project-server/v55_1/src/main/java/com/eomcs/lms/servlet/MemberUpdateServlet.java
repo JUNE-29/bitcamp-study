@@ -12,9 +12,10 @@ import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
-@WebServlet("/auth/login")
-public class LoginServlet extends GenericServlet {
+@WebServlet("/member/update")
+public class MemberUpdateServlet extends GenericServlet {
   private static final long serialVersionUID = 1L;
+
 
   @Override
   public void service(ServletRequest req, ServletResponse res)
@@ -29,34 +30,34 @@ public class LoginServlet extends GenericServlet {
           (ApplicationContext) servletContext.getAttribute("iocContainer");
       MemberService memberService = iocContainer.getBean(MemberService.class);
 
-      String email = req.getParameter("email");
-      String password = req.getParameter("password");
 
-      Member member = memberService.get(email, password);
+      Member member = new Member();
+      member.setNo(Integer.parseInt(req.getParameter("no")));
+      member.setName(req.getParameter("name"));
+      member.setEmail(req.getParameter("email"));
+      member.setPassword(req.getParameter("password"));
+      member.setPhoto(req.getParameter("photo"));
+      member.setTel(req.getParameter("tel"));
 
       out.println("<!DOCTYPE html>");
       out.println("<html>");
       out.println("<head>");
       out.println("<meta charset='UTF-8'>");
-      if (member != null) {
-        out.println("<meta http-equiv='refresh' content='2;url=../index.html'>");
-      } else {
-        out.println("<meta http-equiv='refresh' content='2;url=loginForm'>");
-      }
-      out.println("<title>로그인</title>");
+      out.println("<meta http-equiv='refresh' content='2;url=list'>");
+      out.println("<title>회원 변경</title>");
       out.println("</head>");
       out.println("<body>");
-      out.println("<h1>로그인 결과</h1>");
+      out.println("<h1>회원 변경 결과</h1>");
 
-      if (member != null) {
-        out.printf("<p>'%s'님 환영합니다.</p>\n", member.getName());
+      if (memberService.update(member) > 0) {
+        out.println("<p>회원을 변경했습니다.</p>");
+
       } else {
-        out.println("<p>사용자 정보가 유효하지 않습니다.</p>");
+        out.println("<p>변경에 실패했습니다.</p>");
       }
 
       out.println("</body>");
       out.println("</html>");
-
     } catch (Exception e) {
       throw new ServletException(e);
     }
