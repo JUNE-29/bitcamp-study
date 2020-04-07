@@ -22,7 +22,7 @@ public class Servlet02 extends GenericServlet {
     // - 웹 페이지의 폼(method='POST' 일 때)에서 전송 버튼을 클릭하면 POST 요청을 보낸다.
     //
     // 테스트
-    // - http://localhost:8080/java-web/ex04/test02.html 실행
+    // - http://localhost:9999/java-web/ex04/test02.html 실행
     //
 
     // 웹 브라우저가 보낸 데이터 읽기

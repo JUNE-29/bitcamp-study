@@ -24,7 +24,7 @@ public class Servlet03 extends GenericServlet {
     // 첨부 파일의 데이터는 받을 수 없다.
     //
     // 테스트
-    // - http://localhost:8080/java-web/ex04/test03.html 실행
+    // - http://localhost:9999/java-web/ex04/test03.html 실행
     //
 
     req.setCharacterEncoding("UTF-8");

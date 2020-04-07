@@ -12,6 +12,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
 
@@ -32,7 +33,7 @@ public class Servlet08 extends GenericServlet {
       throws ServletException, IOException {
 
     // 테스트
-    // - http://localhost:8080/java-web/ex04/test08.html 실행
+    // - http://localhost:9999/java-web/ex04/test08.html 실행
     //
 
     req.setCharacterEncoding("UTF-8");
@@ -68,20 +69,29 @@ public class Servlet08 extends GenericServlet {
     // 2) 썸네일 이미지 만들기
     // => 원본 이미지 파일이 저장된 경로를 알려주고
     // 어떤 썸네일 이미지를 만들어야 하는지 설정한다.
-    Thumbnails.of(this.uploadDir + "/" + filename).size(20, 20).outputFormat("jpg")
-        .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+    // 가로 세로 20픽셀 만들라는것
 
-    /*
-     * Thumbnails.of(this.uploadDir + "/" + filename) .size(80, 80) .outputFormat("jpg")
-     * .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-     * 
-     * Thumbnails.of(this.uploadDir + "/" + filename) .size(160, 160) .outputFormat("jpg")
-     * .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-     */
+    // Thumbnails.of(this.uploadDir + "/" + filename).size(20, 20).outputFormat("jpg")
+    // .toFiles(Rename.PREFIX_DOT_THUMBNAIL); // 접두어를 붙인다.
+
+    Thumbnails.of(this.uploadDir + "/" + filename).size(20, 20).outputFormat("jpg")
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+    Thumbnails.of(this.uploadDir + "/" + filename).size(80, 80).outputFormat("jpg")
+        .toFiles(Rename.PREFIX_DOT_THUMBNAIL); // 가로 세로 80픽셀을 만들라는 것
+    //
+    // Thumbnails.of(this.uploadDir + "/" + filename) .size(160, 160) .outputFormat("jpg")
+    // .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+
     out.printf("사진=%s<br>\n", filename);
-    out.printf("<img src='../upload/thumbnail.%s.jpg'><br>\n", filename);
-    out.printf("<img src='../upload/%s' height='80'><br>\n", filename);
-    out.printf("<img src='../upload/%s'><br>\n", filename);
+    out.printf("<img src='../upload/%s_20x20.jpg'><br>\n", filename); // 썸네일 이미지 출력
+    out.printf("<img src='../upload/%s' height='80'><br>\n", filename); // 원본 사진을 줄인 것을 출력
+    out.printf("<img src='../upload/%s'><br>\n", filename); // 원본사진 출력
     out.println("</body></html>");
   }
 }

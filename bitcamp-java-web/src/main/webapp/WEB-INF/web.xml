@@ -7,6 +7,26 @@
   version="4.0"
   metadata-complete="false">
   
+  <!--  컨텍스트(웹 애플리케이션 환경) 초기화 파라미터
+      => Servlet, Listener, Filter 에서 모두 사용할 수 있다.
+   -->
+  <context-param>
+      <param-name>jdbc2.driver</param-name>
+      <param-value>org.mariadb.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+      <param-name>jdbc2.url</param-name>
+      <param-value>jdbc:mariadb://localhost:3306/studydb</param-value>
+    </context-param>
+    <context-param>
+      <param-name>jdbc2.username</param-name>
+      <param-value>study</param-value>
+    </context-param>
+    <context-param>
+      <param-name>jdbc2.password</param-name>
+      <param-value>1111</param-value>
+    </context-param>
+  
   <!-- 리스너 등록 -->
   <listener>
     <listener-class>com.eomcs.web.ex02.Listener01</listener-class>
@@ -51,6 +71,42 @@
     <servlet-name>Servlet03</servlet-name>
     <url-pattern>/ex01/s03</url-pattern>
   </servlet-mapping>
+  
+  <!-- 서블릿 객체 자동 생성(클라이언트 요청 없이)
+  왜 만들었을까 생각해보기! 왜냐면 다른 서블릿들이 사용할 재료들(도구들)을
+  이 서블릿에서 준비하는구나! 그래서 이 서블렛에서 초기화를 하는구나!
+   -->
+  <servlet>
+    <servlet-name>ex06.Servlet02</servlet-name>
+    <servlet-class>com.eomcs.web.ex06.Servlet02</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>ex06.Servlet02</servlet-name>
+  <url-pattern>/ex06/s2</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ex06.Servlet04</servlet-name>
+    <servlet-class>com.eomcs.web.ex06.Servlet04</servlet-class>
+    <init-param>
+      <param-name>jdbc.driver</param-name>
+      <param-value>org.mariadb.jdbc.Driver</param-value>
+    </init-param>
+    <init-param>
+      <param-name>jdbc.url</param-name>
+      <param-value>jdbc:mariadb://localhost:3306/studydb</param-value>
+    </init-param>
+    <init-param>
+      <param-name>jdbc.username</param-name>
+      <param-value>study</param-value>
+    </init-param>
+    <init-param>
+      <param-name>jdbc.password</param-name>
+      <param-value>1111</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
   
   <!--  
     <servlet>

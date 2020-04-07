@@ -42,7 +42,7 @@ public class Servlet05 extends GenericServlet {
       throws ServletException, IOException {
 
     // 테스트
-    // - http://localhost:8080/java-web/ex04/test05.html 실행
+    // - http://localhost:9999/java-web/ex04/test05.html 실행
     //
 
     // Servlet 3.0의 멀티파트 처리 기능을 이용할 때는

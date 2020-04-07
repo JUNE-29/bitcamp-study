@@ -60,7 +60,7 @@ public class Servlet04 extends GenericServlet {
     // 4) Spring WebMVC를 사용한다면 해당 프레임워크에서 제공하는 기능을 이용한다.
     // - Spring WebMVC를 설명할 때 실습하겠다.
     // 테스트
-    // - http://localhost:8080/java-web/ex04/test04.html 실행
+    // - http://localhost:9999/java-web/ex04/test04.html 실행
     //
 
     // 멀티파트 데이터를 처리할 때는 다음의 인코딩 설정이 적용되지 않는다.
