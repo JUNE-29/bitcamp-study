@@ -51,25 +51,22 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 
   @Transactional
   @Override
-  public void delete(int no) throws Exception {
-    photoFileDao.deleteAll(no);
-    if (photoBoardDao.delete(no) == 0) {
-      throw new Exception("해당 번호의 사진 게시글이 없습니다.");
+  public void update(PhotoBoard photoBoard) throws Exception {
+    if (photoBoardDao.update(photoBoard) == 0) {
+      throw new Exception("사진 게시글 변경에 실패했습니다.");
+    }
+    if (photoBoard.getFiles() != null) {
+      photoFileDao.deleteAll(photoBoard.getNo());
+      photoFileDao.insert(photoBoard);
     }
   }
 
   @Transactional
   @Override
-  public void update(PhotoBoard photoBoard) throws Exception {
-    if (photoBoardDao.update(photoBoard) == 0) {
-      throw new Exception("사진 게시글 변경에 실패했습니다.");
-    }
-
-    if (photoBoard.getFiles() != null) {
-      // 첨부파일을 변경한다면
-      photoFileDao.deleteAll(photoBoard.getNo());
-      photoFileDao.insert(photoBoard);
-
+  public void delete(int no) throws Exception {
+    photoFileDao.deleteAll(no);
+    if (photoBoardDao.delete(no) == 0) {
+      throw new Exception("해당 번호의 사진 게시글이 없습니다.");
     }
   }
 }

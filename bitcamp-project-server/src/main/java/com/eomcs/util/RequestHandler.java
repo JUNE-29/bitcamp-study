@@ -3,7 +3,6 @@ package com.eomcs.util;
 import java.lang.reflect.Method;
 
 public class RequestHandler {
-
   Object bean;
   String path;
   Method method;
@@ -19,7 +18,7 @@ public class RequestHandler {
   }
 
   private String getPath(Method method) {
-    // 메서드에 붙은 RequestMapping 애노테이션을 추출한다.
+    // 메서드에 붙은 @RequestMapping 애노테이션을 추출한다.
     RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
     return requestMapping.value();
   }
@@ -31,7 +30,6 @@ public class RequestHandler {
   public void setBean(Object bean) {
     this.bean = bean;
   }
-
 
   public Method getMethod() {
     return method;
@@ -48,7 +46,4 @@ public class RequestHandler {
   public void setPath(String path) {
     this.path = path;
   }
-
-
-
 }

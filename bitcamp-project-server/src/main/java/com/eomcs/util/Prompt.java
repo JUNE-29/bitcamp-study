@@ -9,7 +9,6 @@ public class Prompt {
     try {
       return Integer.parseInt(getString(in, out, title));
     } catch (Exception e) {
-      // 숫자가 아닌 값을 넣으면 0 리턴
       return 0;
     }
   }
@@ -18,7 +17,6 @@ public class Prompt {
     try {
       return Integer.parseInt(getString(in, out, title, defaultValue));
     } catch (Exception e) {
-      // 숫자가 아닌 값을 넣으면 0 리턴
       return 0;
     }
   }
@@ -47,7 +45,6 @@ public class Prompt {
     try {
       return Date.valueOf(getString(in, out, title));
     } catch (Exception e) {
-      // 날짜가 맞지 않으면 0리턴
       return null;
     }
   }
@@ -56,7 +53,6 @@ public class Prompt {
     try {
       return Date.valueOf(getString(in, out, title, defaultValue));
     } catch (Exception e) {
-      // 날짜가 맞지 않으면 0리턴
       return null;
     }
   }

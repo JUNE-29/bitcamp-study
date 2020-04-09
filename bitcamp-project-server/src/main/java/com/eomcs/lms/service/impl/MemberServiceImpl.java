@@ -17,24 +17,8 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public int add(Member member) throws Exception {
-    return memberDao.insert(member);
-  }
-
-  @Override
   public List<Member> list() throws Exception {
     return memberDao.findAll();
-  }
-
-  @Override
-  public Member get(int no) throws Exception {
-
-    return memberDao.findByNo(no);
-  }
-
-  @Override
-  public int update(Member member) throws Exception {
-    return memberDao.update(member);
   }
 
   @Override
@@ -43,8 +27,13 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public List<Member> search(String keyword) throws Exception {
-    return memberDao.findByKeyword(keyword);
+  public int add(Member member) throws Exception {
+    return memberDao.insert(member);
+  }
+
+  @Override
+  public Member get(int no) throws Exception {
+    return memberDao.findByNo(no);
   }
 
   @Override
@@ -55,4 +44,13 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.findByEmailAndPassword(params);
   }
 
+  @Override
+  public List<Member> search(String keyword) throws Exception {
+    return memberDao.findByKeyword(keyword);
+  }
+
+  @Override
+  public int update(Member member) throws Exception {
+    return memberDao.update(member);
+  }
 }

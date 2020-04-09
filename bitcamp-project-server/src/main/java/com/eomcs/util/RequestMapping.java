@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 
 public @interface RequestMapping {
-  // 서블릿 메서드와 명령어를 연결하기 위해
-  // 명령어를 저장 할 프로퍼티를 정의한다.
-  String value(); // 필수!
+  // 서블릿 메서드와 명령어를 연결하기 위해,
+  // 명령어를 저장할 프로퍼티를 정의한다.
+  String value();
 }
