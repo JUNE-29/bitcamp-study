@@ -14,7 +14,8 @@
 <body>
 <h1>JSP 빌트인 객체 - JSP에서 기본으로 사용할 수 있는 객체</h1>
 <%
-// JSP에서 기본으로 준비한 변수를 사용할 수 있다.
+// JSP에서 기본으로 준비한 변수를 사용할 수 있다. 
+// 기본적으로 준비가 되어있다! ex10_jsp.java 확인해보기! 9개의 변수가 정해져있다.
 request.setAttribute("aaa", "okok");
 session.setAttribute("bbb", "nono");
 application.setAttribute("ccc", "haha");
@@ -23,7 +24,7 @@ out.println("okok");
 </body>
 </html>
 <%--
-JSP 빌트인 객체
+JSP 빌트인 객체 (= 9개의 변수)
 - JSP를 가지고 서블릿 클래스를 만들 때 _jspService() 메서드에서 기본으로 준비하는 객체
 - JSP 엔진은 반드시 다음과 같은 이름으로 레퍼런스를 선언해야 한다.
   즉 서블릿 컨테이너(ex: 톰캣, jetty, resin 등)에 상관없이 이름이 같다.

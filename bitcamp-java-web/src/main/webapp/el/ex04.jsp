@@ -20,6 +20,7 @@
 부동소수점: ${3.14}<br>
 논리값: ${true}<br>
 null: ${null}<br>
+<%-- null 값은 빈 문자열 --%>
 
 </body>
 </html>

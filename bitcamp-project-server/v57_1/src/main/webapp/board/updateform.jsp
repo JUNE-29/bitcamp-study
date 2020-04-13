@@ -5,11 +5,10 @@
 
 <jsp:include page="/header.jsp"></jsp:include>
 
-
 <h1>게시물 변경</h1>
+<jsp:useBean id="board" class="com.eomcs.lms.domain.Board" scope="request"/>
 <% 
-Board board = (Board) request.getAttribute("board");
-  if (board == null) {
+  if (board.getNo() == 0) {
 %>
   <p>해당 번호의 게시글이 없습니다.</p>
 <%

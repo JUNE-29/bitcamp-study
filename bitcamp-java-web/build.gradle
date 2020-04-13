@@ -40,6 +40,9 @@ dependencies {
   // => 왜? 서버에 이미 이 라이브러리가 있기 때문이다.
   compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
 
-    implementation 'com.google.guava:guava:28.0-jre'
-    testImplementation 'junit:junit:4.12'
+  implementation 'jstl:jstl:1.2'
+  
+  implementation 'com.google.guava:guava:28.0-jre'
+   
+  testImplementation 'junit:junit:4.12'
 }

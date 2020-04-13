@@ -20,8 +20,8 @@
     <th>등록일</th>
     <th>조회수</th>
   </tr>
+   <jsp:useBean id="list" type="java.util.List<PhotoBoard>" class="java.util.ArrayList" scope="request"/>
 <% 
-  List<PhotoBoard> list = (List<PhotoBoard>) request.getAttribute("list");
   for(PhotoBoard item : list) {
 %>
   <tr>

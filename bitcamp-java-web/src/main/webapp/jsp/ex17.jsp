@@ -1,11 +1,8 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page 
     language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<%@ page import="bitcamp.vo.Board"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +21,7 @@
   java.util.List list = 
      (java.util.List) pageContext.getAttribute("list");
   if (list == null) {
-    list = new java.util.List();
+    list = new java.util.List(); <=== 이 부분 때문에 인터페이스를 사용할 수 없다.
     pageContext.setAttribute("list", list);
   }
  --%>

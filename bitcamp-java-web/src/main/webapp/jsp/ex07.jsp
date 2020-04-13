@@ -20,9 +20,10 @@
 <h1>지시문(directive element)</h1>
 <%
 for (int i = 0; i < 1000; i++) {
-  out.print(". "); 
+  out.print("★ ☆ "); 
 }
 %>
+<p>출력완료!</p>
 </body>
 </html>
 <%--
@@ -78,7 +79,7 @@ page 지시문
 7) autoFlush="true"
    - 출력 버퍼가 찼을 때 자동으로 출력한다.
    - 기본은 true 이다.
-   - false로 설정하면 출력 버퍼가 찼을 때 예외가 발생한다.
+   - false로 설정하면 출력 버퍼가 찼을 때 예외가 발생한다.(꽉찼을때)
    
 --%>
 
