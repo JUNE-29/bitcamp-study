@@ -55,7 +55,7 @@ public class Controller01_2 {
     //      "/WEB-INF/jsp2/c01_2/h1.jsp"
     //    이다.
     //
-    return "c01_2/h1";
+    return "c01_2/h1"; // => /WEB-INF/jsp2/c01_1/h1.jsp
   }
 
   // 테스트:
