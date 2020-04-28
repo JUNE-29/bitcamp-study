@@ -14,16 +14,19 @@
         대상자[속성명] {...}
    */
   
+  /*div인 content라는 id를 가진거, 공백 절대 노노*/
   div#content {
     border-width: 1px;
     border-color: red;
     border-style: dashed;
     margin: 10px;
   }
+  /*공백을 띄우게 되면 ul 자손의 c1 자손의 c2를 찾게 된다.*/
   ul.c1.c2 {
     background-color: yellow;
   }
 
+/*div인 menu라는 id를 가진거를 찾고 거기에 li태그의 c2클래스인것만 보이지 말라.*/
   div#menu li.c2 {
     display: none;
   }

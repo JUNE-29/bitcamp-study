@@ -21,10 +21,17 @@
   }
  
   .c1 {
-    color: red;
+    color: orange;
   }
+
+  /* 같은 레벨이 아닌 경우 나중에 나온게 덮어씌우지 않는다.
+     그래서 밑에 li에 컬러를 지정했을 때 위에 c1까지 덮어씌우지 못한다.
+     왜냐면 li는 태그 레벨이고 c1은 클래스 레벨이여서 레벨이 다르다.
+     그러나 같은 레벨일 경우에는 다음에 나오는게 덮어 씌운다.
+  */
   
-  .c2 {
+  li {
+    color:orchid;
     font-weight: bold;
     text-decoration: underline;
   }

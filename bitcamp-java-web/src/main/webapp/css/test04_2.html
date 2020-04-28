@@ -22,6 +22,11 @@
   * { 
     border: 1px solid black;
     background-color: gray;
+    margin: 20px;
+  }
+
+  body{
+    background-color: lightpink;
   }
 
 /* = 1 */
@@ -35,10 +40,10 @@
 /* = 1 */
   div { 
     width: 200px; /* 같은 점수일 때 나중에 지정된 스타일이 기존 스타일을 덮어쓴다 */
-    background-color: green;
+    background-color: lightgoldenrodyellow;
   }
 
-/* = 1 */
+/* = 1 같은 점수일때는 덮어씌운다. */ 
   div { 
     background-color: navy;
   }
@@ -66,7 +71,8 @@
 
 <div>d0</div>
 <div class="c1">d1</div>
-<div class="c1" id="d2" style="background-color: yellow;">d2</div>
+<div class="c1" id="d2" style="background-color: yellow; color: magenta;" >
+  d2 tag안에 style을 지정하면 (inline) 여기가 우선순위가 제일 높다.</div>
 <div class="c1" id="d3" >d3</div>
 
 
