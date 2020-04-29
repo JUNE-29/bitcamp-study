@@ -22,8 +22,8 @@ console.log(f1());
 
 // 한 문장만 있을 때는 
 // 그 문장의 실행 결과가 자동으로 리턴된다.  
-var f2 = () => "안녕";
-console.log(f2());
+var f2 = () =>  "안녕";
+console.log(f2()); 
 
 // 만약에 arrow 함수가 값을 리턴하지 않는다면?
 f2 = () => console.log("값을 리턴하지 않는다.");
@@ -37,8 +37,7 @@ console.log(f3(100, 200));
 // 여러 개의 문장을 가질 때는 블록{}으로 묶는다.
 // => 값을 리턴하려면 return을 명시해야 한다.
 var f4 = (a, b) => {
-    var result = a + b;
-    return result;
+   return a + b;
 };
 console.log(f4(100, 200));
 </script>

@@ -3,5 +3,5 @@
     pageEncoding="UTF-8"%>
 console.log("완료!")
 <%
-Thread.currentThread().sleep(5000);
+Thread.currentThread().sleep(10000);
 %>

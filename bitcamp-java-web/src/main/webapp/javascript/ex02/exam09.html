@@ -15,11 +15,11 @@
 // => 객체['변수명']
 
 var v1;
-
+// 함수 밖에 있는 변수는 무조건 window 객체에 저장된다.
 v1 = "홍길동";
 console.log(v1);
 console.log(window.v1);
-console.log(window["v1"]);
+console.log(window["v1"]); // 마치 키 값으로 꺼내는거 같은 느낌!
 console.log(window['v1']);
 
 window.v2 = "임꺽정";

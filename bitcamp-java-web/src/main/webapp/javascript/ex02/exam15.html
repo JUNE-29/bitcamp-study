@@ -20,6 +20,7 @@ function f1() {
     
     // 그런데 로컬 변수와 이름이 같은 글로벌 변수를 사용하고 싶다면? 
     // window를 생략하지 말라!
+    console.log(window.v1); // 글로벌 변수의 값 변경 전
     window.v1 = "임꺽정";
     
     console.log("f1():", v1, window.v1);
