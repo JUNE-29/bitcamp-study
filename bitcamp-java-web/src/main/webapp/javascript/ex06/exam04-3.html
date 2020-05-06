@@ -32,7 +32,7 @@ button {padding: 30px;}
 //
 document.getElementById("btn1").addEventListener("click", function(e) {
 	console.log("버튼1...1");
-	e.stopPropagation();
+	e.stopPropagation(); // 버블링이 안됨
 });
 document.getElementById("btn1").addEventListener("click", function(e) {
     console.log("버튼1...2");
@@ -47,7 +47,7 @@ document.getElementById("btn1").addEventListener("click", function(e) {
 //
 document.getElementById("btn2").addEventListener("click", function(e) {
     console.log("버튼2...1");
-    e.stopImmediatePropagation();
+    e.stopImmediatePropagation(); // 현재것만 실행. 
 });
 document.getElementById("btn2").addEventListener("click", function(e) {
     console.log("버튼2...2");

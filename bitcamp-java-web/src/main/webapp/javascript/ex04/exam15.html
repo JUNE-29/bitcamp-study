@@ -11,6 +11,10 @@
 // instanceof 연산자는 해당 객체가 어떤 생성자를 통해 초기화되었는지 검사하는 연산자이다.
 
 function Score(name, kor, eng, math) {
+	// 호출할 상위 생성자를 따로 지정하지 않으면
+	// 기본으로 Object()를 호출한다.
+	// this.Object();
+	
 	this.name = name;
 	this.kor = kor;
 	this.eng = eng;
@@ -18,11 +22,17 @@ function Score(name, kor, eng, math) {
 }
 
 function Member(id, pwd) {
+	 // 호출할 상위 생성자를 따로 지정하지 않으면
+	 // 기본으로 Object()를 호출한다.
+	 // this.Object();
 	this.id = id;
 	this.pwd = pwd;
 } 
 
 function Board(title, content) {
+	 // 호출할 상위 생성자를 따로 지정하지 않으면
+	 // 기본으로 Object()를 호출한다.
+	 // this.Object();
 	this.title = title;
 	this.content = content;
 }
@@ -36,15 +46,21 @@ console.log(obj1 instanceof Score);  // true
 console.log(obj2 instanceof Member); // true
 console.log(obj3 instanceof Board);  // true
 
+console.log("--------------------------");
+
 // 상위 생성자를 통해 초기화되었는지 확인할 수 있다. 
 console.log(obj1 instanceof Object); // true
 console.log(obj2 instanceof Object); // true
 console.log(obj3 instanceof Object); // true
 
+console.log("--------------------------");
+
 // 특정 생성자와 상관없다면?
 console.log(obj1 instanceof Member); // false
 console.log(obj2 instanceof Board);  // false
 console.log(obj3 instanceof Score);  // false
+
+console.log("--------------------------");
 
 </script>
 </body>

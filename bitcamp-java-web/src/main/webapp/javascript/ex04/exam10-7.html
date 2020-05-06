@@ -14,6 +14,8 @@
 // 생성자 함수는 보통 대문자로 이름을 시작한다. 
 function Score(name, kor, eng, math) {
 	// 생성자로 호출되는 경우, 상위 생성자를 먼저 호출한다.
+	// 상위 생성자를 따로 지정하지 않으면 Object()가 상위 생성자이다.
+	// 따라서 다음 명령이 생략된 것이다.
 	// this.Object(); 
 	
     this.name = name;
@@ -49,6 +51,13 @@ console.log(scores[0]);
 console.log(scores[1]);
 console.log(scores[2]);
 console.log(scores[0].toString());
+
+console.log("----------------------------------------");
+
+console.log(scores[0].__proto__); // 생성자 정보가 담겨 있는 객체
+console.log(scores[0].__proto__.__proto__); // 생성자의 상위 생성자 정보가 담겨있는 객체
+
+console.log(scores[0].constructor); // 직접적인 생성자 함수 객체
 </script>
 </body>
 </html>
