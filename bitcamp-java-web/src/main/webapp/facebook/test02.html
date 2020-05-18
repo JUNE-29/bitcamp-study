@@ -16,6 +16,7 @@
 // 페이스북 SDK 라이브러리파일 로드
 // - 동적으로 script 태그를 만든다.
 // - 웹브라우저는 당연히 동적으로 생성된 script 태그를 실행할 것이다.
+
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -23,6 +24,7 @@
   js.src = "https://connect.facebook.net/en_US/sdk.js";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+//위에 함수는 라이브러리를 가져오는 함수이다. 브라우저를 실행하면 위에 붙는다.   
 
 console.log('OK!');
 </script>
