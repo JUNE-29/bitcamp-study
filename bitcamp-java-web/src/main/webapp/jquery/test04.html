@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jquery 만들기</title>
+</head>
+<body>
+<h1>jquery 사용</h1>
+<div id="d1">이전 값!</div>
+<div id ="d2"></div>
+
+<script src="jquery04.js"></script>
+<script>
+var tag = $('#d1');
+var tag2 = $('#d2');
+
+var content = tag.html(); // 값을 꺼내는 용도, 파라미터가 없으면 getter
+tag2.html(content); // 파라미터가 있으면 Setter
+tag.html('바꾼 값!');
+
+var divList = $('div');
+
+for (var d of divList) {
+	  d.style.border = "5px dashed yellow";
+	  d.style.margin = "10px";
+}
+
+tag.style.color = 'white';
+tag.style.backgroundColor = 'gray'; //ok
+
+tag.onclick = function() {
+	alert('okok!');
+};
+
+</script>
+</body>
+</html>

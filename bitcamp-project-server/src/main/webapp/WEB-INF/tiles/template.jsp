@@ -15,6 +15,7 @@
 <link rel='stylesheet' href='${pageContext.getServletContext().getContextPath()}/node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='<tiles:getAsString name="css.common"/>'>
 <link rel='stylesheet' href='<tiles:getAsString name="css.page"/>'>
+<link rel='stylesheet' href='<tiles:getAsString name="css.page2"/>'>
 
 <style>
 body {
@@ -56,7 +57,6 @@ background-color: white;
 footer{
   margin-top: 20px;
   padding: 10px;
-  background-color:navy;
   color:white;
   text-align: center;
 }
