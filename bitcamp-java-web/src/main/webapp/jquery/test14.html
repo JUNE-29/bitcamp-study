@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jquery 만들기</title>
+</head>
+<body>
+<h1>jquery 사용</h1>
+<button id="btn1"> Ajax!</button>
+<div id ="d1"></div>
+
+<script src="jquery14.js"></script>
+<script>
+
+var d1 = $('#d1')
+             .css("border","2px dashed green")
+             .css("margin", "10px")
+             .css("min-height", "100px");
+
+
+$('#btn1').click(function() { 
+	$.ajax('test14.jsp', {
+		success: function(data) {
+			d1.html(data)
+		}
+	});
+
+});
+
+
+</script>
+</body>
+</html>
